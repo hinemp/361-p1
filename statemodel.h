@@ -6,6 +6,8 @@
 
 extern bool debug; // Global variable that is used for debugging transitions
 
+#define BUFFER_LENGTH 1024;
+
 /* States and events should just be integers */
 typedef int state_t;
 typedef int event_t;
@@ -22,6 +24,7 @@ typedef void (*action_t) (fsm_t *);
 // dynamically allocated arrays of pointers to the rows of the table.
 // This will allow you to still access fsm->transitions[state][event]
 // as needed.
+
 struct fsm
 {
   state_t state;  /* current state */
@@ -33,6 +36,8 @@ struct fsm
   // Pointers to the input text, including the current byte being processed
   char const *input;
   char const *current;
+  char buffer[1024];
+  size_t length;
 
   // TODO: Extend this with additional fields you need to hold information
   // during the execution of your FSM.
