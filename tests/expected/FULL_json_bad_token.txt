@@ -1,0 +1,2 @@
+SYNTAX ERROR: Could not process text beginning at 'not : "good" }'
+Parsing ../data/json_bad_token.txt failed

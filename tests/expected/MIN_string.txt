@@ -1,0 +1,2 @@
+VALUE [string]: 'I am a simple string'
+Success!

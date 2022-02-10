@@ -1,0 +1,2 @@
+VALUE [integer]: 123
+Success!

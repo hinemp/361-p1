@@ -1,0 +1,6 @@
+Key-value pairs:
+{
+KEYS[first] = 15
+KEYS[second] = value
+}
+Success!

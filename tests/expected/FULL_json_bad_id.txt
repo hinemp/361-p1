@@ -1,0 +1,3 @@
+SYNTAX ERROR: '\t' is not a valid escape code
+SYNTAX ERROR: Could not process text beginning at '"Not \t valid": "value" }'
+Parsing ../data/json_bad_id.txt failed

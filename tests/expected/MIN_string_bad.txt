@@ -1,0 +1,2 @@
+SYNTAX ERROR: '\n' is not a valid escape code
+Parsing ../data/string_bad.txt failed

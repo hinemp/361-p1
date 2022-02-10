@@ -1,0 +1,2 @@
+STRING: 'I am a simple string'
+Success!

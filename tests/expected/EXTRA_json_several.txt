@@ -1,0 +1,9 @@
+Key-value pairs:
+{
+KEYS[a] = alpha
+KEYS[b] = beta
+KEYS[c] = gamma?
+KEYS[d] = 42
+KEYS[e] = 2.718281828459
+}
+Success!

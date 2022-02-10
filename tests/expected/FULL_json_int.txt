@@ -1,0 +1,5 @@
+Key-value pairs:
+{
+KEYS[keyName] = 125
+}
+Success!

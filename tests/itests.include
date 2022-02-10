@@ -1,0 +1,32 @@
+# list of integration tests
+#  format: run_test <TAG> <ARGS>
+#    <TAG>      used as the root for all filenames (i.e., "expected/$TAG.txt")
+#    <ARGS>     command-line arguments to test
+
+run_test    PART_string             "-s ../data/string.txt"
+run_test    PART_string_bad         "-s ../data/string_bad.txt"
+run_test    PART_string_escapes     "-s ../data/string_escapes.txt"
+run_test    PART_int                "-i ../data/int.txt"
+run_test    PART_int_bad            "-i ../data/int_bad.txt"
+run_test    PART_negative           "-i ../data/negative.txt"
+run_test    PART_octal              "-i ../data/octal.txt"
+run_test    PART_octal_repeated     "-i ../data/octal_repeated.txt"
+
+run_test    MIN_string              "-v ../data/string.txt"
+run_test    MIN_string_bad          "-v ../data/string_bad.txt"
+run_test    MIN_string_escapes      "-v ../data/string_escapes.txt"
+run_test    MIN_int                 "-v ../data/int.txt"
+run_test    MIN_int_bad             "-v ../data/int_bad.txt"
+run_test    MIN_negative            "-v ../data/negative.txt"
+run_test    MIN_octal               "-v ../data/octal.txt"
+run_test    MIN_octal_repeated      "-v ../data/octal_repeated.txt"
+
+run_test    FULL_json               "-o ../data/json.txt"
+run_test    FULL_json_bad           "-o ../data/json_bad.txt"
+run_test    FULL_json_bad_id        "-o ../data/json_bad_id.txt"
+run_test    FULL_json_bad_token     "-o ../data/json_bad_token.txt"
+run_test    FULL_json_int           "-o ../data/json_int.txt"
+run_test    FULL_json_max           "-o ../data/json_max.txt"
+
+run_test    EXTRA_json_multiple     "-o ../data/json_multiple.txt"
+run_test    EXTRA_json_several      "-o ../data/json_several.txt"

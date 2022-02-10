@@ -1,0 +1,2 @@
+SYNTAX ERROR: 'j' is not a valid digit
+Parsing ../data/int_bad.txt failed

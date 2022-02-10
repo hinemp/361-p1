@@ -1,0 +1,2 @@
+VALUE [string]: 'This "is" okay to do. Here is a \ backslash.'
+Success!
