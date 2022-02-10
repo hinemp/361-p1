@@ -14,8 +14,11 @@ static void SyntaxError (fsm_t *);
 fsm_t *
 string_init (char const *input)
 {
-  return NULL;
+  // Extended Example has code here
 }
+
+// transition and effect tables for the string fsm go here
+// parsetransition fn should go here as well
 
 /* Define additional functions or global data structures for this specific
    FSM. IMPORTANT: You must declare all such additional declarations as static
