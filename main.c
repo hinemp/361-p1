@@ -40,7 +40,7 @@ main (int argc, char **argv)
   if (type == STR)
   {
     FILE *fp;
-    char *line;
+    char *line = (char *) calloc (100, sizeof (char));
     fp = fopen(filename, "r");
     fgets (line, 100, (FILE*) fp);
     fclose (fp);
