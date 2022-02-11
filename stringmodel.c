@@ -101,7 +101,7 @@ AllocateBuffer (fsm_t *fsm)
 {
   char *tbuffer;
   tbuffer = (char *) malloc (sizeof (char) * 100);
-  *fsm->buffer = tbuffer;
+  fsm->buffer[0] = tbuffer;
 }
 
 /* Append a character from the current string to a buffer */
