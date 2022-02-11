@@ -50,6 +50,7 @@ main (int argc, char **argv)
       {
         printf ("STRING: '%s'\n", result);
         printf ("Success!\n");
+        free (string->buffer);
         return EXIT_SUCCESS;
       }
     else
