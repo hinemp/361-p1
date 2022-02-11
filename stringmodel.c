@@ -47,16 +47,16 @@ static strst_t const _transition[NSTR_STATES][NSTR_EVENTS] = {
 
 static strevt_t const _effect[NSTR_STATES][NSTR_EVENTS] = {
    // OPEN_QUOTE CLOSE_QUOTE NONCTRL BACKSLASH ESC_CHAR NO_ESC NIL_CHAR
-   {AllocateBuffer, NULL, NULL, NULL, NULL, NULL, NULL}, // STR_INIT
-   {NULL, AdvancePointer, AppendCharacter, NULL, NULL, NULL, NULL}, // BUILDING
-   {NULL, NULL, NULL, NULL, NULL, ReplaceCharacter, SyntaxError, NULL}, // ESCAPE
-   {NULL, NULL, NULL, NULL, NULL, NULL, NULL}, // STR_FINISH
-   {NULL, NULL, NULL, NULL, NULL, NULL, NULL}, // STR_ERROR
+   {AllocateBuffer, NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR}, // STR_INIT
+   {NIL_CHAR, AdvancePointer, AppendCharacter, NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR}, // BUILDING
+   {NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR, ReplaceCharacter, SyntaxError, NIL_CHAR}, // ESCAPE
+   {NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR}, // STR_FINISH
+   {NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR}, // STR_ERROR
 };
 
 static strevt_t const _entry[NSTR_STATES] = {
   // OPEN_QUOTE CLOSE_QUOTE NONCTRL BACKSLASH ESC_CHAR NO_ESC NIL_CHAR
-  NULL, NULL, NULL, NULL, NULL, NULL,
+  NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR,
 };
 
 /* Given FSM instance and event, perform the table lookups */
