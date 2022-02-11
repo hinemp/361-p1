@@ -25,7 +25,7 @@ string_init (char const *input)
 
   // Extra Fields
   fsm->input = input;
-  fsm->current = input[0];
+  fsm->current = input;
   fsm->length = 0;
 
   return fsm;
@@ -44,13 +44,13 @@ static state_t const _transition[NSTR_STATES][NSTR_EVENTS] = {
    {NON_STR , NON_STR   , NON_STR , NON_STR, BUILDING, NON_STR,}, // ESCAPE
    {NON_STR , NON_STR   , NON_STR , NON_STR, NON_STR , NON_STR,}, // STR_FINISH
    {NON_STR , NON_STR   , NON_STR , NON_STR, NON_STR , NON_STR,}, // STR_ERROR
-  };;
+  };
 
 static action_t const _effect[NSTR_STATES][NSTR_EVENTS] = {
    // OPEN_QUOTE CLOSE_QUOTE NONCTRL BACKSLASH ESC_CHAR NO_ESC NULL
    {AllocateBuffer, NULL, NULL, NULL, NULL, NULL,}, // STR_INIT
    {NULL, AdvancePointer, AppendCharacter, NULL, NULL, NULL,}, // BUILDING
-   {NULL, NULL, NULL, NULL, NULL, ReplaceCharacter, SyntaxError,}, // ESCAPE
+   {NULL, NULL, NULL, NULL, ReplaceCharacter, SyntaxError,}, // ESCAPE
    {NULL, NULL, NULL, NULL, NULL, NULL,}, // STR_FINISH
    {NULL, NULL, NULL, NULL, NULL, NULL,}, // STR_ERROR
 };
