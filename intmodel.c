@@ -6,7 +6,7 @@
 #include "statemodel.h"
 
 static void SetNegative (fsm_t *);
-static void SetMultiplier (fsm_t *, int);
+static void SetMultiplier (fsm_t *);
 static void MultAndAdd (fsm_t *);
 static void SyntaxError (fsm_t *);
 static state_t parse_transition (fsm_t *, event_t, action_t *, action_t *);
@@ -85,9 +85,9 @@ SetNegative (fsm_t *fsm)
 }
 
 static void
-SetMultiplier (fsm_t *fsm, int multiplier)
+SetMultiplier (fsm_t *fsm)
 {
-  fsm->multiplier = multiplier;
+  fsm->multiplier = fsm->current[0] - '0';
 }
 
 static void

@@ -81,7 +81,7 @@ accept_integer (fsm_t *fsm, int64_t *value)
   // Whitespace
   // }
   // ,
-  // '\0' 
+  // '\0' (Null byte zero)
 
   return false;
 }
