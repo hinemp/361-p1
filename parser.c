@@ -53,7 +53,7 @@ accept_string (fsm_t *fsm, char **result)
         }
       }
   }
-  *result = fsm->buffer;
+  *result = fsm->buffer[0];
   return fsm->state == STR_FINISH;
 }
 
