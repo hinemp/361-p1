@@ -44,12 +44,12 @@ main (int argc, char **argv)
     fp = fopen(filename, "r");
     fgets (line, 100, (FILE*) fp);
     fclose (fp);
-    fsm_t *string = string_init (line);
+    // fsm_t *string = string_init (line);
     char **result = NULL;
-    // if (accept_string(string, result))
-    // {
-    //   printf("STRING: %s", result[0]);
-    // }
+    if (accept_string(string, result))
+    {
+      printf("STRING: %s", result[0]);
+    }
   }
   printf ("Success!\n");
   return EXIT_SUCCESS;
