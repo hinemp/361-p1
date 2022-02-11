@@ -5,6 +5,7 @@
 #include <stdlib.h>
 
 #include "statemodel.h"
+#include "stringmodel.h"
 #include "parser.h"
 
 // Used to specify which of the four FSMs to use
