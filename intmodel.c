@@ -48,7 +48,7 @@ static state_t const _transition[NINT_STATES][NINT_EVENTS] = {
    {NON_INT , NON_INT,  NON_INT,    NON_INT,   NON_INT,    NON_INT,},   // INT_ERROR
   };
 
-  static action_t const _effect[NINT_STATES][NINT_EVENTS] = {
+static action_t const _effect[NINT_STATES][NINT_EVENTS] = {
 //  ZERO      HYPHEN    NZ_DIGIT    DIGIT      TERM_INIT   NON_DIGIT
    {OCTAL,    SIGN,     MAGNITUDE,  NON_INT,   NON_INT,    NON_INT,},   // INT_INIT
    {NON_INT,  NON_INT,  NON_INT,    MAGNITUDE, INT_FINISH, INT_ERROR,}, // MAGNITUDE
@@ -57,6 +57,26 @@ static state_t const _transition[NINT_STATES][NINT_EVENTS] = {
    {NON_INT , NON_INT,  NON_INT,    NON_INT,   NON_INT,    NON_INT,},   // INT_FINISH
    {NON_INT , NON_INT,  NON_INT,    NON_INT,   NON_INT,    NON_INT,},   // INT_ERROR
   };
+
+static action_t const _entry[NINT_STATES] = {
+  // OPEN_QUOTE CLOSE_QUOTE NONCTRL BACKSLASH ESC_CHAR NO_ESC NULL
+  NULL, NULL, NULL, NULL, NULL, NULL,
+};
+
+/* Given FSM instance and event, perform the table lookups */
+static state_t
+parse_transition (fsm_t *fsm, event_t event, action_t *effect, action_t *entry)
+{
+  if (fsm->state >= NON_INT || event >= NIL_INT || _transition[fsm->state][event] == NON_INT) 
+    return -1;
+  
+  *effect = _effect[fsm->state][event];
+  state_t next = _transition[fsm->state][event];
+  if (next != NON_INT)
+    *entry = _entry[next];
+  
+  return next;
+}
 
 static void
 SetNegative (fsm_t *fsm)
@@ -81,5 +101,5 @@ MultAndAdd (fsm_t *fsm)
 static void
 SyntaxError (fsm_t *fsm)
 {
-  
+
 }
