@@ -51,7 +51,7 @@ accept_string (fsm_t *fsm, char **result)
         }
       }
   }
-  result = fsm->buffer;
+  *result = fsm->buffer;
   return fsm->state == STR_FINISH;
 }
 
