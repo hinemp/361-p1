@@ -38,7 +38,7 @@ main (int argc, char **argv)
   if (type == STR)
   {
     FILE *fp;
-    char *line;
+    char *line = NULL;
     fp = fopen(filename, "r");
     fgets (line, 100, (FILE*) fp);
 
