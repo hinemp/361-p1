@@ -11,7 +11,7 @@ static void AllocateBuffer (fsm_t *);
 static void AppendCharacter (fsm_t *);
 static void ReplaceCharacter (fsm_t *);
 static void SyntaxError (fsm_t *);
-static strst_t parse_transition (fsm_t *, strevt_t, strevt_t *, strevt_t *);
+static state_t parse_transition (fsm_t *, strevt_t, strevt_t *, strevt_t *);
 
 /* Return an FSM that links to these internals */
 fsm_t *
