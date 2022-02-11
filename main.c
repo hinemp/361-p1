@@ -50,15 +50,16 @@ main (int argc, char **argv)
       {
         printf ("STRING: '%s'\n", result);
         printf ("Success!\n");
-        free (string->buffer);
+        free (line);
         return EXIT_SUCCESS;
       }
     else
       {
         printf ("Parsing %s failed\n", filename);
+        free (line);
         return EXIT_FAILURE;
       }
-    free (line);
+    
   }
 }
 
