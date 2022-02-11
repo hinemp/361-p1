@@ -83,6 +83,12 @@ accept_integer (fsm_t *fsm, int64_t *value)
   // ,
   // '\0' (Null byte zero)
 
+  // Any other non-digit value is a NON_DIGIT and results in a syntax error.
+
+  // If the number is successfully built, it should be copied into the location
+  // pointed to by the call-by-reference parameter value and the function should return true.
+  // Otherwise, return false.
+
   return false;
 }
 
