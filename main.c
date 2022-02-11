@@ -35,6 +35,11 @@ main (int argc, char **argv)
       return EXIT_FAILURE;
     }
 
+  if (type == STR)
+  {
+    
+    fsm_t *string = string_init ();
+  }
   printf ("Success!\n");
   return EXIT_SUCCESS;
 }
