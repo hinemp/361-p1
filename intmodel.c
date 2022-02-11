@@ -49,13 +49,13 @@ static state_t const _transition[NINT_STATES][NINT_EVENTS] = {
   };
 
 static action_t const _effect[NINT_STATES][NINT_EVENTS] = {
-//  ZERO      HYPHEN    NZ_DIGIT    DIGIT      TERM_INIT   NON_DIGIT
-   {OCTAL,    SIGN,     MAGNITUDE,  NON_INT,   NON_INT,    NON_INT,},   // INT_INIT
-   {NON_INT,  NON_INT,  NON_INT,    MAGNITUDE, INT_FINISH, INT_ERROR,}, // MAGNITUDE
-   {OCTAL,    NON_INT,  MAGNITUDE,  NON_INT,   NON_INT,    INT_ERROR,}, // SIGN
-   {OCTAL,    NON_INT,  MAGNITUDE,  NON_INT,   INT_FINISH, INT_ERROR,}, // OCTAL
-   {NON_INT , NON_INT,  NON_INT,    NON_INT,   NON_INT,    NON_INT,},   // INT_FINISH
-   {NON_INT , NON_INT,  NON_INT,    NON_INT,   NON_INT,    NON_INT,},   // INT_ERROR
+//  ZERO      HYPHEN        NZ_DIGIT        DIGIT       TERM_INT  NON_DIGIT
+   {NULL,     SetNegative,  SetMultiplier,  NULL,       NULL,     NULL,},   // INT_INIT
+   {NULL,     NULL,         NULL,           MultAndAdd, NULL,     SyntaxError,}, // MAGNITUDE
+   {NULL,     NULL,         SetMultiplier,  NULL,       NULL,     SyntaxError,}, // SIGN
+   {NULL,     NULL,         SetMultiplier,  NULL,       NULL,     SyntaxError,}, // OCTAL
+   {NULL,     NULL,         NULL,           NULL,       NULL,     NULL,},   // INT_FINISH
+   {NULL,     NULL,         NULL,           NULL,       NULL,     NULL,},   // INT_ERROR
   };
 
 static action_t const _entry[NINT_STATES] = {
@@ -101,5 +101,5 @@ MultAndAdd (fsm_t *fsm)
 static void
 SyntaxError (fsm_t *fsm)
 {
-
+  
 }
