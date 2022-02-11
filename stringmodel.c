@@ -11,7 +11,7 @@ static void AllocateBuffer (fsm_t *);
 static void AppendCharacter (fsm_t *);
 static void ReplaceCharacter (fsm_t *);
 static void SyntaxError (fsm_t *);
-static state_t parse_transition (fsm_t *, strevt_t, strevt_t *, strevt_t *);
+static state_t parse_transition (fsm_t *, event_t, action_t *, action_t *);
 
 /* Return an FSM that links to these internals */
 fsm_t *
@@ -61,7 +61,7 @@ static action_t const _entry[NSTR_STATES] = {
 
 /* Given FSM instance and event, perform the table lookups */
 static state_t
-parse_transition (fsm_t *fsm, strevt_t event, strevt_t *effect, strevt_t *entry)
+parse_transition (fsm_t *fsm, event_t event, action_t *effect, action_t *entry)
 {
   if (fsm->state >= NON_STR || event >= NULL || _transition[fsm->state][event] == NON_STR) 
     return -1;
