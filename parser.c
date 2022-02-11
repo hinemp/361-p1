@@ -43,7 +43,7 @@ accept_string (fsm_t *fsm, char **result)
         switch (fsm->current[0])
         {
         case '"':
-        case '\\':
+        case 92:
           handle_event (fsm, ESC_CHAR);
           break;
         default:
