@@ -27,6 +27,7 @@ string_init (char const *input)
   // Extra Fields
   fsm->input = input;
   fsm->current = input;
+  fsm->buffer = (char *) malloc (100 * sizeof (char));
   fsm->length = 0;
 
   return fsm;
