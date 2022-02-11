@@ -100,7 +100,7 @@ AdvancePointer (fsm_t *fsm)
 static void
 AllocateBuffer (fsm_t *fsm)
 {
-  fsm->buffer = (char *) malloc (100 * sizeof (char));
+  fsm->buffer = (char *) calloc (100, sizeof (char));
   memset (fsm->buffer, 0, 100 * sizeof (char));
 }
 
