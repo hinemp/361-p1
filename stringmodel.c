@@ -118,7 +118,6 @@ AppendCharacter (fsm_t *fsm)
 static void
 ReplaceCharacter (fsm_t *fsm)
 {
-  fsm->current++;
   assert (fsm->length < 1024 - 1);
   fsm->buffer[fsm->length++] = fsm->current[0];
   fsm->current++;
