@@ -5,6 +5,7 @@
 #include <stdlib.h>
 
 #include "statemodel.h"
+#include "parser.h"
 
 // Used to specify which of the four FSMs to use
 typedef enum
@@ -41,8 +42,12 @@ main (int argc, char **argv)
     char *line = NULL;
     fp = fopen(filename, "r");
     fgets (line, 100, (FILE*) fp);
-
     fsm_t *string = string_init (line);
+    char **result;
+    if (accept_string(string, result))
+    {
+      printf("STRING: %s", result);
+    }
   }
   printf ("Success!\n");
   return EXIT_SUCCESS;
