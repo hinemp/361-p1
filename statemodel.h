@@ -36,7 +36,7 @@ struct fsm
   // Pointers to the input text, including the current byte being processed
   char const *input;
   char const *current;
-  char buffer[100];
+  char *buffer[100];
   size_t length;
 
   // TODO: Extend this with additional fields you need to hold information

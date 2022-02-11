@@ -27,7 +27,6 @@ string_init (char const *input)
   // Extra Fields
   fsm->input = input;
   fsm->current = input;
-  memset (fsm->buffer, 0, sizeof (fsm->buffer));
   fsm->length = 0;
 
   return fsm;
@@ -100,7 +99,9 @@ AdvancePointer (fsm_t *fsm)
 static void
 AllocateBuffer (fsm_t *fsm)
 {
-  memset (fsm->buffer, 0, sizeof (fsm->buffer));
+  char *tbuffer;
+  tbuffer = (char *) malloc (sizeof (char) * 100);
+  *fsm->buffer = tbuffer;
 }
 
 /* Append a character from the current string to a buffer */
