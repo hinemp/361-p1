@@ -51,10 +51,7 @@ accept_string (fsm_t *fsm, char **result)
         }
       }
   }
-
-
-  // if str error return false
-  return false;
+  return fsm->state == STR_FINISH;
 }
 
 /* Begins at fsm->current and tries to build a valid integer value. This
