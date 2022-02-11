@@ -14,7 +14,7 @@
 // Tests open quote state
 START_TEST (my_basic_string_test)
 {
-  fsm_t *string = string_init ("This is a backslash \\");
+  fsm_t *string = string_init ("\"This is a tab \t character\"");
   char *str = NULL;
   ck_assert (accept_string (string, &str));
   ck_assert (str != NULL);
