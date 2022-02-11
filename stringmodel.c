@@ -36,7 +36,7 @@ string_init (char const *input)
    your code should access these functions or data structures directly; all
    access should be indirect through the fsm_t structure. */
 
-static strst_t const _transition[NSTR_STATES][NSTR_EVENTS] = {
+static state_t const _transition[NSTR_STATES][NSTR_EVENTS] = {
    // OPEN_QUOTE CLOSE_QUOTE NONCTRL BACKSLASH ESC_CHAR NO_ESC NULL
    {BUILDING, NON_STR   , NON_STR , NON_STR, NON_STR , NON_STR,}, // STR_INIT
    {NON_STR , STR_FINISH, BUILDING, ESCAPE , NON_STR , NON_STR,}, // BUILDING
@@ -60,7 +60,7 @@ static action_t const _entry[NSTR_STATES] = {
 };
 
 /* Given FSM instance and event, perform the table lookups */
-static strst_t
+static state_t
 parse_transition (fsm_t *fsm, strevt_t event, strevt_t *effect, strevt_t *entry)
 {
   if (fsm->state >= NON_STR || event >= NULL || _transition[fsm->state][event] == NON_STR) 
