@@ -54,7 +54,7 @@ static action_t const _effect[NSTR_STATES][NSTR_EVENTS] = {
    {NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR,}, // STR_ERROR
 };
 
-static strevt_t const _entry[NSTR_STATES] = {
+static action_t const _entry[NSTR_STATES] = {
   // OPEN_QUOTE CLOSE_QUOTE NONCTRL BACKSLASH ESC_CHAR NO_ESC NIL_CHAR
   NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR,
 };
