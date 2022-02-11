@@ -57,6 +57,7 @@ main (int argc, char **argv)
         printf ("Parsing %s failed\n", filename);
         return EXIT_FAILURE;
       }
+    free (line);
   }
 }
 
