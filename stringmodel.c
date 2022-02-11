@@ -101,6 +101,7 @@ static void
 AllocateBuffer (fsm_t *fsm)
 {
   fsm->buffer = (char *) malloc (100 * sizeof (char));
+  memset (fsm->buffer, 0, 100 * sizeof (char));
 }
 
 /* Append a character from the current string to a buffer */
