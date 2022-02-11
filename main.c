@@ -60,6 +60,7 @@ main (int argc, char **argv)
         printf ("Parsing %s failed\n", filename);
         free (line);
         free (string->buffer);
+        free (string);
         return EXIT_FAILURE;
       }
     
