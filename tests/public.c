@@ -38,7 +38,7 @@ START_TEST (PART_string)
   ck_assert (str != NULL);
   ck_assert_str_eq (str, "hello");
   // free (string);
-  free (str);
+  // free (str);
 }
 END_TEST
 
