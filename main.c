@@ -37,8 +37,12 @@ main (int argc, char **argv)
 
   if (type == STR)
   {
-    
-    fsm_t *string = string_init ();
+    FILE *fp;
+    char *line;
+    fp = fopen(filename, "r");
+    fgets (line, 100, (FILE*) fp);
+
+    fsm_t *string = string_init (line);
   }
   printf ("Success!\n");
   return EXIT_SUCCESS;
