@@ -130,6 +130,7 @@ SyntaxError (fsm_t *fsm)
   // encountered. The two characters should be the last one
   // successfully processed and the next character causing the
   // error.
+  // printf ("SYNTAX ERROR: '%c%c' is not a valid escape code\n",
 
   // Print two chars:
   // last char successfully processed, 

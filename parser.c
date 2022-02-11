@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include "statemodel.h"
+#include "stringmodel.h"
 
 /* Begins at fsm->current and tries to identify a string in the given
    input data. A string begins and ends with ". In between, only two
@@ -17,6 +18,42 @@
 bool
 accept_string (fsm_t *fsm, char **result)
 {
+  // Find the first quotation mark
+  while (fsm->current[0] != '"') 
+  {
+    fsm->current++;
+  }
+  handle_event (fsm, OPEN_QUOTE);
+  fsm->current++; // Puts the current pointer on first character of the string
+  while (fsm->state < STR_FINISH)   // As long as the fsm hasn't reached an end state
+  {
+    if (fsm->state == BUILDING)
+      {
+        // Only options are ", /, or 
+        if (fsm->current[0] == '"')
+          handle_event (fsm, CLOSE_QUOTE);
+        else if (fsm->current[0] == '\\')
+          handle_event (fsm, BACKSLASH);
+        else 
+          handle_event (fsm, NON_CTRL);
+      }
+    else if (fsm->state == ESCAPE)
+      {
+        switch (fsm->current[0])
+        {
+        case '"':
+        case '\\':
+          handle_event (fsm, ESC_CHAR);
+          break;
+        default:
+          handle_event (fsm, NO_ESC);
+          break;
+        }
+      }
+  }
+
+
+  // if str error return false
   return false;
 }
 
