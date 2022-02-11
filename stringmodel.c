@@ -37,7 +37,7 @@ string_init (char const *input)
    access should be indirect through the fsm_t structure. */
 
 static strst_t const _transition[NSTR_STATES][NSTR_EVENTS] = {
-   // OPEN_QUOTE CLOSE_QUOTE NONCTRL BACKSLASH ESC_CHAR NO_ESC NIL_CHAR
+   // OPEN_QUOTE CLOSE_QUOTE NONCTRL BACKSLASH ESC_CHAR NO_ESC NULL
    {BUILDING, NON_STR   , NON_STR , NON_STR, NON_STR , NON_STR, NON_STR}, // STR_INIT
    {NON_STR , STR_FINISH, BUILDING, ESCAPE , NON_STR , NON_STR, NON_STR}, // BUILDING
    {NON_STR , NON_STR   , NON_STR , NON_STR, BUILDING, NON_STR, NON_STR}, // ESCAPE
@@ -46,24 +46,24 @@ static strst_t const _transition[NSTR_STATES][NSTR_EVENTS] = {
   };;
 
 static action_t const _effect[NSTR_STATES][NSTR_EVENTS] = {
-   // OPEN_QUOTE CLOSE_QUOTE NONCTRL BACKSLASH ESC_CHAR NO_ESC NIL_CHAR
-   {AllocateBuffer, NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR,}, // STR_INIT
-   {NIL_CHAR, AdvancePointer, AppendCharacter, NIL_CHAR, NIL_CHAR, NIL_CHAR,}, // BUILDING
-   {NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR, ReplaceCharacter, SyntaxError,}, // ESCAPE
-   {NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR,}, // STR_FINISH
-   {NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR,}, // STR_ERROR
+   // OPEN_QUOTE CLOSE_QUOTE NONCTRL BACKSLASH ESC_CHAR NO_ESC NULL
+   {AllocateBuffer, NULL, NULL, NULL, NULL, NULL,}, // STR_INIT
+   {NULL, AdvancePointer, AppendCharacter, NULL, NULL, NULL,}, // BUILDING
+   {NULL, NULL, NULL, NULL, NULL, ReplaceCharacter, SyntaxError,}, // ESCAPE
+   {NULL, NULL, NULL, NULL, NULL, NULL,}, // STR_FINISH
+   {NULL, NULL, NULL, NULL, NULL, NULL,}, // STR_ERROR
 };
 
 static action_t const _entry[NSTR_STATES] = {
-  // OPEN_QUOTE CLOSE_QUOTE NONCTRL BACKSLASH ESC_CHAR NO_ESC NIL_CHAR
-  NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR, NIL_CHAR,
+  // OPEN_QUOTE CLOSE_QUOTE NONCTRL BACKSLASH ESC_CHAR NO_ESC NULL
+  NULL, NULL, NULL, NULL, NULL,
 };
 
 /* Given FSM instance and event, perform the table lookups */
 static strst_t
 parse_transition (fsm_t *fsm, strevt_t event, strevt_t *effect, strevt_t *entry)
 {
-  if (fsm->state >= NON_STR || event >= NIL_CHAR || _transition[fsm->state][event] == NON_STR) 
+  if (fsm->state >= NON_STR || event >= NULL || _transition[fsm->state][event] == NON_STR) 
     return -1;
   
   *effect = _effect[fsm->state][event];
