@@ -6,7 +6,7 @@
 
 extern bool debug; // Global variable that is used for debugging transitions
 
-#define BUFFER_LENGTH 1024;
+#define BUFFER_LENGTH 100;
 
 /* States and events should just be integers */
 typedef int state_t;
@@ -36,7 +36,7 @@ struct fsm
   // Pointers to the input text, including the current byte being processed
   char const *input;
   char const *current;
-  char buffer[1024];
+  char buffer[100];
   size_t length;
 
   // TODO: Extend this with additional fields you need to hold information
