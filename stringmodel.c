@@ -7,7 +7,6 @@
 #include "statemodel.h"
 #include "stringmodel.h"
 
-
 static void AdvancePointer (fsm_t *);
 static void AllocateBuffer (fsm_t *);
 static void AppendCharacter (fsm_t *);

@@ -119,7 +119,7 @@ accept_value (fsm_t *fsm, bool *is_string, char **string, int64_t *value)
    each key-value pair found. In the case above, the exact string
    returned would be:
 
-     "KEYS[integer] = 1\nKEYS[string] = one\n"
+    "KEYS[integer] = 1\nKEYS[string] = one\n"
 
    Return true if the object is successfully parsed, false otherwise.
    */

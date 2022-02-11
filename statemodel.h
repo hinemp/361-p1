@@ -39,6 +39,11 @@ struct fsm
   char *buffer;
   size_t length;
 
+  // Int FSM Fields
+  int build_int;
+  int multiplier;
+  bool is_negative;
+
   // TODO: Extend this with additional fields you need to hold information
   // during the execution of your FSM.
 };
