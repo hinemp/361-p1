@@ -22,6 +22,7 @@ START_TEST (my_basic_string_test)
   char *res = """Hello""";
   ck_assert_str_eq (str, res);
 
+  free (string);
   // free (str);
 }
 END_TEST
