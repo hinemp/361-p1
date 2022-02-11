@@ -52,6 +52,7 @@ main (int argc, char **argv)
         printf ("Success!\n");
         free (line);
         free (string->buffer);
+        free (string);
         return EXIT_SUCCESS;
       }
     else
