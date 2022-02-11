@@ -20,6 +20,7 @@ START_TEST (PART_string)
   char *str = NULL;
   ck_assert (accept_string (string, &str));
   ck_assert (str != NULL);
+  printf("\n%s\n", str);
   ck_assert_str_eq (str, "hello");
   free (string);
   free (str);
