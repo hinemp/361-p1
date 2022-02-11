@@ -18,7 +18,7 @@ START_TEST (my_basic_string_test)
   fsm_t *string = string_init (input);
   if (string == NULL)
     printf("STRING WAS NULL\n");
-  handle_event (string, event);
+  handle_event (string, OPEN_QUOTE);
   ck_assert_int_eq (string->state, BUILDING);
 }
 END_TEST
