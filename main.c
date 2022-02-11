@@ -46,7 +46,7 @@ main (int argc, char **argv)
     fclose (fp);
     fsm_t *string = string_init (line);
     char *result = NULL;
-    if (accept_string(string, result))
+    if (accept_string(string, &result))
     {
       printf("STRING: %s", result);
     }
