@@ -80,7 +80,8 @@ accept_integer (fsm_t *fsm, int64_t *value)
   // End of a number is indicated by:
   // Whitespace
   // }
-  // 
+  // ,
+  // '\0' 
 
   return false;
 }
