@@ -44,7 +44,7 @@ main (int argc, char **argv)
     fp = fopen(filename, "r");
     fgets (line, 100, (FILE*) fp);
     fsm_t *string = string_init (line);
-    char **result;
+    char **result = NULL;
     if (accept_string(string, result))
     {
       printf("STRING: %s", result[0]);
