@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#include <stdio.h>
 
 #include "statemodel.h"
 #include "stringmodel.h"
@@ -64,7 +65,7 @@ static action_t const _entry[NSTR_STATES] = {
 static state_t
 parse_transition (fsm_t *fsm, event_t event, action_t *effect, action_t *entry)
 {
-  if (fsm->state >= NON_STR || event >= NULL || _transition[fsm->state][event] == NON_STR) 
+  if (fsm->state >= NON_STR || event >= NIL_CHAR || _transition[fsm->state][event] == NON_STR) 
     return -1;
   
   *effect = _effect[fsm->state][event];
@@ -106,7 +107,7 @@ static void
 AppendCharacter (fsm_t *fsm)
 {
   assert (fsm->length < 1024 - 1);
-  fsm->buffer[fsm->length++] = fsm->current;
+  fsm->buffer[fsm->length++] = fsm->current[0];
   fsm->current++;
 }
 
