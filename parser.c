@@ -72,6 +72,16 @@ accept_string (fsm_t *fsm, char **result)
 bool
 accept_integer (fsm_t *fsm, int64_t *value)
 {
+
+  // begins at fsm->current
+  // tries to build valid int val
+  // function accepts both pos and neg vals
+  // allows leading 0s (means number is octal, 023 prints decimal 19)
+  // End of a number is indicated by:
+  // Whitespace
+  // }
+  // 
+
   return false;
 }
 
