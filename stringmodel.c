@@ -136,6 +136,7 @@ SyntaxError (fsm_t *fsm)
   // Print two chars:
   // last char successfully processed, 
   // next char causing error, 
+  fsm->current--;
   char curr = fsm->current[0];
   char err = fsm->current[1];
 

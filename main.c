@@ -51,9 +51,6 @@ main (int argc, char **argv)
       printf("STRING: '%s'\n", result);
       printf ("Success!\n");
       return EXIT_SUCCESS;
-    } else 
-    {
-      
     }
   }
 }

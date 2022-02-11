@@ -40,11 +40,11 @@ accept_string (fsm_t *fsm, char **result)
       }
     else if (fsm->state == ESCAPE)
       {
+        fsm->current++;
         switch (fsm->current[0])
         {
         case '"':
         case 92:
-          fsm->current++;
           handle_event (fsm, ESC_CHAR);
           break;
         default:
