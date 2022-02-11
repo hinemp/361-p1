@@ -14,7 +14,7 @@
 // Tests open quote state
 START_TEST (my_basic_string_test)
 {
-  fsm_t *string = string_init ("\"\"");
+  fsm_t *string = string_init ("\"Hello\"");
   if (string == NULL)
     printf("STRING WAS NULL\n");
   printf("DID SOMETHING\n");
