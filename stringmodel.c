@@ -125,18 +125,17 @@ ReplaceCharacter (fsm_t *fsm)
 static void
 SyntaxError (fsm_t *fsm)
 {
-// Use the following print format string if a syntax error is
-// encountered. The two characters should be the last one
-// successfully processed and the next character causing the
-// error.
+  // Use the following print format string if a syntax error is
+  // encountered. The two characters should be the last one
+  // successfully processed and the next character causing the
+  // error.
 
-// Print two chars:
-// last char successfully processed, 
-// next char causing error, 
-  printf("SYNTAX ERROR: '%c%c' is not a valid escape code\n", fsm->current++, fsm->current);
+  // Print two chars:
+  // last char successfully processed, 
+  // next char causing error, 
+  char curr = fsm->current;
+  char *err = fsm->current + 1;
 
-
-// printf ("SYNTAX ERROR: '%c%c' is not a valid escape code\n", )
-
+  printf("SYNTAX ERROR: '%c%c' is not a valid escape code\n", curr);
 }
 
