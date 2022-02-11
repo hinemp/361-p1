@@ -15,15 +15,13 @@
 START_TEST (my_basic_string_test)
 {
   fsm_t *string = string_init ("\"Hello\"");
-  if (string == NULL)
-    printf("STRING WAS NULL\n");
-  printf("DID SOMETHING\n");
   char *str = NULL;
   ck_assert (accept_string (string, &str));
   ck_assert (str != NULL);
   ck_assert_int_eq (string->state, STR_FINISH);
   char *res = """Hello""";
   ck_assert_str_eq (str, res);
+
   free (str);
 }
 END_TEST
