@@ -45,8 +45,8 @@ main (int argc, char **argv)
     fgets (line, 100, (FILE*) fp);
     fclose (fp);
     fsm_t *string = string_init (line);
-    char *result = (char *) calloc (100, sizeof (char));
-    if (accept_string(string, result))
+    char **result = (char *) calloc (100, sizeof (char));
+    if (accept_string(string, result[0]))
     {
       printf("STRING: %s", result);
     }
