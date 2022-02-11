@@ -19,7 +19,7 @@ START_TEST (my_basic_string_test)
   ck_assert (accept_string (string, &str));
   ck_assert (str != NULL);
   ck_assert_int_eq (string->state, STR_FINISH);
-  char *res = "This is a backslash \\";
+  char *res = "\"This is a tab \t character\"";
   ck_assert_str_eq (str, res);
 
   free (string);
