@@ -23,7 +23,7 @@ START_TEST (my_basic_string_test)
   ck_assert_str_eq (str, res);
 
   free (string);
-  // free (str);
+  free (str);
 }
 END_TEST
 
