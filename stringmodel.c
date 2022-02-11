@@ -5,8 +5,6 @@
 #include "statemodel.h"
 #include "stringmodel.h"
 
-#define NUM_STATES (NON_STR+1)
-#define NUM_EVENTS (NIL_CHAR+1)
 
 static void AdvancePointer (fsm_t *);
 static void AllocateBuffer (fsm_t *);
@@ -20,7 +18,7 @@ fsm_t *
 string_init (char const *input)
 {
   fsm_t *fsm = calloc (1, sizeof (fsm_t));
-  fsm->nevents = NUM_EVENTS;
+  fsm->nevents = NSTR_EVENTS;
   fsm->state = STR_INIT;
   fsm->transition = parse_transition;
 
@@ -38,7 +36,7 @@ string_init (char const *input)
    your code should access these functions or data structures directly; all
    access should be indirect through the fsm_t structure. */
 
-static strst_t const _transition[NUM_STATES][NUM_EVENTS] = {
+static strst_t const _transition[NSTR_STATES][NSTR_EVENTS] = {
    // OPEN_QUOTE CLOSE_QUOTE NONCTRL BACKSLASH ESC_CHAR NO_ESC NIL_CHAR
    {BUILDING, NON_STR   , NON_STR , NON_STR, NON_STR , NON_STR, NON_STR}, // STR_INIT
    {NON_STR , STR_FINISH, BUILDING, ESCAPE , NON_STR , NON_STR, NON_STR}, // BUILDING
@@ -47,7 +45,7 @@ static strst_t const _transition[NUM_STATES][NUM_EVENTS] = {
    {NON_STR , NON_STR   , NON_STR , NON_STR, NON_STR , NON_STR, NON_STR}, // STR_ERROR
   };;
 
-static strevt_t const _effect[NUM_STATES][NUM_EVENTS] = {
+static strevt_t const _effect[NSTR_STATES][NSTR_EVENTS] = {
    // OPEN_QUOTE CLOSE_QUOTE NONCTRL BACKSLASH ESC_CHAR NO_ESC NIL_CHAR
    {AllocateBuffer, NULL, NULL, NULL, NULL, NULL, NULL}, // STR_INIT
    {NULL, AdvancePointer, AppendCharacter, NULL, NULL, NULL, NULL}, // BUILDING
@@ -56,7 +54,7 @@ static strevt_t const _effect[NUM_STATES][NUM_EVENTS] = {
    {NULL, NULL, NULL, NULL, NULL, NULL, NULL}, // STR_ERROR
 };
 
-static strevt_t const _entry[NUM_STATES] = {
+static strevt_t const _entry[NSTR_STATES] = {
   // OPEN_QUOTE CLOSE_QUOTE NONCTRL BACKSLASH ESC_CHAR NO_ESC NIL_CHAR
   NULL, NULL, NULL, NULL, NULL, NULL,
 };
