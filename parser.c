@@ -1,5 +1,6 @@
 #include <stdbool.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "statemodel.h"
 #include "stringmodel.h"
