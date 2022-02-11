@@ -11,6 +11,16 @@
 #include "../objmodel.h"
 #include "../parser.h"
 
+// Tests open quote state
+START_TEST (my_basic_string_test)
+{
+ fsm_t *string = string_init ("\"");
+ event_t event = OPEN_QUOTE;
+ handle_event (string, event);
+ ck_assert_int_eq (string->state, BUILDING);
+}
+END_TEST
+
 // Test that accept_string accepts a basic "hello" string
 START_TEST (PART_string)
 {
@@ -74,6 +84,7 @@ END_TEST
 void public_tests (Suite *s)
 {
   TCase *tc_public = tcase_create ("Public");
+  tcase_add_test (tc_public, my_basic_string_test);
   tcase_add_test (tc_public, PART_string);
   tcase_add_test (tc_public, PART_integer);
   tcase_add_test (tc_public, MIN_value_string);
