@@ -49,10 +49,13 @@ main (int argc, char **argv)
     if (accept_string(string, &result))
     {
       printf("STRING: '%s'\n", result);
+      printf ("Success!\n");
+      return EXIT_SUCCESS;
+    } else 
+    {
+      
     }
   }
-  printf ("Success!\n");
-  return EXIT_SUCCESS;
 }
 
 /* Parse the command-line arguments. Sets the type based on whether the
