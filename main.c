@@ -47,11 +47,15 @@ main (int argc, char **argv)
     fsm_t *string = string_init (line);
     char *result = NULL;
     if (accept_string(string, &result))
-    {
-      printf("STRING: '%s'\n", result);
-      printf ("Success!\n");
-      return EXIT_SUCCESS;
-    }
+      {
+        printf ("STRING: '%s'\n", result);
+        printf ("Success!\n");
+        return EXIT_SUCCESS;
+      }
+    else
+      {
+        printf ("Parsing %s failed\n", filename);
+      }
   }
 }
 
