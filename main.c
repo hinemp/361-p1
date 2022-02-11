@@ -48,7 +48,7 @@ main (int argc, char **argv)
     char *result = NULL;
     if (accept_string(string, &result))
     {
-      printf("STRING: %s", result);
+      printf("STRING: '%s'\n", result);
     }
   }
   printf ("Success!\n");
