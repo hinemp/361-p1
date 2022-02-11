@@ -46,7 +46,7 @@ main (int argc, char **argv)
     char **result;
     if (accept_string(string, result))
     {
-      printf("STRING: %s", result);
+      printf("STRING: %s", result[0]);
     }
   }
   printf ("Success!\n");
