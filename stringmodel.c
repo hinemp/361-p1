@@ -118,7 +118,7 @@ ReplaceCharacter (fsm_t *fsm)
 {
   fsm->current++;
   assert (fsm->length < 1024 - 1);
-  fsm->buffer[fsm->length++] = fsm->current;
+  fsm->buffer[fsm->length++] = fsm->current[0];
   fsm->current++;
 }
 
@@ -134,9 +134,9 @@ SyntaxError (fsm_t *fsm)
   // Print two chars:
   // last char successfully processed, 
   // next char causing error, 
-  char curr = fsm->current;
-  char *err = fsm->current + 1;
+  char curr = fsm->current[0];
+  char err = fsm->current[1];
 
-  printf("SYNTAX ERROR: '%c%c' is not a valid escape code\n", curr);
+  printf("SYNTAX ERROR: '%c%c' is not a valid escape code\n", curr, err);
 }
 
