@@ -14,12 +14,12 @@
 // Tests open quote state
 START_TEST (my_basic_string_test)
 {
-  fsm_t *string = string_init ("\"This is a tab \t character\"");
+  fsm_t *string = string_init ("\"test\"");
   char *str = NULL;
   ck_assert (accept_string (string, &str));
   ck_assert (str != NULL);
   ck_assert_int_eq (string->state, STR_FINISH);
-  char *res = "\"This is a tab \t character\"";
+  char *res = "\"test\"";
   ck_assert_str_eq (str, res);
 
   free (string);
