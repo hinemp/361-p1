@@ -27,6 +27,7 @@ string_init (char const *input)
   // Extra Fields
   fsm->input = input;
   fsm->current = input;
+  memset (fsm->buffer, 0, sizeof (fsm->buffer));
   fsm->length = 0;
 
   return fsm;
