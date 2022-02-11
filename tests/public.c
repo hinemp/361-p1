@@ -24,6 +24,7 @@ START_TEST (my_basic_string_test)
   ck_assert_int_eq (string->state, STR_FINISH);
   char *res = """Hello""";
   ck_assert_str_eq (str, res);
+  free (str);
 }
 END_TEST
 
