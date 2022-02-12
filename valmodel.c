@@ -12,6 +12,7 @@
 static void ActivateString (fsm_t *);
 static void ActivateInteger (fsm_t*);
 static void SyntaxError (fsm_t *);
+static state_t parse_transition (fsm_t *, event_t, action_t *, action_t *);
 
 /* Return an FSM that links to these internals */
 fsm_t *
