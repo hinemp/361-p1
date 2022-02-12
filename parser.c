@@ -188,7 +188,7 @@ accept_integer (fsm_t *fsm, int64_t *value)
      }
   }
 
-  *value = fsm->build_int;
+  value = fsm->build_int;
   return fsm->state == INT_FINISH;
 }
 
