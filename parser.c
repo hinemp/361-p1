@@ -229,7 +229,7 @@ accept_value (fsm_t *fsm, bool *is_string, char **string, int64_t *value)
       is_string = false;
       break;
     case '"':
-      is_string = true;
+      *is_string = true;
       break;
     default:
       handle_event (fsm, BAD_VALUE);
