@@ -74,10 +74,10 @@ main (int argc, char **argv)
     fgets (line, 100, (FILE*) fp);
     fclose (fp);
     fsm_t *integer = int_init (line);
-    int64_t *value = NULL;
-    if (accept_integer (integer, value)) 
+    int64_t value = NULL;
+    if (accept_integer (integer, &value)) 
     {
-      printf ("INTEGER: '%ln'\n", value);
+      printf ("INTEGER: '%ln'\n", &value);
       printf ("Success!\n");
       free (line);
       free (integer->buffer);
