@@ -21,6 +21,7 @@ START_TEST (my_basic_val_test)
   int64_t integer = 0;
   ck_assert (accept_value (value, &is_string, &str, &integer));
   ck_assert_int_eq (integer, 123);
+  ck_assert_int_eq (value->state, VAL_FINISH);
   free (value);
   free (str);
 }
