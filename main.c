@@ -77,7 +77,7 @@ main (int argc, char **argv)
     int64_t value;
     if (accept_integer (integer, &value)) 
     {
-      printf ("INTEGER: '%ld'\n", value);
+      printf ("INTEGER: %ld\n", value);
       printf ("Success!\n");
       free (line);
       free (integer->buffer);
@@ -85,8 +85,6 @@ main (int argc, char **argv)
       return EXIT_SUCCESS;
     } else {
       printf ("Parsing %s failed\n", filename);
-      printf ("%ld\n", value);
-      printf ("%d", integer->state);
       free (line);
       free (integer->buffer);
       free (integer);
