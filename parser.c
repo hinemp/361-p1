@@ -73,6 +73,29 @@ accept_string (fsm_t *fsm, char **result)
 bool
 accept_integer (fsm_t *fsm, int64_t *value)
 {
+  if (fsm->state == INT_INIT) {
+    switch (fsm->current[0]) {
+      case '0':
+        handle_event (fsm, ZERO);
+        break;
+      case '1':
+      case '2':
+      case '3':
+      case '4':
+      case '5':
+      case '6':
+      case '7':
+      case '8':
+      case '9':
+        handle_event (fsm, NZ_DIGIT);
+        break;
+      case '-':
+        handle_event (fsm, HYPHEN);
+        break;
+      default:
+        break;
+    }
+  }
   while (fsm->state < INT_FINISH) {
     if (fsm->state == MAGNITUDE) {
       switch (fsm->current[0])

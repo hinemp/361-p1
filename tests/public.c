@@ -12,7 +12,7 @@
 #include "../parser.h"
 
 // Tests open quote state
-START_TEST (my_basic_string_test)
+START_TEST (my_basic_int_test)
 {
   fsm_t *string = string_init ("\"test\"");
   char *str = NULL;
@@ -90,7 +90,7 @@ END_TEST
 void public_tests (Suite *s)
 {
   TCase *tc_public = tcase_create ("Public");
-  tcase_add_test (tc_public, my_basic_string_test);
+  tcase_add_test (tc_public, my_basic_int_test);
   tcase_add_test (tc_public, PART_string);
   tcase_add_test (tc_public, PART_integer);
   tcase_add_test (tc_public, MIN_value_string);
