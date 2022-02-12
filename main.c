@@ -74,7 +74,7 @@ main (int argc, char **argv)
     fgets (line, 100, (FILE*) fp);
     fclose (fp);
     fsm_t *integer = int_init (line);
-    int64_t value = NULL;
+    int64_t value;
     if (accept_integer (integer, &value)) 
     {
       printf ("INTEGER: '%ln'\n", &value);
@@ -82,7 +82,6 @@ main (int argc, char **argv)
       free (line);
       free (integer->buffer);
       free (integer);
-      free (value);
       return EXIT_SUCCESS;
     } else {
       printf ("Parsing %s failed\n", filename);
