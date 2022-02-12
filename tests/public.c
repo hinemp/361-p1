@@ -92,7 +92,7 @@ END_TEST
 void public_tests (Suite *s)
 {
   TCase *tc_public = tcase_create ("Public");
-  tcase_add_test (tc_public, my_basic_int_test);
+  tcase_add_test (tc_public, my_basic_val_test);
   tcase_add_test (tc_public, PART_string);
   tcase_add_test (tc_public, PART_integer);
   tcase_add_test (tc_public, MIN_value_string);
