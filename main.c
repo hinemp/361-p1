@@ -82,6 +82,7 @@ main (int argc, char **argv)
       free (line);
       free (integer->buffer);
       free (integer);
+      free (value);
       return EXIT_SUCCESS;
     } else {
       printf ("Parsing %s failed\n", filename);
