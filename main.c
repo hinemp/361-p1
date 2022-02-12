@@ -82,17 +82,14 @@ main (int argc, char **argv)
       free (integer->buffer);
       free (integer);
       return EXIT_SUCCESS;
-    }
-      else
-      {
+    } else {
         printf ("Parsing %s failed\n", filename);
         free (line);
         free (integer->buffer);
         free (integer);
         return EXIT_FAILURE;
-      }
+    }
   }
-
 }
 
 /* Parse the command-line arguments. Sets the type based on whether the
