@@ -40,7 +40,7 @@ struct fsm
   size_t length;
 
   // Int FSM Fields
-  int build_int;
+  int64_t build_int;
   int multiplier;
   bool is_negative;
 
