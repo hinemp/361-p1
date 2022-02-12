@@ -102,7 +102,7 @@ accept_integer (fsm_t *fsm, int64_t *value)
       }
     }
 
-    if (fsm->state == SIGN) {
+    else if (fsm->state == SIGN) {
       switch (fsm->current[0])
       {
       case '1':
@@ -120,13 +120,14 @@ accept_integer (fsm_t *fsm, int64_t *value)
       case '0':
         handle_event (fsm, ZERO);
         fsm->current++;
+        break;
       default:
         handle_event (fsm, NON_DIGIT);
         break;
       }
     }
   
-    if (fsm->state == OCTAL) {
+    else if (fsm->state == OCTAL) {
       switch (fsm->current[0])
       {
         case '0':
