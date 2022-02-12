@@ -42,12 +42,14 @@ END_TEST
 // Test that accept_integer accepts normal decimal
 START_TEST (PART_integer)
 {
-  char *input = "1234";
+  char *input = "-1234";
   fsm_t *integer = int_init (input);
   ck_assert (integer != NULL);
   int64_t value = 0;
+  accept_integer (integer, &value);
+  ck_assert (integer->state == INT_FINISH);
   ck_assert (accept_integer (integer, &value));
-  ck_assert_int_eq (value, 1234);
+  ck_assert_int_eq (value, -1234);
   free (integer);
 }
 END_TEST
