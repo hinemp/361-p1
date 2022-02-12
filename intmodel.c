@@ -100,15 +100,15 @@ SetMultiplier_10 (fsm_t *fsm)
 static void
 MultAndAdd (fsm_t *fsm)
 {
-  fsm->build_int *= fsm->multiplier;
+  *fsm->build_int *= fsm->multiplier;
   int to_add = fsm->current[0] - '0';
   if (fsm->is_negative) 
     {
-      fsm->build_int -= to_add;
+      *fsm->build_int -= to_add;
     }
   else
     {
-      fsm->build_int += to_add;
+      *fsm->build_int += to_add;
     }
 }
 
