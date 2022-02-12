@@ -108,7 +108,12 @@ main (int argc, char **argv)
         printf("VALUE [string]: '%s'\n", str);
         printf("Success!\n");
       }
-    }
+      if (!is_string) 
+      {
+        printf("VALUE [integer]: %ld\n", integer);
+        printf("Success!\n");
+      }
+    } 
   }
   
 }
