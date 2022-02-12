@@ -1,8 +1,11 @@
 #include <stdbool.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "statemodel.h"
 #include "valmodel.h"
+#include "stringmodel.h"
+#include "intmodel.h"
 
 
 static void ActivateString (fsm_t *);
