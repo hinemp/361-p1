@@ -1,7 +1,6 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
 
 #include "statemodel.h"
 #include "stringmodel.h"
@@ -240,8 +239,8 @@ accept_value (fsm_t *fsm, bool *is_string, char **string, int64_t *value)
   if (*is_string)
   {
     handle_event (fsm, START_STR);
-    *string = strncpy (*string, fsm->buffer, strlen(fsm->buffer));
-    // free (fsm->buffer);
+    *string = fsm->buffer;
+    free (fsm->buffer);
     if (!fsm->is_val_bad)
       handle_event (fsm, END_STR);
     else
