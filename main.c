@@ -107,16 +107,25 @@ main (int argc, char **argv)
       {
         printf("VALUE [string]: '%s'\n", str);
         printf("Success!\n");
+        free (line);
+        free (value->buffer);
+        free (value);
       }
       if (!is_string) 
       {
         printf("VALUE [integer]: %ld\n", integer);
         printf("Success!\n");
+        free (line);
+        free (value->buffer);
+        free (value);
       }
     } 
     else 
     {
       printf ("Parsing %s failed\n", filename);
+      free (line);
+      free (value->buffer);
+      free (value);
     }
   }
   
