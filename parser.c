@@ -240,11 +240,19 @@ accept_value (fsm_t *fsm, bool *is_string, char **string, int64_t *value)
   {
     handle_event (fsm, START_STR);
     *string = fsm->buffer;
+    if (!fsm->is_val_bad)
+      handle_event (fsm, END_STR);
+    else
+      handle_event (fsm, BAD_VALUE);
   } 
   if (!*is_string)
   {
     handle_event (fsm, START_INT);
     *value = fsm->build_int;
+    if (!fsm->is_val_bad)
+      handle_event (fsm, END_INT);
+    else
+      handle_event (fsm, BAD_VALUE);
   }
   return fsm->is_val_bad;
 }
