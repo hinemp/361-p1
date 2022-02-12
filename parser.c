@@ -241,9 +241,13 @@ accept_value (fsm_t *fsm, bool *is_string, char **string, int64_t *value)
     handle_event (fsm, START_STR);
     *string = fsm->buffer;
   } 
-  if (!*is_string)
+  else
   {
     handle_event (fsm, START_INT);
+    if (fsm->is_val_bad)
+    {
+      
+    }
     value = &fsm->build_int;
   }
   return fsm->is_val_bad;
