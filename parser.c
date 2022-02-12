@@ -226,7 +226,7 @@ accept_value (fsm_t *fsm, bool *is_string, char **string, int64_t *value)
     case '7':
     case '8':
     case '9':
-      is_string = false;
+      *is_string = false;
       break;
     case '"':
       *is_string = true;
