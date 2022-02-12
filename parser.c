@@ -243,7 +243,8 @@ accept_value (fsm_t *fsm, bool *is_string, char **string, int64_t *value)
   } else
   {
     handle_event (fsm, BUILD_INT);
-    *value = (int64_t) fsm->build_int;
+    *value = 123;
+    // *value = (int64_t) fsm->build_int;
   }
   return fsm->is_val_bad;
 }
