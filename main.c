@@ -114,6 +114,10 @@ main (int argc, char **argv)
         printf("Success!\n");
       }
     } 
+    else 
+    {
+      printf ("Parsing %s failed\n", filename);
+    }
   }
   
 }
