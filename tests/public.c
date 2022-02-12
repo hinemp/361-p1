@@ -14,13 +14,12 @@
 // Tests open quote state
 START_TEST (my_basic_val_test)
 {
-  char *input = "123";
+  char *input = '123';
   fsm_t *value = value_init (input);
   bool is_string = false;
   char *str = NULL;
   int64_t integer = 0;
   ck_assert (accept_value (value, &is_string, &str, &integer));
-  // ck_assert (str == NULL);
   ck_assert_int_eq (integer, 123);
   free (value);
   free (str);
