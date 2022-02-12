@@ -117,7 +117,7 @@ accept_integer (fsm_t *fsm, int64_t *value)
       case '8':
       case '9':
         handle_event (fsm, DIGIT);
-        // fsm->current++;
+        fsm->current++;
         break;
       default:
         handle_event (fsm, NON_DIGIT);
@@ -138,7 +138,7 @@ accept_integer (fsm_t *fsm, int64_t *value)
       case '8':
       case '9':
         handle_event (fsm, NZ_DIGIT);
-        // fsm->current++;
+        fsm->current++;
         break;
       case '0':
         handle_event (fsm, ZERO);
