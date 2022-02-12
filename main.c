@@ -64,8 +64,9 @@ main (int argc, char **argv)
         free (string);
         return EXIT_FAILURE;
       }
-    
   }
+
+
   if (type == INT) {
     FILE *fp;
     char *line = (char *) calloc (100, sizeof (char));
@@ -73,8 +74,8 @@ main (int argc, char **argv)
     fgets (line, 100, (FILE*) fp);
     fclose (fp);
     fsm_t *integer = int_init (line);
-    int64_t *value = NULL;
-    if (accept_integer (integer, value)) 
+    int64_t value = NULL;
+    if (accept_integer (integer, &value)) 
     {
       printf ("INTEGER: '%ln'\n", value);
       printf ("Success!\n");
@@ -83,13 +84,15 @@ main (int argc, char **argv)
       free (integer);
       return EXIT_SUCCESS;
     } else {
-        printf ("Parsing %s failed\n", filename);
-        free (line);
-        free (integer->buffer);
-        free (integer);
-        return EXIT_FAILURE;
+      printf ("Parsing %s failed\n", filename);
+      free (line);
+      free (integer->buffer);
+      free (integer);
+      return EXIT_FAILURE;
     }
   }
+
+  
 }
 
 /* Parse the command-line arguments. Sets the type based on whether the
