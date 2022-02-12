@@ -236,12 +236,12 @@ accept_value (fsm_t *fsm, bool *is_string, char **string, int64_t *value)
       break;
   }
   // Determine if BuildStr or BuildInt
-  if (is_string)
+  if (*is_string)
   {
     handle_event (fsm, START_STR);
     *string = fsm->buffer;
   } 
-  if (!is_string)
+  if (!*is_string)
   {
     handle_event (fsm, START_INT);
     *value = 123;
