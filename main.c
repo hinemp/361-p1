@@ -110,7 +110,6 @@ main (int argc, char **argv)
         free (line);
         free (value->buffer);
         free (value);
-        free (str);
       }
       if (!is_string) 
       {
@@ -119,7 +118,6 @@ main (int argc, char **argv)
         free (line);
         free (value->buffer);
         free (value);
-        free (str);
       }
     } 
     else 
@@ -128,7 +126,6 @@ main (int argc, char **argv)
       free (line);
       free (value->buffer);
       free (value);
-      free (str);
     }
   }
   

@@ -96,7 +96,7 @@ ActivateString (fsm_t *fsm)
   fsm->is_val_bad = accept_string (str_fsm, &fsm->buffer);
   // Store the result of the accept_string() in a way that the
   // accept_value() parser driver can determine if it was successful.
-
+  free (str_fsm);
 }
 
 static void
@@ -104,6 +104,7 @@ ActivateInteger (fsm_t *fsm)
 {
   fsm_t * int_fsm = int_init (fsm->current);
   fsm->is_val_bad = accept_integer (int_fsm, &fsm->build_int);
+  free (int_fsm);
 }
 
 // Use this format string for syntax errors:
