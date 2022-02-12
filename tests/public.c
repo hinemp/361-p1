@@ -12,15 +12,18 @@
 #include "../parser.h"
 
 // Tests open quote state
-START_TEST (my_basic_int_test)
+START_TEST (my_basic_val_test)
 {
-  char *input = "04321";
-  fsm_t *integer = int_init (input);
-  ck_assert (integer != NULL);
-  int64_t value = 0;
-  ck_assert (accept_integer (integer, &value));
-  ck_assert_int_eq (value, 04321);
-  free (integer);
+  char *input = "123";
+  fsm_t *value = value_init (input);
+  bool is_string = false;
+  char *str = NULL;
+  int64_t integer = 0;
+  ck_assert (accept_value (value, &is_string, &str, &integer));
+  ck_assert (str == NULL);
+  ck_assert_int_eq (integer, 123);
+  free (value);
+  free (str);
 }
 END_TEST
 
