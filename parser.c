@@ -240,7 +240,8 @@ accept_value (fsm_t *fsm, bool *is_string, char **string, int64_t *value)
   {
     handle_event (fsm, START_STR);
     *string = fsm->buffer;
-  } else
+  } 
+  else
   {
     handle_event (fsm, BUILD_INT);
     value = fsm->build_int;
