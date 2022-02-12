@@ -183,7 +183,9 @@ accept_integer (fsm_t *fsm, int64_t *value)
     }
   
     if (fsm->state == INT_ERROR)
+     {
       return false;
+     }
   }
 
   *value = fsm->build_int;
