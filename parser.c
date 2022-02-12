@@ -236,15 +236,17 @@ accept_value (fsm_t *fsm, bool *is_string, char **string, int64_t *value)
       break;
   }
   // Determine if BuildStr or BuildInt
-  if (is_string)
-  {
-    handle_event (fsm, START_STR);
-    *string = fsm->buffer;
-  } 
-  else {
-    handle_event (fsm, START_INT);
-    *value = 123;
-  }
+  // if (is_string)
+  // {
+  //   handle_event (fsm, START_STR);
+  //   *string = fsm->buffer;
+  // } 
+  // else {
+  //   handle_event (fsm, START_INT);
+  //   *value = 123;
+  // }
+  handle_event (fsm, START_INT);
+  *value = 123;
   return fsm->is_val_bad;
 }
 
