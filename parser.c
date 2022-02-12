@@ -5,6 +5,7 @@
 #include "statemodel.h"
 #include "stringmodel.h"
 #include "intmodel.h"
+#include "valmodel.h"
 
 /* Begins at fsm->current and tries to identify a string in the given
    input data. A string begins and ends with ". In between, only two
@@ -204,6 +205,45 @@ accept_integer (fsm_t *fsm, int64_t *value)
 bool
 accept_value (fsm_t *fsm, bool *is_string, char **string, int64_t *value)
 {
+  handle_event (fsm, START_VALUE);
+  // Skip over whitespace
+  while (fsm->current[0] == ' ' || fsm->current[0] == '\n') 
+  {
+    handle_event (fsm, WHITESPACE);
+    fsm->current++;
+  }
+  // Leading character - Digits, hyphen, or quotation
+  switch (fsm->current[0])
+  {
+    case '-':
+    case '0':
+    case '1':
+    case '2':
+    case '3':
+    case '4':
+    case '5':
+    case '6':
+    case '7':
+    case '8':
+    case '9':
+      *is_string = false;
+      break;
+    case '"':
+      *is_string = true;
+      break;
+    default:
+      handle_event (fsm, BAD_VALUE);
+      break;
+  }
+  // Determine if BuildStr or BuildInt
+  if (is_string)
+  {
+    handle_event (fsm, START_STR);
+  } else
+  {
+    handle_event (fsm, BUILD_INT);
+  }
+
   return false;
 }
 

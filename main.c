@@ -65,8 +65,7 @@ main (int argc, char **argv)
         return EXIT_FAILURE;
       }
   }
-
-
+  
   if (type == INT) {
     FILE *fp;
     char *line = (char *) calloc (100, sizeof (char));

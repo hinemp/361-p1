@@ -3,6 +3,19 @@
 
 #include "statemodel.h"
 
+// Value processing states
+typedef enum
+{
+  VAL_INIT,   // beginning to build a value
+  VAL_SKIP,   // skipping over leading whitespace
+  BUILD_STR,  // building a string because " was encountered
+  BUILD_INT,  // building an integer based on leading - or digit
+  VAL_FINISH, // successfully built a value
+  VAL_ERROR,  // encountered an error while building
+  NON_VAL
+} valst_t;
+#define NVAL_STATES NON_VAL
+
 // Value processing events
 typedef enum
 {
@@ -16,19 +29,6 @@ typedef enum
   NIL_VAL
 } valevt_t;
 #define NVAL_EVENTS NIL_VAL
-
-// Value processing states
-typedef enum
-{
-  VAL_INIT,   // beginning to build a value
-  VAL_SKIP,   // skipping over leading whitespace
-  BUILD_STR,  // building a string because " was encountered
-  BUILD_INT,  // building an integer based on leading - or digit
-  VAL_FINISH, // successfully built a value
-  VAL_ERROR,  // encountered an error while building
-  NON_VAL
-} valst_t;
-#define NVAL_STATES NON_VAL
 
 fsm_t *value_init (char const *);
 
