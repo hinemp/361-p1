@@ -14,12 +14,12 @@
 // Tests open quote state
 START_TEST (my_basic_int_test)
 {
-  char *input = "1234";
+  char *input = "04321";
   fsm_t *integer = int_init (input);
   ck_assert (integer != NULL);
   int64_t value = 0;
   ck_assert (accept_integer (integer, &value));
-  ck_assert_int_eq (value, 1234);
+  ck_assert_int_eq (value, 04321);
   free (integer);
 }
 END_TEST
