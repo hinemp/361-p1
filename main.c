@@ -7,6 +7,7 @@
 #include "statemodel.h"
 #include "stringmodel.h"
 #include "intmodel.h"
+#include "valmodel.h"
 #include "parser.h"
 
 // Used to specify which of the four FSMs to use
@@ -65,7 +66,6 @@ main (int argc, char **argv)
         return EXIT_FAILURE;
       }
   }
-  
   if (type == INT) {
     FILE *fp;
     char *line = (char *) calloc (100, sizeof (char));
@@ -90,7 +90,26 @@ main (int argc, char **argv)
       return EXIT_FAILURE;
     }
   }
-
+  if (type == VAL)
+  {
+    FILE *fp;
+    char *line = (char *) calloc (100, sizeof (char));
+    fp = fopen(filename, "r");
+    fgets (line, 100, (FILE*) fp);
+    fclose (fp);
+    bool is_string = false;
+    char *str = NULL;
+    int64_t integer = 0;
+    fsm_t *value = value_init (line);
+    if (accept_value (value, &is_string, &str, &integer))
+    {
+      if (is_string)
+      {
+        printf("VALUE [string]: '%s'\n", str);
+        printf("Success!\n");
+      }
+    }
+  }
   
 }
 
