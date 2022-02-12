@@ -245,8 +245,8 @@ accept_value (fsm_t *fsm, bool *is_string, char **string, int64_t *value)
   {
     handle_event (fsm, BUILD_INT);
     value = &fsm->build_int;
-    int64_t tmp = 123;
-    value = &tmp;
+    int64_t *tmp = 123;
+    value = tmp;
     // *value = (int64_t) fsm->build_int;
   }
   return fsm->is_val_bad;
