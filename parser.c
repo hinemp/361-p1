@@ -4,6 +4,7 @@
 
 #include "statemodel.h"
 #include "stringmodel.h"
+#include "intmodel.h"
 
 /* Begins at fsm->current and tries to identify a string in the given
    input data. A string begins and ends with ". In between, only two
@@ -72,24 +73,96 @@ accept_string (fsm_t *fsm, char **result)
 bool
 accept_integer (fsm_t *fsm, int64_t *value)
 {
+  while (fsm->state < INT_FINISH) {
+    if (fsm->state == MAGNITUDE) {
+      switch (fsm->current[0])
+      {
+      case ' ':
+      case '}':
+      case ',':
+      case '\0':
+        handle_event (fsm, TERM_INT);
+        break;
+      case '0':
+      case '1':
+      case '2':
+      case '3':
+      case '4':
+      case '5':
+      case '6':
+      case '7':
+      case '8':
+      case '9':
+        handle_event (fsm, DIGIT);
+        fsm->current++;
+        break;
+      default:
+        handle_event (fsm, NON_DIGIT);
+        break;
+      }
+    }
 
-  // begins at fsm->current
-  // tries to build valid int val
-  // function accepts both pos and neg vals
-  // allows leading 0s (means number is octal, 023 prints decimal 19)
-  // End of a number is indicated by:
-  // Whitespace
-  // }
-  // ,
-  // '\0' (Null byte zero)
+    if (fsm->state == SIGN) {
+      switch (fsm->current[0])
+      {
+      case '1':
+      case '2':
+      case '3':
+      case '4':
+      case '5':
+      case '6':
+      case '7':
+      case '8':
+      case '9':
+        handle_event (fsm, NZ_DIGIT);
+        fsm->current++;
+        break;
+      case '0':
+        handle_event (fsm, ZERO);
+        fsm->current++;
+      default:
+        handle_event (fsm, NON_DIGIT);
+        break;
+      }
+    }
+  
+    if (fsm->state == OCTAL) {
+      switch (fsm->current[0])
+      {
+        case '0':
+          handle_event (fsm, ZERO);
+          fsm->current++;
+          break;
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+          handle_event (fsm, NZ_DIGIT);
+          fsm->current++;
+          break;
+        case ' ':
+        case '}':
+        case ',':
+        case '\0':
+          handle_event (fsm, TERM_INT);
+          break;
+        default:
+          handle_event (fsm, NON_DIGIT);
+          break;
+      }
+    }
+  
+    if (fsm->state == INT_ERROR)
+      return false;
+  }
 
-  // Any other non-digit value is a NON_DIGIT and results in a syntax error.
-
-  // If the number is successfully built, it should be copied into the location
-  // pointed to by the call-by-reference parameter value and the function should return true.
-  // Otherwise, return false.
-
-  return false;
+  *value = fsm->build_int;
+  return fsm->state == INT_FINISH;
 }
 
 /* Begins at fsm->current and tries to build a value that can be either

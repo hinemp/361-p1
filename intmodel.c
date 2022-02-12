@@ -6,7 +6,8 @@
 #include "statemodel.h"
 
 static void SetNegative (fsm_t *);
-static void SetMultiplier (fsm_t *);
+static void SetMultiplier_8 (fsm_t *);
+static void SetMultiplier_10 (fsm_t *);
 static void MultAndAdd (fsm_t *);
 static void SyntaxError (fsm_t *);
 static state_t parse_transition (fsm_t *, event_t, action_t *, action_t *);
@@ -49,13 +50,13 @@ static state_t const _transition[NINT_STATES][NINT_EVENTS] = {
   };
 
 static action_t const _effect[NINT_STATES][NINT_EVENTS] = {
-//  ZERO      HYPHEN        NZ_DIGIT        DIGIT       TERM_INT  NON_DIGIT
-   {NULL,     SetNegative,  SetMultiplier,  NULL,       NULL,     NULL,},   // INT_INIT
-   {NULL,     NULL,         NULL,           MultAndAdd, NULL,     SyntaxError,}, // MAGNITUDE
-   {NULL,     NULL,         SetMultiplier,  NULL,       NULL,     SyntaxError,}, // SIGN
-   {NULL,     NULL,         SetMultiplier,  NULL,       NULL,     SyntaxError,}, // OCTAL
-   {NULL,     NULL,         NULL,           NULL,       NULL,     NULL,},   // INT_FINISH
-   {NULL,     NULL,         NULL,           NULL,       NULL,     NULL,},   // INT_ERROR
+//  ZERO      HYPHEN        NZ_DIGIT            DIGIT       TERM_INT  NON_DIGIT
+   {NULL,     SetNegative,  SetMultiplier_10,   NULL,       NULL,     NULL,},   // INT_INIT
+   {NULL,     NULL,         NULL,               MultAndAdd, NULL,     SyntaxError,}, // MAGNITUDE
+   {NULL,     NULL,         SetMultiplier_10,   NULL,       NULL,     SyntaxError,}, // SIGN
+   {NULL,     NULL,         SetMultiplier_8,    NULL,       NULL,     SyntaxError,}, // OCTAL
+   {NULL,     NULL,         NULL,               NULL,       NULL,     NULL,},   // INT_FINISH
+   {NULL,     NULL,         NULL,               NULL,       NULL,     NULL,},   // INT_ERROR
   };
 
 static action_t const _entry[NINT_STATES] = {
@@ -85,9 +86,15 @@ SetNegative (fsm_t *fsm)
 }
 
 static void
-SetMultiplier (fsm_t *fsm)
+SetMultiplier_8 (fsm_t *fsm)
 {
-  fsm->multiplier = fsm->current[0] - '0';
+  fsm->multiplier = 8;
+}
+
+static void
+SetMultiplier_10 (fsm_t *fsm)
+{
+  fsm->multiplier = 10;
 }
 
 static void
@@ -101,5 +108,5 @@ MultAndAdd (fsm_t *fsm)
 static void
 SyntaxError (fsm_t *fsm)
 {
-  
+  // Print syntax error.
 }
