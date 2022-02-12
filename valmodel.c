@@ -103,9 +103,9 @@ static void
 ActivateInteger (fsm_t *fsm)
 {
   fsm_t * int_fsm = int_init (fsm->current);
-  int64_t *value = 0;
-  fsm->is_val_bad = accept_integer (int_fsm, value);
-  fsm->build_int = *value;
+  int64_t value = 0;
+  fsm->is_val_bad = accept_integer (int_fsm, &value);
+  fsm->build_int = value;
 }
 
 // Use this format string for syntax errors:
