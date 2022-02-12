@@ -74,7 +74,7 @@ main (int argc, char **argv)
     fclose (fp);
     fsm_t *integer = int_init (line);
     int64_t *value = NULL;
-    if (accept_integer (integer, &value)) 
+    if (accept_integer (integer, value)) 
     {
       printf ("INTEGER: '%d'\n", value);
       printf ("Success!\n");
