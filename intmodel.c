@@ -103,6 +103,9 @@ MultAndAdd (fsm_t *fsm)
   fsm->build_int *= fsm->multiplier;
   int to_add = fsm->current[0] - '0';
   fsm->build_int += to_add;
+  if (fsm->is_negative) 
+    if (fsm->build_int > 0)
+      fsm->build_int *= -1;
 }
 
 static void
