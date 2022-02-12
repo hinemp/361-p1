@@ -244,7 +244,7 @@ accept_value (fsm_t *fsm, bool *is_string, char **string, int64_t *value)
     handle_event (fsm, BUILD_INT);
   }
 
-  return false;
+  return fsm->is_val_bad;
 }
 
 /* Begins at fsm->current and tries to build a valid JSON object. All JSON
