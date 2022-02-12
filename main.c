@@ -6,6 +6,7 @@
 
 #include "statemodel.h"
 #include "stringmodel.h"
+#include "intmodel.h"
 #include "parser.h"
 
 // Used to specify which of the four FSMs to use
@@ -46,7 +47,7 @@ main (int argc, char **argv)
     fclose (fp);
     fsm_t *string = string_init (line);
     char *result = NULL;
-    if (accept_string(string, &result))
+    if (accept_string (string, &result))
       {
         printf ("STRING: '%s'\n", result);
         printf ("Success!\n");
@@ -65,6 +66,33 @@ main (int argc, char **argv)
       }
     
   }
+  if (type == INT) {
+    FILE *fp;
+    char *line = (char *) calloc (100, sizeof (char));
+    fp = fopen(filename, "r");
+    fgets (line, 100, (FILE*) fp);
+    fclose (fp);
+    fsm_t *integer = int_init (line);
+    int64_t *value = NULL;
+    if (accept_integer (integer, &value)) 
+    {
+      printf ("INTEGER: '%d'\n", value);
+      printf ("Success!\n");
+      free (line);
+      free (integer->buffer);
+      free (integer);
+      return EXIT_SUCCESS;
+    }
+      else
+      {
+        printf ("Parsing %s failed\n", filename);
+        free (line);
+        free (integer->buffer);
+        free (integer);
+        return EXIT_FAILURE;
+      }
+  }
+
 }
 
 /* Parse the command-line arguments. Sets the type based on whether the
