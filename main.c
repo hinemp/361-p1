@@ -76,7 +76,7 @@ main (int argc, char **argv)
     int64_t *value = NULL;
     if (accept_integer (integer, value)) 
     {
-      printf ("INTEGER: '%d'\n", value);
+      printf ("INTEGER: '%ln'\n", value);
       printf ("Success!\n");
       free (line);
       free (integer->buffer);
