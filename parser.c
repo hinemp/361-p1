@@ -181,7 +181,6 @@ accept_integer (fsm_t *fsm, int64_t *value)
           break;
       }
     }
-  
     if (fsm->state == INT_ERROR)
      {
       return false;
