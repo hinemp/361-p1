@@ -14,7 +14,7 @@
 // Tests open quote state
 START_TEST (my_basic_val_test)
 {
-  char *input = '123';
+  char *input = "123";
   fsm_t *value = value_init (input);
   bool is_string = false;
   char *str = NULL;
