@@ -20,6 +20,7 @@ START_TEST (my_basic_val_test)
   char *str = NULL;
   int64_t integer = 0;
   ck_assert (accept_value (value, &is_string, &str, &integer));
+  ck_assert_int_eq (value->state, VAL_FINISH);
   ck_assert_int_eq (integer, 123);
   free (value);
   free (str);
