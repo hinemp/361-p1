@@ -102,6 +102,8 @@ ActivateString (fsm_t *fsm)
 static void
 ActivateInteger (fsm_t *fsm)
 {
+  fsm->buffer = (char *) calloc (100, sizeof (char));
+  memset (fsm->buffer, 0, 100 * sizeof (char));
   fsm_t * int_fsm = int_init (fsm->current);
   fsm->is_val_bad = accept_integer (int_fsm, (int64_t) fsm-> build_int);
 }
