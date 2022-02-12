@@ -6,6 +6,7 @@
 #include "valmodel.h"
 #include "stringmodel.h"
 #include "intmodel.h"
+#include "parser.h"
 
 
 static void ActivateString (fsm_t *);
