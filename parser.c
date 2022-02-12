@@ -91,6 +91,7 @@ accept_integer (fsm_t *fsm, int64_t *value)
         break;
       case '-':
         handle_event (fsm, HYPHEN);
+        fsm->current++;
         break;
       default:
         break;
