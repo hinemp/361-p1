@@ -175,6 +175,7 @@ accept_integer (fsm_t *fsm, int64_t *value)
         case '}':
         case ',':
         case '\0':
+        case '\n':
           handle_event (fsm, TERM_INT);
           break;
         default:
