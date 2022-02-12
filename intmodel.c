@@ -115,5 +115,5 @@ MultAndAdd (fsm_t *fsm)
 static void
 SyntaxError (fsm_t *fsm)
 {
-  // Print syntax error.
+  printf("SYNTAX ERROR: '%c' is not a valid digit", fsm->current);
 }
