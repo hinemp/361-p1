@@ -311,6 +311,7 @@ accept_object (fsm_t *fsm, char **keys)
   {
     handle_event (fsm, START_ID);
     // BUILD_ID
+    printf("%s = buffer\n", fsm->buffer);
     if (fsm->is_val_ok)
     {
       handle_event (fsm, END_ID);
