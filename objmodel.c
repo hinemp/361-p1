@@ -108,7 +108,7 @@ ActivateString (fsm_t *fsm)
   {
     fsm->current = strmachine->current;
   }
-  int retval = snprintf (fsm->key_str, 100, &fsm->buffer);
+  int retval = snprintf (fsm->key_str, 100, fsm->buffer);
   free (strmachine->buffer);
   free (strmachine);
 }
