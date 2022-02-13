@@ -140,6 +140,5 @@ SyntaxError (fsm_t *fsm)
   char err = fsm->current[1];
 
   printf("SYNTAX ERROR: '%c%c' is not a valid escape code\n", curr, err);
-  free (fsm->buffer);
 }
 
