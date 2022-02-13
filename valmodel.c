@@ -93,7 +93,7 @@ ActivateString (fsm_t *fsm)
 
   // That state machine is run by calling accept_string()
   // bool accept_string (fsm_t *fsm, char **result)
-  fsm->is_val_bad = accept_string (str_fsm, &fsm->buffer);
+  fsm->is_val_bad = !accept_string (str_fsm, &fsm->buffer);
   if (fsm->is_val_bad)
   {  
     fsm->buffer = NULL;
