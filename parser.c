@@ -314,8 +314,9 @@ accept_object (fsm_t *fsm, char **keys)
     {
       handle_event (fsm, END_ID);
       // PEND_VALUE
-      while (fsm->current[0] == ' ')
+      while (fsm->current[0] == ' ' || fsm->current[0] == '\n') 
       {
+        handle_event (fsm, WHITESPACE);
         fsm->current++;
       }
       // First non whitespace char
@@ -326,8 +327,10 @@ accept_object (fsm_t *fsm, char **keys)
         if (fsm->is_val_ok)
         {
           handle_event (fsm, GOOD_VALUE);
-          while (fsm->current[0] == ' ')
+          // SCANNING
+          while (fsm->current[0] == ' ' || fsm->current[0] == '\n')
           {
+            handle_event (fsm, WHITESPACE);
             fsm->current++;
           }
           // First non whitespace char
