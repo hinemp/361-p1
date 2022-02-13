@@ -172,7 +172,7 @@ SyntaxError (fsm_t *fsm)
   char err = fsm->current[1];
   if (err == '\n')
   {
-    err = '\0';
+    err = '-';
   }
   printf ("SYNTAX ERROR: Could not process text beginning at '%c%c'\n", curr, err);
 }
