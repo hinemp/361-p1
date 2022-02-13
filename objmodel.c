@@ -89,6 +89,7 @@ parse_transition (fsm_t *fsm, event_t event, action_t *effect, action_t *entry)
 static void 
 SetIdent (fsm_t *fsm)
 {
+  fsm->key_str = fsm->buffer;
   // This is done in ActivateString, idk how else to do it
 }
 
