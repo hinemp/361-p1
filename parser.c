@@ -58,7 +58,6 @@ accept_string (fsm_t *fsm, char **result)
       }
     if (fsm->state == STR_ERROR)
     {
-      free (fsm->buffer);
       return false;
     }
   }
