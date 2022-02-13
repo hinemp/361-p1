@@ -338,7 +338,7 @@ accept_object (fsm_t *fsm, char **keys)
           } else
           {
             handle_event (fsm, BAD_TOKEN);
-            return false;
+            // return false;
           }
         } else 
         {

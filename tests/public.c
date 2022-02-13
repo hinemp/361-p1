@@ -80,7 +80,7 @@ START_TEST (FULL_object_string)
   fsm_t *object = object_init (input);
   char *str = NULL;
   bool result = accept_object (object, &str);
-  // ck_assert (result);
+  ck_assert (result);
   ck_assert (str != NULL);
   ck_assert_str_eq (str, "KEYS[hello] = goodbye\n");
   free (object);
