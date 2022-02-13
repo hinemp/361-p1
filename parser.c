@@ -256,6 +256,10 @@ accept_value (fsm_t *fsm, bool *is_string, char **string, int64_t *value)
     else
       handle_event (fsm, BAD_VALUE);
   }
+  if (fsm->is_val_bad)
+  {
+    string = NULL;
+  }
   return fsm->is_val_bad;
 }
 
