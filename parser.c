@@ -328,8 +328,8 @@ accept_object (fsm_t *fsm, char **keys)
       // First non whitespace char
       if (fsm->current[0] == ':')
       {
-        handle_event (fsm, COLON);
         printf ("\n%c\n", fsm->current[0]);
+        handle_event (fsm, COLON);
         // BUILD_VALUE
         if (fsm->is_val_ok)
         {
