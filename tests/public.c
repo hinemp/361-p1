@@ -11,20 +11,7 @@
 #include "../objmodel.h"
 #include "../parser.h"
 
-// Tests open quote state
-START_TEST (my_basic_val_test)
-{
-  char *input = "123";
-  fsm_t *value = value_init (input);
-  bool is_string = false;
-  char *str = NULL;
-  int64_t integer = 0;
-  ck_assert (accept_value (value, &is_string, &str, &integer));
-  ck_assert_int_eq (integer, 123);
-  free (value);
-  free (str);
-}
-END_TEST
+
 
 // Test that accept_string accepts a basic "hello" string
 START_TEST (PART_string)
@@ -78,6 +65,24 @@ START_TEST (FULL_object_string)
 {
   char *input = "{\"hello\":\"goodbye\"}";
   fsm_t *object = object_init (input);
+  char *str = NULL;
+  bool result = accept_object (object, &str);
+  ck_assert (result);
+  ck_assert (str != NULL);
+  ck_assert_str_eq (str, "KEYS[hello] = goodbye\n");
+  free (object);
+  free (str);
+}
+END_TEST
+
+// Tests open quote state
+START_TEST (my_basic_val_test)
+{
+  char *input = "{\"a\":\"b\"}";
+  fsm_t *object = object_init (input);
+  ck_assert_int_eq (object->current[0], '{');
+  object->current++;
+  ck_assert_int_eq (object->current[0], '\"');
   char *str = NULL;
   bool result = accept_object (object, &str);
   ck_assert (result);
