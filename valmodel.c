@@ -90,6 +90,7 @@ ActivateString (fsm_t *fsm)
   if (!fsm->is_val_ok)
   {  
     fsm->buffer = NULL;
+    free (str_fsm->buffer);
   }
   free (str_fsm);
 }
