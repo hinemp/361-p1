@@ -334,7 +334,7 @@ accept_object (fsm_t *fsm, char **keys)
         {
           handle_event (fsm, GOOD_VALUE);
           // printf("%s = key\n%s = buffer\n", fsm->key_str, fsm->buffer);
-          // memset (fsm->buffer, 0, 99 * sizeof (char));
+          memset (fsm->buffer, 0, 99 * sizeof (char));
           // SCANNING
           while (fsm->current[0] == ' ' || fsm->current[0] == '\n')
           {
