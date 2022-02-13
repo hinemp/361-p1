@@ -297,13 +297,12 @@ accept_value (fsm_t *fsm, bool *is_string, char **string, int64_t *value)
 bool
 accept_object (fsm_t *fsm, char **keys)
 {
-  while (fsm->current[0] != '{')
+  handle_event (fsm, OPEN_CB);
+  while (fsm->current[0] == ' ' || fsm->current[0] == '\n') 
   {
+    handle_event (fsm, WHITESPACE);
     fsm->current++;
   }
-  handle_event (fsm, OPEN_CB);
-  // SKIP
-  fsm->current++;
   // Should be the first quotation mark
   if (fsm->current[0] == '"')
   {
@@ -359,7 +358,7 @@ accept_object (fsm_t *fsm, char **keys)
   } else
   {
     handle_event (fsm, BAD_TOKEN);
-    // return false;
+    return false;
   }
   return true;
 }
