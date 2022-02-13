@@ -128,7 +128,23 @@ main (int argc, char **argv)
       free (value);
     }
   }
-  
+  if (type == OBJ) {
+    FILE *fp;
+    char *line = (char *) calloc (100, sizeof (char));
+    fp = fopen(filename, "r");
+    fgets (line, 100, (FILE*) fp);
+    fclose (fp);
+    char *keys = NULL;
+    fsm_t *obj = object_init (line);
+    if (accept_object(obj, &keys)) {
+      printf("Key-value pairs:\n");
+      printf("{\n%s}\n", obj->kvbuffer);
+      printf("Success!\n");
+      free (line);
+      free (obj->buffer);
+      free (obj);
+    }
+  }
 }
 
 /* Parse the command-line arguments. Sets the type based on whether the
