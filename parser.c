@@ -6,6 +6,7 @@
 #include "stringmodel.h"
 #include "intmodel.h"
 #include "valmodel.h"
+#include "objmodel.h"
 
 /* Begins at fsm->current and tries to identify a string in the given
    input data. A string begins and ends with ". In between, only two
@@ -296,5 +297,68 @@ accept_value (fsm_t *fsm, bool *is_string, char **string, int64_t *value)
 bool
 accept_object (fsm_t *fsm, char **keys)
 {
-  return false;
+  handle_event (fsm, OPEN_CB);
+  // SKIP
+  while (fsm->current[0] == ' ')
+  {
+    fsm->current++;
+  }
+  // Should be the first quotation mark
+  if (fsm->current == '"')
+  {
+    handle_event (fsm, START_ID);
+    // BUILD_ID
+    if (fsm->is_val_ok)
+    {
+      handle_event (fsm, END_ID);
+      // PEND_VALUE
+      while (fsm->current[0] == ' ')
+      {
+        fsm->current++;
+      }
+      // First non whitespace char
+      if (fsm->current[0] == ':')
+      {
+        handle_event (fsm, COLON);
+        // BUILD_VALUE
+        if (fsm->is_val_ok)
+        {
+          handle_event (fsm, GOOD_VALUE);
+          while (fsm->current[0] == ' ')
+          {
+            fsm->current++;
+          }
+          // First non whitespace char
+          if (fsm->current[0] == ',')
+          {
+            handle_event (fsm, COMMA);
+          } else if (fsm->current[0] == '}')
+          {
+            handle_event (fsm, CLOSE_CB);
+          } else
+          {
+            handle_event (fsm, BAD_TOKEN);
+            return false;
+          }
+        } else 
+        {
+          handle_event (fsm, BAD_VALUE);
+          return false;
+        }
+      } else 
+      {
+        handle_event (fsm, NON_COLON);
+        return false;
+      }
+    } else
+    {
+      handle_event (fsm, BAD_ID);
+      return false;
+    }
+  } else
+  {
+    handle_event (fsm, BAD_TOKEN);
+    return false;
+  }
+  return true;
 }

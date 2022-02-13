@@ -158,7 +158,14 @@ AppendKeyValuePair (fsm_t *fsm)
 static void 
 SyntaxError (fsm_t *fsm)
 {
-  printf ("SYNTAX ERROR: Could not process text beginning at '%s'\n", fsm->current[0]);
+  fsm->current--;
+  char curr = fsm->current[0];
+  char err = fsm->current[1];
+  if (err == '\n')
+  {
+    err = '\0';
+  }
+  printf ("SYNTAX ERROR: Could not process text beginning at '%c%c'\n", curr, err);
 }
 // For syntax errors, if there is a newline character ('\n'),
 // replace it with a null byte ('\0'), then use this format
