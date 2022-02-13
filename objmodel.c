@@ -108,7 +108,10 @@ ActivateString (fsm_t *fsm)
   {
     fsm->current = str_machine->current;
   }
-  // free (str_machine->buffer);
+  else 
+  {
+    free (str_machine->buffer);
+  }
   free (str_machine);
 }
 
