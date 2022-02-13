@@ -347,6 +347,7 @@ accept_object (fsm_t *fsm, char **keys)
             handle_event (fsm, CLOSE_CB);
           } else
           {
+            printf("%ld\n", fsm->val_int);
             printf("failed this if statement\n");
             handle_event (fsm, BAD_TOKEN);
             return false;
