@@ -148,10 +148,10 @@ AppendKeyValuePair (fsm_t *fsm)
   // realloc()
   if (fsm->is_val_str)
   {
-    ret_val = snprintf (fsm->kvbuffer, 100, "KEYS[%s] = %s\n", fsm->buffer, fsm->val_str);
+    ret_val = snprintf (fsm->kvbuffer, 100, "KEYS[%s] = %s\n", fsm->key_str, fsm->val_str);
   } else 
   {
-    ret_val = snprintf (fsm->kvbuffer, 100, "KEYS[%s] = %ld\n", fsm->buffer, fsm->val_int);
+    ret_val = snprintf (fsm->kvbuffer, 100, "KEYS[%s] = %ld\n", fsm->key_str, fsm->val_int);
   }
   
 }
