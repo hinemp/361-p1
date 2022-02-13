@@ -104,6 +104,7 @@ ActivateString (fsm_t *fsm)
   // char *input = "{\"a\":\"b\"}";
   fsm_t *strmachine = string_init (fsm->current);
   fsm->is_val_ok = accept_string (strmachine, &fsm->buffer);
+  printf("%s = buffer\n", fsm->buffer);
   if (fsm->is_val_ok)
   {
     fsm->current = strmachine->current;
