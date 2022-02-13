@@ -325,6 +325,7 @@ accept_object (fsm_t *fsm, char **keys)
       // First non whitespace char
       if (fsm->current[0] == ':')
       {
+        printf("%s = buffer\n", fsm->buffer);
         handle_event (fsm, COLON);
         // BUILD_VALUE
         if (fsm->is_val_ok)

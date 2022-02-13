@@ -140,7 +140,6 @@ ActivateValue (fsm_t *fsm)
 static void 
 AppendKeyValuePair (fsm_t *fsm) 
 {
-  printf("%s = buffer\n", fsm->buffer);
   // key comes from fsm key_str
   int ret_val = 100;
   fsm->kvbuffer = (char *) calloc (99, sizeof (char));
