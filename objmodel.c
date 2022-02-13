@@ -144,6 +144,7 @@ AppendKeyValuePair (fsm_t *fsm)
   int ret_val = 100;
   fsm->kvbuffer = (char *) calloc (99, sizeof (char));
   memset (fsm->buffer, 0, 99 * sizeof (char));
+  printf("%s = buffer\n", fsm->buffer);
   // realloc()
   if (fsm->is_val_str)
   {
