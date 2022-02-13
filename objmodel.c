@@ -124,7 +124,11 @@ AppendKeyValuePair( fsm_t *fsm)
 // resize an existing dynamically
 //  allocated string to make space to concatenate.
 
-static void SyntaxError (fsm_t *);
+static void 
+SyntaxError (fsm_t *fsm)
+{
+
+}
 // For syntax errors, if there is a newline character ('\n'),
 // replace it with a null byte ('\0'), then use this format
 // string:
