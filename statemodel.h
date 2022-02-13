@@ -48,8 +48,11 @@ struct fsm
   bool is_val_ok;
 
   // OBJ FSM Fields
+  char *key_str;
   bool is_val_str;
-  char *valstr;
+  char *val_str;
+  long int val_int;
+
   char *kvbuffer;
 
 

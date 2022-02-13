@@ -1,5 +1,6 @@
 #include <stdbool.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "objmodel.h"
 #include "statemodel.h"
@@ -101,18 +102,33 @@ ActivateValue (fsm_t *fsm)
   {
     if (fsm->is_val_str) // If val is a string
     {
-    
+      fsm->val_str = str;
     } else  // If val is an int
     {
-
+      fsm->val_int = integer;
     }
+  } else // Bad value
+  {
+    
   }
 }
 
 static void 
-AppendKeyValuePair( fsm_t *fsm) 
+AppendKeyValuePair (fsm_t *fsm) 
 {
-
+  // key comes from fsm key_str
+  int ret_val = 100;
+  fsm->kvbuffer = (char *) calloc (99, sizeof (char));
+  memset (fsm->buffer, 0, 99 * sizeof (char));
+  // realloc()
+  if (fsm->is_val_str)
+  {
+    ret_val = snprintf (fsm->kvbuffer, 100, "KEYS[%s] = %s\n", fsm->buffer, fsm->val_str);
+  } else 
+  {
+    ret_val = snprintf (fsm->kvbuffer, 100, "KEYS[%s] = %ld\n", fsm->buffer, fsm->val_int);
+  }
+  
 }
 // In AppendKeyValuePair, use a combination of strncat() and
 // snprintf() to create format strings like the following:
@@ -127,7 +143,7 @@ AppendKeyValuePair( fsm_t *fsm)
 static void 
 SyntaxError (fsm_t *fsm)
 {
-
+  printf ("SYNTAX ERROR: Could not process text beginning at '%s'\n", fsm->current[0]);
 }
 // For syntax errors, if there is a newline character ('\n'),
 // replace it with a null byte ('\0'), then use this format
