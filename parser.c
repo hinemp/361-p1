@@ -348,12 +348,12 @@ accept_object (fsm_t *fsm, char **keys)
       } else 
       {
         handle_event (fsm, NON_COLON);
-        // return false;
+        return false;
       }
     } else
     {
       handle_event (fsm, BAD_ID);
-      return false;
+      // return false;
     }
   } else
   {
