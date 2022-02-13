@@ -363,6 +363,7 @@ accept_object (fsm_t *fsm, char **keys)
     }
   } else
   {
+    printf("failed first if statement\n");
     handle_event (fsm, BAD_TOKEN);
     return false;
   }
