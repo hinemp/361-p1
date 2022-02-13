@@ -326,11 +326,11 @@ accept_object (fsm_t *fsm, char **keys)
       if (fsm->current[0] == ':')
       {
         handle_event (fsm, COLON);
-        printf("%s = key\n%s = buffer", fsm->key_str, fsm->buffer);
         // BUILD_VALUE
         if (fsm->is_val_ok)
         {
           handle_event (fsm, GOOD_VALUE);
+          printf("%s = key\n%s = buffer\n", fsm->key_str, fsm->buffer);
           // SCANNING
           while (fsm->current[0] == ' ' || fsm->current[0] == '\n')
           {
