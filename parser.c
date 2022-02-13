@@ -258,7 +258,7 @@ accept_value (fsm_t *fsm, bool *is_string, char **string, int64_t *value)
   }
   if (fsm->is_val_bad)
   {
-    *string = NULL;
+    string = NULL;
   }
   return fsm->is_val_bad;
 }
