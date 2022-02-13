@@ -314,6 +314,8 @@ accept_object (fsm_t *fsm, char **keys)
     if (fsm->is_val_ok)
     {
       handle_event (fsm, END_ID);
+      fsm->current++;
+      fsm->current++;
       // PEND_VALUE
       while (fsm->current[0] == ' ' || fsm->current[0] == '\n') 
       {
