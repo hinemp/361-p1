@@ -297,12 +297,9 @@ accept_value (fsm_t *fsm, bool *is_string, char **string, int64_t *value)
 bool
 accept_object (fsm_t *fsm, char **keys)
 {
-  if (fsm->current[0] != '{')
+  while (fsm->current[0] != '{')
   {
-    while (fsm->current[0] != '{')
-    {
-      fsm->current++;
-    }
+    fsm->current++;
   }
   handle_event (fsm, OPEN_CB);
   // SKIP
@@ -362,7 +359,7 @@ accept_object (fsm_t *fsm, char **keys)
   } else
   {
     handle_event (fsm, BAD_TOKEN);
-    return false;
+    // return false;
   }
   return true;
 }
