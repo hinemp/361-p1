@@ -107,7 +107,6 @@ ActivateString (fsm_t *fsm)
   if (fsm->is_val_ok)
   {
     fsm->current = strmachine->current;
-    free (strmachine);
   }
   free (strmachine);
 }

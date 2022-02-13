@@ -337,6 +337,7 @@ accept_object (fsm_t *fsm, char **keys)
             fsm->current++;
           }
           fsm->current++;
+          fsm->current++;
           // First non whitespace char
           if (fsm->current[0] == ',')
           {
