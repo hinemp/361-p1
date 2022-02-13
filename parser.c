@@ -304,7 +304,7 @@ accept_object (fsm_t *fsm, char **keys)
     fsm->current++;
   }
   // Should be the first quotation mark
-  if (fsm->current[0] == '"')
+  if (fsm->current[0] == '\"')
   {
     handle_event (fsm, START_ID);
     // BUILD_ID
@@ -358,7 +358,7 @@ accept_object (fsm_t *fsm, char **keys)
   } else
   {
     handle_event (fsm, BAD_TOKEN);
-    // return false;
+    return false;
   }
   return true;
 }
