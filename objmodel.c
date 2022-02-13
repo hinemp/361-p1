@@ -178,6 +178,8 @@ SyntaxError (fsm_t *fsm)
     err = fsm->current[1];
   }
   printf ("SYNTAX ERROR: Could not process text beginning at '%c%c'\n", curr, err);
+  free (fsm->kvbuffer);
+  free (fsm->buffer);
 }
 // For syntax errors, if there is a newline character ('\n'),
 // replace it with a null byte ('\0'), then use this format
