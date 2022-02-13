@@ -85,21 +85,12 @@ parse_transition (fsm_t *fsm, event_t event, action_t *effect, action_t *entry)
 static void
 ActivateString (fsm_t *fsm)
 {
-  // fsm->buffer = (char *) calloc (100, sizeof (char));
-  // memset (fsm->buffer, 0, 100 * sizeof (char));
-  // Local variable created as an instance of a string-processing FSM
-  // fsm_t str_fsm = string_init (char const *input);
   fsm_t * str_fsm = string_init (fsm->current);
-
-  // That state machine is run by calling accept_string()
-  // bool accept_string (fsm_t *fsm, char **result)
   fsm->is_val_ok = accept_string (str_fsm, &fsm->buffer);
   if (!fsm->is_val_ok)
   {  
     fsm->buffer = NULL;
   }
-  // Store the result of the accept_string() in a way that the
-  // accept_value() parser driver can determine if it was successful.
   free (str_fsm);
 }
 
