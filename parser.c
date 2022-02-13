@@ -335,6 +335,7 @@ accept_object (fsm_t *fsm, char **keys)
             fsm->current++;
           }
           fsm->current++;
+          fsm->current++;
           // First non whitespace char
           if (fsm->current[0] == ',')
           {
@@ -359,12 +360,12 @@ accept_object (fsm_t *fsm, char **keys)
       }
     } else
     {
+      printf("failed this if statement\n");
       handle_event (fsm, BAD_ID);
       return false;
     }
   } else
   {
-    printf("failed first if statement\n");
     handle_event (fsm, BAD_TOKEN);
     return false;
   }
