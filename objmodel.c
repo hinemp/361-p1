@@ -110,7 +110,6 @@ ActivateString (fsm_t *fsm)
   }
   // free (strmachine->buffer);
   free (strmachine);
-  printf("%s = buffer\n", fsm->buffer);
 }
 
 static void 
