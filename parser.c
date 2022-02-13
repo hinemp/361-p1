@@ -329,6 +329,7 @@ accept_object (fsm_t *fsm, char **keys)
       if (fsm->current[0] == ':')
       {
         handle_event (fsm, COLON);
+        printf ("\n%c\n", fsm->current[0]);
         // BUILD_VALUE
         if (fsm->is_val_ok)
         {
