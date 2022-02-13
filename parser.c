@@ -240,7 +240,7 @@ accept_value (fsm_t *fsm, bool *is_string, char **string, int64_t *value)
   {
     handle_event (fsm, START_STR);
     *string = fsm->buffer;
-    if (!fsm->is_val_bad)
+    if (fsm->is_val_ok)
       handle_event (fsm, END_STR);
     else
     {
@@ -251,12 +251,12 @@ accept_value (fsm_t *fsm, bool *is_string, char **string, int64_t *value)
   {
     handle_event (fsm, START_INT);
     *value = fsm->build_int;
-    if (!fsm->is_val_bad)
+    if (fsm->is_val_ok)
       handle_event (fsm, END_INT);
     else
       handle_event (fsm, BAD_VALUE);
   }
-  return fsm->is_val_bad;
+  return fsm->is_val_ok;
 }
 
 /* Begins at fsm->current and tries to build a valid JSON object. All JSON

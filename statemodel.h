@@ -45,7 +45,7 @@ struct fsm
   bool is_negative;
 
   // VAL FSM Fields
-  bool is_val_bad;
+  bool is_val_ok;
 
   // TODO: Extend this with additional fields you need to hold information
   // during the execution of your FSM.
