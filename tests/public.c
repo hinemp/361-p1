@@ -80,9 +80,6 @@ START_TEST (my_basic_val_test)
 {
   char *input = "{\"a\":\"b\"}";
   fsm_t *object = object_init (input);
-  fsm_t *fsm_str = string_init (object->current);
-  fsm_str->current++;
-  ck_assert_int_eq (object->current, fsm_str->current);
   char *str = NULL;
   bool result = accept_object (object, &str);
   ck_assert (result);
