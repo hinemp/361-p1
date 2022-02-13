@@ -83,6 +83,8 @@ START_TEST (my_basic_val_test)
   ck_assert_int_eq (object->current[0], '{');
   object->current++;
   ck_assert_int_eq (object->current[0], '\"');
+  object->current++;
+  ck_assert_int_eq (object->current[0], 'a');
   char *str = NULL;
   bool result = accept_object (object, &str);
   ck_assert (result);
