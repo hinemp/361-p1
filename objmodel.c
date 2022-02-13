@@ -97,6 +97,7 @@ static void
 AdvancePointer (fsm_t *fsm)
 {
   fsm->current++;
+  printf ("\n%c\n", fsm->current);
 }
 
 static void 
