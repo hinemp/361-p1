@@ -245,7 +245,6 @@ accept_value (fsm_t *fsm, bool *is_string, char **string, int64_t *value)
     else
     {
       handle_event (fsm, BAD_VALUE);
-      *string = NULL;
     }      
   } 
   if (!*is_string)

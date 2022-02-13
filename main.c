@@ -93,7 +93,7 @@ main (int argc, char **argv)
   if (type == VAL)
   {
     FILE *fp;
-    char *line = (char *) calloc (100, sizeof (char));
+    char *line = (char *) calloc (101, sizeof (char));
     fp = fopen(filename, "r");
     fgets (line, 100, (FILE*) fp);
     fclose (fp);
