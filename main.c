@@ -142,6 +142,7 @@ main (int argc, char **argv)
       printf("{\n%s}\n", obj->kvbuffer);
       printf("Success!\n");
       free (line);
+      free (obj->kvbuffer);
       free (obj->buffer);
       free (obj);
     }
