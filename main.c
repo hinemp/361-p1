@@ -141,11 +141,11 @@ main (int argc, char **argv)
       printf("Key-value pairs:\n");
       printf("{\n%s}\n", obj->kvbuffer);
       printf("Success!\n");
-      free (line);
-      free (obj->kvbuffer);
-      free (obj->buffer);
-      free (obj);
     }
+    free (line);
+    free (obj->kvbuffer);
+    free (obj->buffer);
+    free (obj);
   }
 }
 
