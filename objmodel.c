@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "objmodel.h"
 #include "statemodel.h"
@@ -20,7 +21,21 @@ static state_t parse_transition (fsm_t *, event_t, action_t *, action_t *);
 fsm_t *
 object_init (char const *input)
 {
-  return NULL;
+  fsm_t *fsm = calloc (1, sizeof (fsm_t));
+  fsm->nevents = NOBJ_EVENTS;
+  fsm->state = OBJ_INIT;
+  fsm->transition = parse_transition;
+
+  // Extra Fields
+  fsm->input = input;
+  fsm->current = input;
+  fsm->length = 0;
+
+  // Int Fields
+  fsm->build_int = 0;
+  fsm->is_negative = false;
+  
+  return fsm;
 }
 
 static state_t const _transition[NOBJ_STATES][NOBJ_EVENTS] = {
