@@ -306,6 +306,7 @@ accept_object (fsm_t *fsm, char **keys)
   }
   handle_event (fsm, OPEN_CB);
   // SKIP
+  fsm->current++;
   // Should be the first quotation mark
   if (fsm->current[0] == '"')
   {
