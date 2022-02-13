@@ -145,6 +145,8 @@ main (int argc, char **argv)
     free (line);
     free (obj->kvbuffer);
     free (obj->buffer);
+    free (obj->str_machine->buffer);
+    free (obj->str_machine);
     free (obj);
   }
 }

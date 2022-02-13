@@ -102,14 +102,12 @@ AdvancePointer (fsm_t *fsm)
 static void 
 ActivateString (fsm_t *fsm)
 {
-  fsm_t *strmachine = string_init (fsm->current);
-  fsm->is_val_ok = accept_string (strmachine, &fsm->buffer);
+  fsm->str_machine = string_init (fsm->current);
+  fsm->is_val_ok = accept_string (fsm->str_machine, &fsm->buffer);
   if (fsm->is_val_ok)
   {
-    fsm->current = strmachine->current;
+    fsm->current = fsm->str_machine->current;
   }
-  free (strmachine->buffer);
-  free (strmachine);
 }
 
 static void 
