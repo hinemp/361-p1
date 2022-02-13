@@ -93,9 +93,9 @@ main (int argc, char **argv)
   if (type == VAL)
   {
     FILE *fp;
-    char *line = (char *) calloc (101, sizeof (char));
+    char *line = (char *) calloc (99, sizeof (char));
     fp = fopen(filename, "r");
-    fgets (line, 100, (FILE*) fp);
+    fgets (line, 99, (FILE*) fp);
     fclose (fp);
     bool is_string = false;
     char *str = NULL;
