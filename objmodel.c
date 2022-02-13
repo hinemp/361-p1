@@ -120,6 +120,7 @@ ActivateValue (fsm_t *fsm)
   fsm->is_val_ok = accept_value (valfsm, &is_string, &str, &integer);
   if (fsm->is_val_ok)
   {
+    fsm->current = valfsm->current;
     if (fsm->is_val_str) // If val is a string
     {
       fsm->val_str = str;
