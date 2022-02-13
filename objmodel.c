@@ -108,6 +108,7 @@ ActivateString (fsm_t *fsm)
   {
     fsm->current = strmachine->current;
   }
+  free (strmachine);
 }
 
 static void 
@@ -132,6 +133,7 @@ ActivateValue (fsm_t *fsm)
   {
     
   }
+  free (valfsm);
 }
 
 static void 
