@@ -108,7 +108,7 @@ ActivateString (fsm_t *fsm)
   {
     fsm->current = strmachine->current;
   }
-  free (strmachine->buffer);
+  // free (strmachine->buffer);
   free (strmachine);
   printf("%s = buffer\n", fsm->buffer);
 }
