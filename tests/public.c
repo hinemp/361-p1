@@ -78,6 +78,7 @@ START_TEST (FULL_object_string)
 {
   char *input = "{\"hello\":\"goodbye\"}";
   fsm_t *object = object_init (input);
+  ck_assert_int_eq (object->current[0], '"');
   char *str = NULL;
   bool result = accept_object (object, &str);
   ck_assert (result);
