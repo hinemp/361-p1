@@ -109,7 +109,11 @@ ActivateValue (fsm_t *fsm)
   }
 }
 
-static void AppendKeyValuePair( fsm_t *);
+static void 
+AppendKeyValuePair( fsm_t *fsm) 
+{
+
+}
 // In AppendKeyValuePair, use a combination of strncat() and
 // snprintf() to create format strings like the following:
 //   printf ("KEYS[%s] = %" PRId64 "\n", ...
