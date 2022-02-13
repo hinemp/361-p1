@@ -99,8 +99,8 @@ AdvancePointer (fsm_t *fsm)
 static void
 AllocateBuffer (fsm_t *fsm)
 {
-  fsm->buffer = (char *) calloc (99, sizeof (char));
-  memset (fsm->buffer, 0, 99 * sizeof (char));
+  fsm->buffer = (char *) calloc (95, sizeof (char));
+  memset (fsm->buffer, 0, 95 * sizeof (char));
 }
 
 /* Append a character from the current string to a buffer */
@@ -139,6 +139,5 @@ SyntaxError (fsm_t *fsm)
   char curr = fsm->current[0];
   char err = fsm->current[1];
   printf("SYNTAX ERROR: '%c%c' is not a valid escape code\n", curr, err);
-  free (fsm->buffer);
 }
 
