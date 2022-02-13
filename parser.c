@@ -355,12 +355,12 @@ accept_object (fsm_t *fsm, char **keys)
         }
       } else 
       {
+        printf("failed this if statement\n");
         handle_event (fsm, NON_COLON);
         return false;
       }
     } else
     {
-      printf("failed this if statement\n");
       handle_event (fsm, BAD_ID);
       return false;
     }

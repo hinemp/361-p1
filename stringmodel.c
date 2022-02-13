@@ -138,7 +138,6 @@ SyntaxError (fsm_t *fsm)
   fsm->current--;
   char curr = fsm->current[0];
   char err = fsm->current[1];
-  printf("fail here\n");
   printf("SYNTAX ERROR: '%c%c' is not a valid escape code\n", curr, err);
 }
 
