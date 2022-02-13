@@ -298,11 +298,13 @@ bool
 accept_object (fsm_t *fsm, char **keys)
 {
   handle_event (fsm, OPEN_CB);
+  // SKIP
   while (fsm->current[0] == ' ' || fsm->current[0] == '\n') 
   {
     handle_event (fsm, WHITESPACE);
     fsm->current++;
   }
+  fsm->current++;
   // Should be the first quotation mark
   if (fsm->current[0] == '"')
   {
