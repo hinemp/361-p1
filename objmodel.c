@@ -101,6 +101,7 @@ AdvancePointer (fsm_t *fsm)
 static void 
 ActivateString (fsm_t *fsm)
 {
+  // char *input = "{\"a\":\"b\"}";
   fsm_t *strmachine = string_init (fsm->current);
   fsm->is_val_ok = accept_string (strmachine, &fsm->buffer);
   if (fsm->is_val_ok)

@@ -93,6 +93,7 @@ ActivateString (fsm_t *fsm)
     free (str_fsm->buffer);
   }
   fsm->is_val_str = true;
+  fsm->current = str_fsm->current;
   free (str_fsm);
 }
 
