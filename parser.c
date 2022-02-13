@@ -243,8 +243,10 @@ accept_value (fsm_t *fsm, bool *is_string, char **string, int64_t *value)
     if (!fsm->is_val_bad)
       handle_event (fsm, END_STR);
     else
+    {
       handle_event (fsm, BAD_VALUE);
       *string = NULL;
+    }      
   } 
   if (!*is_string)
   {
