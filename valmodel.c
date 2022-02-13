@@ -92,6 +92,7 @@ ActivateString (fsm_t *fsm)
     fsm->buffer = NULL;
     free (str_fsm->buffer);
   }
+  fsm->is_val_str = true;
   free (str_fsm);
 }
 
@@ -100,6 +101,7 @@ ActivateInteger (fsm_t *fsm)
 {
   fsm_t * int_fsm = int_init (fsm->current);
   fsm->is_val_ok = accept_integer (int_fsm, &fsm->build_int);
+  fsm->is_val_str = false;
   free (int_fsm);
 }
 

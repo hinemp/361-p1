@@ -47,6 +47,12 @@ struct fsm
   // VAL FSM Fields
   bool is_val_ok;
 
+  // OBJ FSM Fields
+  bool is_val_str;
+  char *valstr;
+  char *kvbuffer;
+
+
   // TODO: Extend this with additional fields you need to hold information
   // during the execution of your FSM.
 };
