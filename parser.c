@@ -314,7 +314,6 @@ accept_object (fsm_t *fsm, char **keys)
     if (fsm->is_val_ok)
     {
       handle_event (fsm, END_ID);
-      printf("%s = buffer\n", fsm->buffer);
       fsm->current++;
       fsm->current++;
       // PEND_VALUE
@@ -327,6 +326,7 @@ accept_object (fsm_t *fsm, char **keys)
       if (fsm->current[0] == ':')
       {
         handle_event (fsm, COLON);
+        printf("%s = key\n%s = buffer", fsm->key_str, fsm->buffer);
         // BUILD_VALUE
         if (fsm->is_val_ok)
         {
