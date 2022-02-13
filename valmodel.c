@@ -101,6 +101,7 @@ ActivateString (fsm_t *fsm)
   // Store the result of the accept_string() in a way that the
   // accept_value() parser driver can determine if it was successful.
   free (str_fsm);
+  free (fsm->buffer);
 }
 
 static void
