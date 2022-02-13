@@ -85,8 +85,8 @@ parse_transition (fsm_t *fsm, event_t event, action_t *effect, action_t *entry)
 static void
 ActivateString (fsm_t *fsm)
 {
-  fsm->buffer = (char *) calloc (100, sizeof (char));
-  memset (fsm->buffer, 0, 100 * sizeof (char));
+  // fsm->buffer = (char *) calloc (100, sizeof (char));
+  // memset (fsm->buffer, 0, 100 * sizeof (char));
   // Local variable created as an instance of a string-processing FSM
   // fsm_t str_fsm = string_init (char const *input);
   fsm_t * str_fsm = string_init (fsm->current);
