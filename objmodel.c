@@ -244,16 +244,18 @@ static void
 AppendKeyValuePair (fsm_t *fsm) 
 {
   // key comes from fsm key_str
-  fsm->kvbuffer = (char *) calloc (99, sizeof (char));
+  fsm->kvbuffer = (char *)calloc (99, sizeof (char));
   // realloc()
   if (fsm->is_val_str)
-  {
-    snprintf (fsm->kvbuffer, 100, "KEYS[%s] = %s\n", fsm->key_str, fsm->val_str);
-  } else 
-  {
-    snprintf (fsm->kvbuffer, 100, "KEYS[%s] = %ld\n", fsm->key_str, fsm->val_int);
-  }
-  
+    {
+      snprintf (fsm->kvbuffer, 100, "KEYS[%s] = %s\n", fsm->key_str,
+                fsm->val_str);
+    }
+  else
+    {
+      snprintf (fsm->kvbuffer, 100, "KEYS[%s] = %ld\n", fsm->key_str,
+                fsm->val_int);
+    }
 }
 // In AppendKeyValuePair, use a combination of strncat() and
 // snprintf() to create format strings like the following:

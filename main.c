@@ -127,7 +127,7 @@ main (int argc, char **argv)
       FILE *fp;
       char *line = (char *)calloc (100, sizeof (char));
       fp = fopen (filename, "r");
-      fgets (line, 100, (FILE*)fp);
+      fgets (line, 100, (FILE *)fp);
       fclose (fp);
       bool is_string = false;
       char *str = NULL;
@@ -137,55 +137,57 @@ main (int argc, char **argv)
         {
           if (is_string)
             {
-              printf("VALUE [string]: '%s'\n", str);
-              printf("Success!\n");
+              printf ("VALUE [string]: '%s'\n", str);
+              printf ("Success!\n");
               free (line);
               free (value->buffer);
               free (value);
             }
           if (!is_string)
             {
-              printf("VALUE [integer]: %ld\n", integer);
-              printf("Success!\n");
+              printf ("VALUE [integer]: %ld\n", integer);
+              printf ("Success!\n");
               free (line);
               free (value->buffer);
               free (value);
             }
-        } 
-      else 
-      {
-        printf ("Parsing %s failed\n", filename);
-        free (line);
-        free (value->buffer);
-        free (value);
-      }
+        }
+      else
+        {
+          printf ("Parsing %s failed\n", filename);
+          free (line);
+          free (value->buffer);
+          free (value);
+        }
     }
-  if (type == OBJ) {
-    FILE *fp;
-    char *line = (char *) calloc (100, sizeof (char));
-    fp = fopen(filename, "r");
-    fgets (line, 100, fp);
-    // char ch = ' ';
-    // int i = 0;
-    // while (ch != EOF)
-    // {
-    //   line[i] = ch;
-    //   ch = fgetc (fp);
-    //   i++;
-    // }
-    fclose (fp);
-    char *keys = NULL;
-    fsm_t *obj = object_init (line);
-    if (accept_object(obj, &keys)) {
-      printf("Key-value pairs:\n");
-      printf("{\n%s}\n", obj->kvbuffer);
-      printf("Success!\n");
+  if (type == OBJ)
+    {
+      FILE *fp;
+      char *line = (char *) calloc (100, sizeof (char));
+      fp = fopen(filename, "r");
+      fgets (line, 100, fp);
+      // char ch = ' ';
+      // int i = 0;
+      // while (ch != EOF)
+      // {
+      //   line[i] = ch;
+      //   ch = fgetc (fp);
+      //   i++;
+      // }
+      fclose (fp);
+      char *keys = NULL;
+      fsm_t *obj = object_init (line);
+      if (accept_object(obj, &keys))
+        {
+          printf("Key-value pairs:\n");
+          printf("{\n%s}\n", obj->kvbuffer);
+          printf("Success!\n");
+        }
+      free (line);
+      free (obj->kvbuffer);
+      free (obj->buffer);
+      free (obj);
     }
-    free (line);
-    free (obj->kvbuffer);
-    free (obj->buffer);
-    free (obj);
-  }
 }
 
 /* Parse the command-line arguments. Sets the type based on whether the
