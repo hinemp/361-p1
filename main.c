@@ -142,7 +142,7 @@ main (int argc, char **argv)
       ch = fgetc (fp);
       i++;
     }
-    fgets (line, 100, (FILE*) fp);
+    // fgets (line, 100, (FILE*) fp);
     /*
     if (line[1] == '\n')
     {
