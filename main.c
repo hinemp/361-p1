@@ -98,13 +98,13 @@ main (int argc, char **argv)
   if (type == INT)
     {
       FILE *fp;
-      char *line = (char *) calloc (100, sizeof (char));
-      fp = fopen(filename, "r");
-      fgets (line, 100, (FILE*) fp);
+      char *line = (char *)calloc (100, sizeof (char));
+      fp = fopen (filename, "r");
+      fgets (line, 100, (FILE*)fp);
       fclose (fp);
       fsm_t *integer = int_init (line);
       int64_t value;
-      if (accept_integer (integer, &value)) 
+      if (accept_integer (integer, &value))
         {
           printf ("INTEGER: %ld\n", value);
           printf ("Success!\n");
@@ -112,8 +112,8 @@ main (int argc, char **argv)
           free (integer->buffer);
           free (integer);
           return EXIT_SUCCESS;
-        } 
-      else 
+        }
+      else
         {
           printf ("Parsing %s failed\n", filename);
           free (line);
@@ -125,9 +125,9 @@ main (int argc, char **argv)
   if (type == VAL)
     {
       FILE *fp;
-      char *line = (char *) calloc (100, sizeof (char));
-      fp = fopen(filename, "r");
-      fgets (line, 100, (FILE*) fp);
+      char *line = (char *)calloc (100, sizeof (char));
+      fp = fopen (filename, "r");
+      fgets (line, 100, (FILE*)fp);
       fclose (fp);
       bool is_string = false;
       char *str = NULL;
