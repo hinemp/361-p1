@@ -215,7 +215,7 @@ ActivateString (fsm_t *fsm)
   free (str_machine);
 }
 
-static void 
+static void
 ActivateValue (fsm_t *fsm)
 {
   fsm_t *valfsm = value_init (fsm->current);
