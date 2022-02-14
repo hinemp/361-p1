@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "statemodel.h"
 #include "stringmodel.h"
@@ -134,6 +135,10 @@ main (int argc, char **argv)
     char *line = (char *) calloc (100, sizeof (char));
     fp = fopen(filename, "r");
     fgets (line, 100, (FILE*) fp);
+    while (line[strlen (line) - 1] != '\0')
+    {
+      strncat (line, fgets (line, 100, (FILE*) fp), 100);
+    }
     fclose (fp);
     char *keys = NULL;
     fsm_t *obj = object_init (line);
