@@ -29,6 +29,7 @@ accept_string (fsm_t *fsm, char **result)
     fsm->current++;
   }
   handle_event (fsm, OPEN_QUOTE);
+  printf ("got here\n");
   fsm->current++; // Puts the current pointer on first character of the string
   while (fsm->state < STR_FINISH)   // As long as the fsm hasn't reached an end state
   {
