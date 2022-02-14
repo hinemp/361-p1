@@ -75,22 +75,6 @@ START_TEST (FULL_object_string)
 }
 END_TEST
 
-// Tests open quote state
-START_TEST (my_basic_val_test)
-{
-  char *input = "{\"a\":\"b\"}";
-  fsm_t *object = object_init (input);
-  char *str = NULL;
-  ck_assert_int_eq (object->current[0], '{');
-  bool result = accept_object (object, &str);
-  ck_assert (result);
-  ck_assert (str != NULL);
-  ck_assert_str_eq (str, "KEYS[hello] = goodbye\n");
-  free (object);
-  free (str);
-}
-END_TEST
-
 void public_tests (Suite *s)
 {
   TCase *tc_public = tcase_create ("Public");
