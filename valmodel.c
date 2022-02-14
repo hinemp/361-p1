@@ -10,7 +10,6 @@
 #include "stringmodel.h"
 #include "valmodel.h"
 
-
 static void ActivateString (fsm_t *);
 static void ActivateInteger (fsm_t *);
 static void SyntaxError (fsm_t *);
