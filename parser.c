@@ -251,17 +251,17 @@ accept_value (fsm_t *fsm, bool *is_string, char **string, int64_t *value)
       if (fsm->is_val_ok)
         handle_event (fsm, END_STR);
       else
-        handle_event (fsm, BAD_VALUE);     
-    } 
+        handle_event (fsm, BAD_VALUE); 
+    }
   if (!*is_string)
-  {
-    handle_event (fsm, START_INT);
-    *value = fsm->build_int;
-    if (fsm->is_val_ok)
-      handle_event (fsm, END_INT);
-    else
-      handle_event (fsm, BAD_VALUE);
-  }
+    {
+      handle_event (fsm, START_INT);
+      *value = fsm->build_int;
+      if (fsm->is_val_ok)
+        handle_event (fsm, END_INT);
+      else
+        handle_event (fsm, BAD_VALUE);
+    }
   return fsm->is_val_ok;
 }
 
@@ -298,77 +298,77 @@ accept_object (fsm_t *fsm, char **keys)
   fsm->current++;
   fsm->current++;
   // SKIP
-  while (fsm->current[0] == ' ' || fsm->current[0] == '\n') 
-  {
-    // handle_event (fsm, WHITESPACE);
-    fsm->current++;
-  }
+    while (fsm->current[0] == ' ' || fsm->current[0] == '\n') 
+    {
+      // handle_event (fsm, WHITESPACE);
+      fsm->current++;
+    }
   // fsm->current++;
   // fsm->current++;
   // Should be the first quotation mark
   if (fsm->current[0] == '"')
-  {
-    handle_event (fsm, START_ID);
-    // BUILD_ID
-    if (fsm->is_val_ok)
     {
-      handle_event (fsm, END_ID);
-      fsm->current++;
-      fsm->current++;
-      // PEND_VALUE
-      while (fsm->current[0] == ' ' || fsm->current[0] == '\n') 
-      {
-        handle_event (fsm, WHITESPACE);
-        fsm->current++;
-      }
-      // First non whitespace char
-      if (fsm->current[0] == ':')
-      {
-        handle_event (fsm, COLON);
-        // BUILD_VALUE
-        if (fsm->is_val_ok)
+      handle_event (fsm, START_ID);
+      // BUILD_ID
+      if (fsm->is_val_ok)
         {
-          handle_event (fsm, GOOD_VALUE);
-          // printf("%s = key\n%s = buffer\n", fsm->key_str, fsm->buffer);
-          memset (fsm->buffer, 0, 99 * sizeof (char));
-          // SCANNING
-          while (fsm->current[0] == ' ' || fsm->current[0] == '\n')
+          handle_event (fsm, END_ID);
+          fsm->current++;
+          fsm->current++;
+          // PEND_VALUE
+          while (fsm->current[0] == ' ' || fsm->current[0] == '\n') 
           {
             handle_event (fsm, WHITESPACE);
             fsm->current++;
           }
           // First non whitespace char
-          if (fsm->current[0] == ',')
+          if (fsm->current[0] == ':')
           {
-            handle_event (fsm, COMMA);
-          } else if (fsm->current[0] == '}')
+            handle_event (fsm, COLON);
+            // BUILD_VALUE
+            if (fsm->is_val_ok)
+            {
+              handle_event (fsm, GOOD_VALUE);
+              // printf("%s = key\n%s = buffer\n", fsm->key_str, fsm->buffer);
+              memset (fsm->buffer, 0, 99 * sizeof (char));
+              // SCANNING
+              while (fsm->current[0] == ' ' || fsm->current[0] == '\n')
+              {
+                handle_event (fsm, WHITESPACE);
+                fsm->current++;
+              }
+              // First non whitespace char
+              if (fsm->current[0] == ',')
+              {
+                handle_event (fsm, COMMA);
+              } else if (fsm->current[0] == '}')
+              {
+                handle_event (fsm, CLOSE_CB);
+              } else
+              {
+                printf("%ld\n", fsm->val_int);
+                handle_event (fsm, BAD_TOKEN);
+                return false;
+              }
+            } else 
+            {
+              handle_event (fsm, BAD_VALUE);
+              return false;
+            }
+          } else 
           {
-            handle_event (fsm, CLOSE_CB);
-          } else
-          {
-            printf("%ld\n", fsm->val_int);
-            handle_event (fsm, BAD_TOKEN);
+            handle_event (fsm, NON_COLON);
             return false;
           }
-        } else 
+        } else
         {
-          handle_event (fsm, BAD_VALUE);
+          handle_event (fsm, BAD_ID);
           return false;
         }
-      } else 
-      {
-        handle_event (fsm, NON_COLON);
-        return false;
-      }
     } else
     {
-      handle_event (fsm, BAD_ID);
+      handle_event (fsm, BAD_TOKEN);
       return false;
     }
-  } else
-  {
-    handle_event (fsm, BAD_TOKEN);
-    return false;
-  }
   return true;
 }
