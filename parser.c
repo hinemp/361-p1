@@ -36,8 +36,7 @@ accept_string (fsm_t *fsm, char **result)
       {
         // Only options are ", /, or 
         if (fsm->current[0] == '"')
-          {printf ("found a clsoe quote\n");
-          handle_event (fsm, CLOSE_QUOTE);}
+          handle_event (fsm, CLOSE_QUOTE);
         else if (fsm->current[0] == 92) // 92 is ascii code for \  //
           handle_event (fsm, BACKSLASH);
         else 
@@ -344,6 +343,7 @@ accept_object (fsm_t *fsm, char **keys)
             handle_event (fsm, WHITESPACE);
             fsm->current++;
           }
+          fsm->current++;
           fsm->current++;
           // First non whitespace char
           if (fsm->current[0] == ',')
