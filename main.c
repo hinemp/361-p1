@@ -134,7 +134,7 @@ main (int argc, char **argv)
     FILE *fp;
     char *line = (char *) calloc (100, sizeof (char));
     fp = fopen(filename, "r");
-    char ch;
+    char ch = ' ';
     int i = 0;
     while (ch != EOF)
     {
