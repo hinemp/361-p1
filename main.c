@@ -134,12 +134,22 @@ main (int argc, char **argv)
     FILE *fp;
     char *line = (char *) calloc (100, sizeof (char));
     fp = fopen(filename, "r");
+    char ch;
+    int i = 0;
+    while (ch != EOF)
+    {
+      line[i] = ch;
+      ch = fgetc (fp);
+      i++;
+    }
     fgets (line, 100, (FILE*) fp);
+    /*
     if (line[1] == '\n')
     {
       strncat (line, fgets (line, 100, (FILE*) fp), 100);
     }
     strncat (line, fgets (line, 100, (FILE*) fp), 100);
+    */
     fclose (fp);
     char *keys = NULL;
     fsm_t *obj = object_init (line);
