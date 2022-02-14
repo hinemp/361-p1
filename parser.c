@@ -302,6 +302,7 @@ accept_object (fsm_t *fsm, char **keys)
 {
   handle_event (fsm, OPEN_CB);
   fsm->current++;
+  fsm->current++;
   // SKIP
   while (fsm->current[0] == ' ' || fsm->current[0] == '\n') 
   {
