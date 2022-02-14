@@ -317,6 +317,7 @@ accept_object (fsm_t *fsm, char **keys)
     if (fsm->is_val_ok)
     {
       handle_event (fsm, END_ID);
+      printf ("\n%c\n", fsm->current[0]);
       fsm->current++;
       fsm->current++;
       // PEND_VALUE
@@ -328,7 +329,6 @@ accept_object (fsm_t *fsm, char **keys)
       // First non whitespace char
       if (fsm->current[0] == ':')
       {
-        printf ("\n%c\n", fsm->current[0]);
         handle_event (fsm, COLON);
         // BUILD_VALUE
         if (fsm->is_val_ok)
