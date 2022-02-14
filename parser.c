@@ -301,6 +301,7 @@ bool
 accept_object (fsm_t *fsm, char **keys)
 {
   handle_event (fsm, OPEN_CB);
+  fsm->current++;
   // SKIP
   while (fsm->current[0] == ' ' || fsm->current[0] == '\n') 
   {
@@ -308,7 +309,7 @@ accept_object (fsm_t *fsm, char **keys)
     fsm->current++;
   }
   // fsm->current++;
-  printf ("\n%c = \n", fsm->current[0]);
+  // printf ("\n%c = \n", fsm->current[0]);
   // fsm->current++;
   // Should be the first quotation mark
   if (fsm->current[0] == '"')
