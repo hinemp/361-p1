@@ -251,7 +251,7 @@ accept_value (fsm_t *fsm, bool *is_string, char **string, int64_t *value)
       if (fsm->is_val_ok)
         handle_event (fsm, END_STR);
       else
-        handle_event (fsm, BAD_VALUE); 
+        handle_event (fsm, BAD_VALUE);
     }
   if (!*is_string)
     {
@@ -298,7 +298,7 @@ accept_object (fsm_t *fsm, char **keys)
   fsm->current++;
   fsm->current++;
   // SKIP
-    while (fsm->current[0] == ' ' || fsm->current[0] == '\n') 
+  while (fsm->current[0] == ' ' || fsm->current[0] == '\n') 
     {
       // handle_event (fsm, WHITESPACE);
       fsm->current++;
@@ -317,45 +317,45 @@ accept_object (fsm_t *fsm, char **keys)
           fsm->current++;
           // PEND_VALUE
           while (fsm->current[0] == ' ' || fsm->current[0] == '\n') 
-          {
-            handle_event (fsm, WHITESPACE);
-            fsm->current++;
-          }
+            {
+              handle_event (fsm, WHITESPACE);
+              fsm->current++;
+            }
           // First non whitespace char
           if (fsm->current[0] == ':')
-          {
-            handle_event (fsm, COLON);
-            // BUILD_VALUE
-            if (fsm->is_val_ok)
             {
-              handle_event (fsm, GOOD_VALUE);
-              // printf("%s = key\n%s = buffer\n", fsm->key_str, fsm->buffer);
-              memset (fsm->buffer, 0, 99 * sizeof (char));
-              // SCANNING
-              while (fsm->current[0] == ' ' || fsm->current[0] == '\n')
+              handle_event (fsm, COLON);
+              // BUILD_VALUE
+              if (fsm->is_val_ok)
               {
-                handle_event (fsm, WHITESPACE);
-                fsm->current++;
-              }
-              // First non whitespace char
-              if (fsm->current[0] == ',')
+                handle_event (fsm, GOOD_VALUE);
+                // printf("%s = key\n%s = buffer\n", fsm->key_str, fsm->buffer);
+                memset (fsm->buffer, 0, 99 * sizeof (char));
+                // SCANNING
+                while (fsm->current[0] == ' ' || fsm->current[0] == '\n')
+                {
+                  handle_event (fsm, WHITESPACE);
+                  fsm->current++;
+                }
+                // First non whitespace char
+                if (fsm->current[0] == ',')
+                {
+                  handle_event (fsm, COMMA);
+                } else if (fsm->current[0] == '}')
+                {
+                  handle_event (fsm, CLOSE_CB);
+                } else
+                {
+                  printf("%ld\n", fsm->val_int);
+                  handle_event (fsm, BAD_TOKEN);
+                  return false;
+                }
+              } else 
               {
-                handle_event (fsm, COMMA);
-              } else if (fsm->current[0] == '}')
-              {
-                handle_event (fsm, CLOSE_CB);
-              } else
-              {
-                printf("%ld\n", fsm->val_int);
-                handle_event (fsm, BAD_TOKEN);
+                handle_event (fsm, BAD_VALUE);
                 return false;
               }
             } else 
-            {
-              handle_event (fsm, BAD_VALUE);
-              return false;
-            }
-          } else 
           {
             handle_event (fsm, NON_COLON);
             return false;
