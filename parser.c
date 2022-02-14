@@ -1,13 +1,13 @@
 #include <stdbool.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
+#include "intmodel.h"
+#include "objmodel.h"
 #include "statemodel.h"
 #include "stringmodel.h"
-#include "intmodel.h"
 #include "valmodel.h"
-#include "objmodel.h"
 
 /* Begins at fsm->current and tries to identify a string in the given
    input data. A string begins and ends with ". In between, only two
@@ -24,46 +24,46 @@ bool
 accept_string (fsm_t *fsm, char **result)
 {
   // Find the first quotation mark
-  while (fsm->current[0] != '"') 
-  {
-    fsm->current++;
-  }
+  while (fsm->current[0] != '"')
+    {
+      fsm->current++;
+    }
   handle_event (fsm, OPEN_QUOTE);
   fsm->current++; // Puts the current pointer on first character of the string
-  while (fsm->state < STR_FINISH)   // As long as the fsm hasn't reached an end state
-  {
-    if (fsm->state == BUILDING)
-      {
-        // Only options are ", /, or 
-        if (fsm->current[0] == '"')
-          handle_event (fsm, CLOSE_QUOTE);
-        else if (fsm->current[0] == 92) // 92 is ascii code for \  //
-          handle_event (fsm, BACKSLASH);
-        else 
-          handle_event (fsm, NON_CTRL);
-      }
-    else if (fsm->state == ESCAPE)
-      {
-        fsm->current++;
-        switch (fsm->current[0])
-        {
-        case '"':
-        case 92:
-          handle_event (fsm, ESC_CHAR);
-          break;
-        default:
-          handle_event (fsm, NO_ESC);
-          break;
-        }
-      }
-    if (fsm->state == STR_ERROR)
+  while (fsm->state < STR_FINISH) // As long as the fsm hasn't reached an end state
     {
-      return false;
+      if (fsm->state == BUILDING)
+        {
+          // Only options are ", /, or 
+          if (fsm->current[0] == '"')
+            handle_event (fsm, CLOSE_QUOTE);
+          else if (fsm->current[0] == 92) // 92 is ascii code for \  //
+            handle_event (fsm, BACKSLASH);
+          else 
+            handle_event (fsm, NON_CTRL);
+        }
+      else if (fsm->state == ESCAPE)
+        {
+          fsm->current++;
+          switch (fsm->current[0])
+          {
+          case '"':
+          case 92:
+            handle_event (fsm, ESC_CHAR);
+            break;
+          default:
+            handle_event (fsm, NO_ESC);
+            break;
+          }
+        }
+      if (fsm->state == STR_ERROR)
+      {
+        return false;
+      }
     }
+    *result = &fsm->buffer[0];
+    return fsm->state == STR_FINISH;
   }
-  *result = &fsm->buffer[0];
-  return fsm->state == STR_FINISH;
-}
 
 /* Begins at fsm->current and tries to build a valid integer value. This
    function should accept both positive and negative numbers, and should
