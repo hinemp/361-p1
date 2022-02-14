@@ -347,7 +347,6 @@ accept_object (fsm_t *fsm, char **keys)
                     }
                   else
                     {
-                      printf("%ld\n", fsm->val_int);
                       handle_event (fsm, BAD_TOKEN);
                       return false;
                     }
@@ -357,12 +356,12 @@ accept_object (fsm_t *fsm, char **keys)
                   handle_event (fsm, BAD_VALUE);
                   return false;
                 }
-            } 
-            else 
-              {
-                handle_event (fsm, NON_COLON);
-                return false;
-              }
+            }
+          else 
+            {
+              handle_event (fsm, NON_COLON);
+              return false;
+            }
         } else
         {
           handle_event (fsm, BAD_ID);
