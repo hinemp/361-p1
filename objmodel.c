@@ -126,21 +126,21 @@ static state_t const _transition[NOBJ_STATES][NOBJ_EVENTS] = {
       NON_OBJ,
       NON_OBJ,
       NON_OBJ,
-+  }, // OBJ_FINISH
-+  {
-+      NON_OBJ,
-+      NON_OBJ,
-+      NON_OBJ,
-+      NON_OBJ,
-+      NON_OBJ,
-+      NON_OBJ,
-+      NON_OBJ,
-+      NON_OBJ,
-+      NON_OBJ,
-+      NON_OBJ,
-+      NON_OBJ,
-+      NON_OBJ,
-+  }, // OBJ_ERROR
+  }, // OBJ_FINISH
+  {
+      NON_OBJ,
+      NON_OBJ,
+      NON_OBJ,
+      NON_OBJ,
+      NON_OBJ,
+      NON_OBJ,
+      NON_OBJ,
+      NON_OBJ,
+      NON_OBJ,
+      NON_OBJ,
+      NON_OBJ,
+      NON_OBJ,
+  }, // OBJ_ERROR
 };
 
 static action_t const _effect[NOBJ_STATES][NOBJ_EVENTS] = {
