@@ -1,8 +1,8 @@
+#include <assert.h>
 #include <stdbool.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <assert.h>
-#include <stdio.h>
 
 #include "statemodel.h"
 #include "stringmodel.h"
@@ -39,21 +39,91 @@ string_init (char const *input)
    access should be indirect through the fsm_t structure. */
 
 static state_t const _transition[NSTR_STATES][NSTR_EVENTS] = {
-// OPEN_QUOTE CLOSE_QUOTE NONCTRL   BACKSLASH ESC_CHAR  NO_ESC 
-   {BUILDING, NON_STR   , NON_STR , NON_STR , NON_STR , NON_STR,}, // STR_INIT
-   {NON_STR , STR_FINISH, BUILDING, ESCAPE  , NON_STR , NON_STR,}, // BUILDING
-   {NON_STR , NON_STR   , NON_STR , NON_STR , BUILDING, STR_ERROR,}, // ESCAPE
-   {NON_STR , NON_STR   , NON_STR , NON_STR , NON_STR , NON_STR,}, // STR_FINISH
-   {NON_STR , NON_STR   , NON_STR , NON_STR , NON_STR , NON_STR,}, // STR_ERROR
-  };
+  // OPEN_QUOTE CLOSE_QUOTE NONCTRL   BACKSLASH ESC_CHAR  NO_ESC
+  {
+      BUILDING,
+      NON_STR,
+      NON_STR,
+      NON_STR,
+      NON_STR,
+      NON_STR,
+  }, // STR_INIT
+  {
+      NON_STR,
+      STR_FINISH,
+      BUILDING,
+      ESCAPE,
+      NON_STR,
+      NON_STR,
+  }, // BUILDING
+  {
+      NON_STR,
+      NON_STR,
+      NON_STR,
+      NON_STR,
+      BUILDING,
+      STR_ERROR,
+  }, // ESCAPE
+  {
+      NON_STR,
+      NON_STR,
+      NON_STR,
+      NON_STR,
+      NON_STR,
+      NON_STR,
+  }, // STR_FINISH
+  {
+      NON_STR,
+      NON_STR,
+      NON_STR,
+      NON_STR,
+      NON_STR,
+      NON_STR,
+  }, // STR_ERROR
+};
 
 static action_t const _effect[NSTR_STATES][NSTR_EVENTS] = {
-   // OPEN_QUOTE CLOSE_QUOTE NONCTRL BACKSLASH ESC_CHAR NO_ESC NULL
-   {AllocateBuffer, NULL, NULL, NULL, NULL, NULL,}, // STR_INIT
-   {NULL, AdvancePointer, AppendCharacter, NULL, NULL, NULL,}, // BUILDING
-   {NULL, NULL, NULL, NULL, ReplaceCharacter, SyntaxError,}, // ESCAPE
-   {NULL, NULL, NULL, NULL, NULL, NULL,}, // STR_FINISH
-   {NULL, NULL, NULL, NULL, NULL, NULL,}, // STR_ERROR
+  // OPEN_QUOTE CLOSE_QUOTE NONCTRL BACKSLASH ESC_CHAR NO_ESC NULL
+  {
+      AllocateBuffer,
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+  }, // STR_INIT
+  {
+      NULL,
+      AdvancePointer,
+      AppendCharacter,
+      NULL,
+      NULL,
+      NULL,
+  }, // BUILDING
+  {
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+      ReplaceCharacter,
+      SyntaxError,
+  }, // ESCAPE
+  {
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+  }, // STR_FINISH
+  {
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+  }, // STR_ERROR
 };
 
 static action_t const _entry[NSTR_STATES] = {
@@ -65,18 +135,15 @@ static action_t const _entry[NSTR_STATES] = {
 static state_t
 parse_transition (fsm_t *fsm, event_t event, action_t *effect, action_t *entry)
 {
-  if (fsm->state >= NON_STR || event >= NIL_CHAR || _transition[fsm->state][event] == NON_STR) 
+  if (fsm->state >= NON_STR || event >= NIL_CHAR
+      || _transition[fsm->state][event] == NON_STR)
     return -1;
-  
   *effect = _effect[fsm->state][event];
   strst_t next = _transition[fsm->state][event];
   if (next != NON_STR)
     *entry = _entry[next];
-  
   return next;
 }
-
-
 
 // Use the following print format string if a syntax error is
 // encountered. The two characters should be the last one
@@ -99,7 +166,7 @@ AdvancePointer (fsm_t *fsm)
 static void
 AllocateBuffer (fsm_t *fsm)
 {
-  fsm->buffer = (char *) calloc (95, sizeof (char));
+  fsm->buffer = (char *)calloc (95, sizeof (char));
   memset (fsm->buffer, 0, 95 * sizeof (char));
 }
 
@@ -133,12 +200,10 @@ SyntaxError (fsm_t *fsm)
   // printf ("SYNTAX ERROR: '%c%c' is not a valid escape code\n",
 
   // Print two chars:
-  // last char successfully processed, 
-  // next char causing error, 
+  // last char successfully processed,
+  // next char causing error,
   fsm->current--;
   char curr = fsm->current[0];
   char err = fsm->current[1];
-  printf("SYNTAX ERROR: '%c%c' is not a valid escape code\n", curr, err);
-  // free (fsm->buffer);
+  printf ("SYNTAX ERROR: '%c%c' is not a valid escape code\n", curr, err);
 }
-
