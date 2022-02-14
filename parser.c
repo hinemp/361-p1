@@ -103,7 +103,7 @@ accept_integer (fsm_t *fsm, int64_t *value)
         default:
           break;
         }
-  }
+    }
   while (fsm->state < INT_FINISH) 
     {
       if (fsm->state == MAGNITUDE)
@@ -134,11 +134,40 @@ accept_integer (fsm_t *fsm, int64_t *value)
               handle_event (fsm, NON_DIGIT);
               break;
             }
-          }
-        else if (fsm->state == SIGN)
+        }
+      else if (fsm->state == SIGN)
         {
           switch (fsm->current[0])
-          {
+            {
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+              handle_event (fsm, NZ_DIGIT);
+              // fsm->current++;
+              break;
+            case '0':
+              handle_event (fsm, ZERO);
+              fsm->current++;
+              break;
+            default:
+              handle_event (fsm, NON_DIGIT);
+              break;
+            }
+        }
+    else if (fsm->state == OCTAL)
+      {
+        switch (fsm->current[0])
+        {
+          case '0':
+            handle_event (fsm, ZERO);
+            fsm->current++;
+            break;
           case '1':
           case '2':
           case '3':
@@ -151,45 +180,16 @@ accept_integer (fsm_t *fsm, int64_t *value)
             handle_event (fsm, NZ_DIGIT);
             // fsm->current++;
             break;
-          case '0':
-            handle_event (fsm, ZERO);
-            fsm->current++;
+          case ' ':
+          case '}':
+          case ',':
+          case '\0':
+          case '\n':
+            handle_event (fsm, TERM_INT);
             break;
           default:
             handle_event (fsm, NON_DIGIT);
             break;
-          }
-        }
-  
-    else if (fsm->state == OCTAL) {
-      switch (fsm->current[0])
-      {
-        case '0':
-          handle_event (fsm, ZERO);
-          fsm->current++;
-          break;
-        case '1':
-        case '2':
-        case '3':
-        case '4':
-        case '5':
-        case '6':
-        case '7':
-        case '8':
-        case '9':
-          handle_event (fsm, NZ_DIGIT);
-          // fsm->current++;
-          break;
-        case ' ':
-        case '}':
-        case ',':
-        case '\0':
-        case '\n':
-          handle_event (fsm, TERM_INT);
-          break;
-        default:
-          handle_event (fsm, NON_DIGIT);
-          break;
       }
     }
     if (fsm->state == INT_ERROR)
