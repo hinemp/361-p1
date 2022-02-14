@@ -2,15 +2,16 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
+
 #include <stdlib.h>
 #include <string.h>
-
-#include "statemodel.h"
-#include "stringmodel.h"
 #include "intmodel.h"
-#include "valmodel.h"
 #include "objmodel.h"
 #include "parser.h"
+#include "statemodel.h"
+#include "stringmodel.h"
+#include "valmodel.h"
+
 
 // Used to specify which of the four FSMs to use
 typedef enum
