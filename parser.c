@@ -340,18 +340,18 @@ accept_object (fsm_t *fsm, char **keys)
                   if (fsm->current[0] == ',')
                     {
                       handle_event (fsm, COMMA);
-                    } 
+                    }
                   else if (fsm->current[0] == '}')
                     {
                       handle_event (fsm, CLOSE_CB);
-                    } 
+                    }
                   else
                     {
                       printf("%ld\n", fsm->val_int);
                       handle_event (fsm, BAD_TOKEN);
                       return false;
                     }
-                } 
+                }
               else
                 {
                   handle_event (fsm, BAD_VALUE);
