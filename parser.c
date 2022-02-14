@@ -300,6 +300,7 @@ accept_value (fsm_t *fsm, bool *is_string, char **string, int64_t *value)
 bool
 accept_object (fsm_t *fsm, char **keys)
 {
+  printf ("\n%c\n", fsm->current[0]);
   handle_event (fsm, OPEN_CB);
   // SKIP
   while (fsm->current[0] == ' ' || fsm->current[0] == '\n') 
@@ -317,7 +318,6 @@ accept_object (fsm_t *fsm, char **keys)
     if (fsm->is_val_ok)
     {
       handle_event (fsm, END_ID);
-      printf ("\n%c\n", fsm->current[0]);
       fsm->current++;
       fsm->current++;
       // PEND_VALUE
