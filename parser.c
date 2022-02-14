@@ -343,6 +343,7 @@ accept_object (fsm_t *fsm, char **keys)
             printf("val is str\n");
             fsm->current++;
             fsm->current++;
+            keys = fsm->val_str;
           }
           while (fsm->current[0] == ' ' || fsm->current[0] == '\n')
           {

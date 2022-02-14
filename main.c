@@ -144,7 +144,6 @@ main (int argc, char **argv)
     }
     fclose (fp);
     char *keys = NULL;
-    printf ("%s<- this is line\n", line);
     fsm_t *obj = object_init (line);
     if (accept_object(obj, &keys)) {
       printf("Key-value pairs:\n");
