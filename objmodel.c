@@ -1,18 +1,19 @@
 #include <stdbool.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "objmodel.h"
+#include "parser.h"
 #include "statemodel.h"
 #include "stringmodel.h"
 #include "valmodel.h"
-#include "parser.h"
+
 
 static void SyntaxError (fsm_t *);
 static void SetIdent (fsm_t *);
 static void AdvancePointer (fsm_t *);
-static void AppendKeyValuePair( fsm_t *);
+static void AppendKeyValuePair (fsm_t *);
 static void ActivateString (fsm_t *);
 static void ActivateValue (fsm_t *);
 static state_t parse_transition (fsm_t *, event_t, action_t *, action_t *);
@@ -39,15 +40,107 @@ object_init (char const *input)
 }
 
 static state_t const _transition[NOBJ_STATES][NOBJ_EVENTS] = {
-// OPEN_CB  OBJ_WS  START_ID  END_ID  BAD_ID  COLON   NON_COLON   GOOD_VALUE  OBJ_BV  BAD_TOKEN COMMA CLOSE_CB
-  {OBJ_SKIP, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, }, // OBJ_INIT
-  {NON_OBJ, OBJ_SKIP, BUILD_ID, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, OBJ_ERROR, NON_OBJ, NON_OBJ,}, // OBJ_SKIP
-  {NON_OBJ, NON_OBJ, NON_OBJ, PEND_VALUE, OBJ_ERROR, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ,}, // BUILD_ID
-  {NON_OBJ, PEND_VALUE, NON_OBJ, NON_OBJ, NON_OBJ, BUILD_VALUE, OBJ_ERROR, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ,}, // PEND_VALUE
-  {NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, SCANNING, OBJ_ERROR, NON_OBJ, NON_OBJ, NON_OBJ,}, // BUILD_VALUE
-  {NON_OBJ, SCANNING, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, OBJ_ERROR, OBJ_SKIP, OBJ_FINISH}, // SCANNING
-  {NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ,}, // OBJ_FINISH
-  {NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ,}, // OBJ_ERROR
+  // OPEN_CB  OBJ_WS  START_ID  END_ID  BAD_ID  COLON   NON_COLON   GOOD_VALUE
++  // OBJ_BV  BAD_TOKEN COMMA CLOSE_CB
++  {
++      OBJ_SKIP,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++  }, // OBJ_INIT
++  {
++      NON_OBJ,
++      OBJ_SKIP,
++      BUILD_ID,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      OBJ_ERROR,
++      NON_OBJ,
++      NON_OBJ,
++  }, // OBJ_SKIP
++  {
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      PEND_VALUE,
++      OBJ_ERROR,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++  }, // BUILD_ID
++  {
++      NON_OBJ,
++      PEND_VALUE,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      BUILD_VALUE,
++      OBJ_ERROR,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++  }, // PEND_VALUE
++  {
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      SCANNING,
++      OBJ_ERROR,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++  }, // BUILD_VALUE
++  { NON_OBJ, SCANNING, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ, NON_OBJ,
++    NON_OBJ, OBJ_ERROR, OBJ_SKIP, OBJ_FINISH }, // SCANNING
++  {
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++  }, // OBJ_FINISH
++  {
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++      NON_OBJ,
++  }, // OBJ_ERROR
 };
 
 static action_t const _effect[NOBJ_STATES][NOBJ_EVENTS] = {
