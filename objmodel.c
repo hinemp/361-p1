@@ -123,15 +123,14 @@ ActivateValue (fsm_t *fsm)
   char *str = NULL;
   int64_t integer = 0;
   fsm->is_val_ok = accept_value (valfsm, &is_string, &str, &integer);
-  printf ("%d", is_string);
   if (fsm->is_val_ok)
   {
     fsm->current = valfsm->current;
-    if (fsm->is_val_str) // If val is a string
+    if (is_string) // If val is a string
     {
       fsm->val_str = str;
     } 
-    if (!fsm->is_val_str)  // If val is an int
+    if (!is_string)  // If val is an int
     {
       fsm->val_int = integer;
     }
