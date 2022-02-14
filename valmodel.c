@@ -7,8 +7,9 @@
 #include "parser.h"
 
 #include "statemodel.h"
-#include "valmodel.h"
 #include "stringmodel.h"
+#include "valmodel.h"
+
 
 static void ActivateString (fsm_t *);
 static void ActivateInteger (fsm_t *);
