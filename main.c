@@ -142,14 +142,6 @@ main (int argc, char **argv)
       ch = fgetc (fp);
       i++;
     }
-    // fgets (line, 100, (FILE*) fp);
-    /*
-    if (line[1] == '\n')
-    {
-      strncat (line, fgets (line, 100, (FILE*) fp), 100);
-    }
-    strncat (line, fgets (line, 100, (FILE*) fp), 100);
-    */
     fclose (fp);
     char *keys = NULL;
     fsm_t *obj = object_init (line);

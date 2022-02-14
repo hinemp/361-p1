@@ -306,7 +306,6 @@ accept_object (fsm_t *fsm, char **keys)
   // SKIP
   while (fsm->current[0] == ' ' || fsm->current[0] == '\n') 
   {
-    printf ("\n%c =", fsm->current[0]);
     // handle_event (fsm, WHITESPACE);
     fsm->current++;
   }
