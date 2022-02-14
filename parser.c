@@ -78,9 +78,9 @@ accept_string (fsm_t *fsm, char **result)
 bool
 accept_integer (fsm_t *fsm, int64_t *value)
 {
-  if (fsm->state == INT_INIT) 
+  if (fsm->state == INT_INIT)
     {
-      switch (fsm->current[0]) 
+      switch (fsm->current[0])
         {
           case '0':
             handle_event (fsm, ZERO);
