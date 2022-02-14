@@ -3,8 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-
-
 #include "intmodel.h"
 #include "parser.h"
 
@@ -39,28 +37,84 @@ value_init (char const *input)
 }
 
 static state_t const _transition[NVAL_STATES][NVAL_EVENTS] = {
-//  START_VALUE WHITESPACE  START_STR  END_STR     START_INT  END_INT     BAD_VALUE
-   {VAL_SKIP,   NON_VAL,    NON_VAL,   NON_VAL,    NON_VAL,   NON_VAL,    NON_VAL},   // VAL_INIT
-   {NON_VAL,    VAL_SKIP,   BUILD_STR, NON_VAL,    BUILD_INT, NON_VAL,    VAL_ERROR}, // VAL_SKIP
-   {NON_VAL,    NON_VAL,    NON_VAL,   VAL_FINISH, NON_VAL,   NON_VAL,    VAL_ERROR}, // BUILD_STR
-   {NON_VAL,    NON_VAL,    NON_VAL,   NON_VAL,    NON_VAL,   VAL_FINISH, VAL_ERROR}, // BUILD_INT
-   {NON_VAL,    NON_VAL,    NON_VAL,   NON_VAL,    NON_VAL,   NON_VAL,    NON_VAL},   // VAL_FINISH
-   {NON_VAL,    NON_VAL,    NON_VAL,   NON_VAL,    NON_VAL,   NON_VAL,    NON_VAL},   // VAL_ERROR
-  };
+  //  START_VALUE WHITESPACE  START_STR  END_STR     START_INT  END_INT
+  //  BAD_VALUE
+  { VAL_SKIP, NON_VAL, NON_VAL, NON_VAL, NON_VAL, NON_VAL,
+    NON_VAL }, // VAL_INIT
+  { NON_VAL, VAL_SKIP, BUILD_STR, NON_VAL, BUILD_INT, NON_VAL,
+    VAL_ERROR }, // VAL_SKIP
+  { NON_VAL, NON_VAL, NON_VAL, VAL_FINISH, NON_VAL, NON_VAL,
+    VAL_ERROR }, // BUILD_STR
+  { NON_VAL, NON_VAL, NON_VAL, NON_VAL, NON_VAL, VAL_FINISH,
+    VAL_ERROR }, // BUILD_INT
+  { NON_VAL, NON_VAL, NON_VAL, NON_VAL, NON_VAL, NON_VAL,
+    NON_VAL }, // VAL_FINISH
+  { NON_VAL, NON_VAL, NON_VAL, NON_VAL, NON_VAL, NON_VAL,
+    NON_VAL }, // VAL_ERROR
+};
 
 static action_t const _effect[NVAL_STATES][NVAL_EVENTS] = {
-//  START_VALUE WHITESPACE  START_STR  END_STR   START_INT  END_INT  BAD_VALUE
-   {NULL,       NULL,       NULL,      NULL,       NULL,     NULL,   NULL,}, // VAL_INIT
-   {NULL,       NULL,       NULL,      NULL,       NULL,     NULL,   SyntaxError,}, // VAL_SKIP
-   {NULL,       NULL,       NULL,      NULL,       NULL,     NULL,   NULL,}, // BUILD_STR
-   {NULL,       NULL,       NULL,      NULL,       NULL,     NULL,   NULL,}, // BUILD_INT
-   {NULL,       NULL,       NULL,      NULL,       NULL,     NULL,   NULL,}, // VAL_FINISH
-   {NULL,       NULL,       NULL,      NULL,       NULL,     NULL,   NULL,}, // VAL_ERROR
-  };
+  //  START_VALUE WHITESPACE  START_STR  END_STR   START_INT  END_INT BAD_VALUE
+  {
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+  }, // VAL_INIT
+  {
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+      SyntaxError,
+  }, // VAL_SKIP
+  {
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+  }, // BUILD_STR
+  {
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+  }, // BUILD_INT
+  {
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+  }, // VAL_FINISH
+  {
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+  }, // VAL_ERROR
+};
 
 static action_t const _entry[NVAL_STATES] = {
-//  VAL_INIT    VAL_SKIP    BUILD_STR       BUILD_INT         VAL_FINISH VAL_ERROR
-    NULL,       NULL,       ActivateString, ActivateInteger,  NULL,      NULL,
+  //  VAL_INIT    VAL_SKIP    BUILD_STR       BUILD_INT         VAL_FINISH
+  //  VAL_ERROR
+  NULL, NULL, ActivateString, ActivateInteger, NULL, NULL,
 };
 
 /* Define additional functions or global data structures for this specific
@@ -73,9 +127,9 @@ static action_t const _entry[NVAL_STATES] = {
 static state_t
 parse_transition (fsm_t *fsm, event_t event, action_t *effect, action_t *entry)
 {
-  if (fsm->state >= NON_VAL || event >= NIL_VAL || _transition[fsm->state][event] == NON_VAL) 
+  if (fsm->state >= NON_VAL || event >= NIL_VAL
+      || _transition[fsm->state][event] == NON_VAL)
     return -1;
-  
   *effect = _effect[fsm->state][event];
   state_t next = _transition[fsm->state][event];
   if (next != NON_VAL)
