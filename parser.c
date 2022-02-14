@@ -306,8 +306,8 @@ accept_object (fsm_t *fsm, char **keys)
   {
     handle_event (fsm, WHITESPACE);
     fsm->current++;
-    printf ("\n%c\n", fsm->current[0]);
   }
+  printf ("\n%c\n", fsm->current[0]);
   fsm->current++;
   fsm->current++;
   // Should be the first quotation mark
