@@ -129,7 +129,8 @@ ActivateValue (fsm_t *fsm)
     if (fsm->is_val_str) // If val is a string
     {
       fsm->val_str = str;
-    } else  // If val is an int
+    } 
+    if (!fsm->is_val_str)  // If val is an int
     {
       fsm->val_int = integer;
     }
