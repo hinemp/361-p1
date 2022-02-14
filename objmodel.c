@@ -126,19 +126,16 @@ ActivateValue (fsm_t *fsm)
   if (fsm->is_val_ok)
   {
     fsm->current = valfsm->current;
-    fsm->is_val_str = is_string;
-    if (is_string) // If val is a string
+    if (fsm->is_val_str) // If val is a string
     {
       fsm->val_str = str;
-      printf ("%s\n", fsm->val_str);
-    } 
-    if (!is_string)  // If val is an int
+    } else  // If val is an int
     {
       fsm->val_int = integer;
     }
   } else // Bad value
   {
-    
+    printf ("Accept value failed \n");
   }
   free (valfsm);
 }

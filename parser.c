@@ -268,33 +268,25 @@ accept_value (fsm_t *fsm, bool *is_string, char **string, int64_t *value)
    value can be either a string or integer. If more than one key-value pair
    is in the object, they are separated by commas. The following examples
    are all valid (note that whitespace is ignored):
-
      {"a":1}
      { "first": "second", "alpha": "beta"}
      { "integer": 1, "string": "one" }
-
    These are examples of bad objects (and the corresponding error events):
-
      { not : "good" }  -- BAD_TOKEN
      { "no \t allowed" : } -- BAD_ID
      { "alpha" } -- NON_COLON
      { "float" : 1.5 } -- BAD_VALUE
      { "a" : "b" : "c" } -- BAD_TOKEN
      { "a" : "b", } -- BAD_TOKEN
-
    All key-value pairs for an object will be concatenated as a string
    and returned via the keys call-by-reference parameter. The format
    should look exactly as (ignore the leading space):
-
      KEYS[integer] = 1
      KEYS[string] = one
-
    AppendKeyValuePair should append a new line (ending in '\n') for
    each key-value pair found. In the case above, the exact string
    returned would be:
-
     "KEYS[integer] = 1\nKEYS[string] = one\n"
-
    Return true if the object is successfully parsed, false otherwise.
    */
 bool
@@ -338,12 +330,6 @@ accept_object (fsm_t *fsm, char **keys)
           // printf("%s = key\n%s = buffer\n", fsm->key_str, fsm->buffer);
           memset (fsm->buffer, 0, 99 * sizeof (char));
           // SCANNING
-          if (fsm->is_val_str)
-          {
-            fsm->current++;
-            fsm->current++;
-            keys = &fsm->val_str;
-          }
           while (fsm->current[0] == ' ' || fsm->current[0] == '\n')
           {
             handle_event (fsm, WHITESPACE);
@@ -358,7 +344,7 @@ accept_object (fsm_t *fsm, char **keys)
             handle_event (fsm, CLOSE_CB);
           } else
           {
-            // printf("%ld\n", fsm->val_int);
+            printf("%ld\n", fsm->val_int);
             handle_event (fsm, BAD_TOKEN);
             return false;
           }
