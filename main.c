@@ -43,7 +43,7 @@ main (int argc, char **argv)
     }
 
   if (type == STR)
-  {
+    {
       FILE *fp;
       char *line = (char *)calloc (100, sizeof (char));
       fp = fopen (filename, "r");
