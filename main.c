@@ -43,32 +43,6 @@ main (int argc, char **argv)
     }
 
   if (type == STR)
-  {
-      FILE *fp;
-      char *line = (char *)calloc (100, sizeof (char));
-      fp = fopen (filename, "r");
-      fgets (line, 100, (FILE *)fp);
-      fclose (fp);
-      fsm_t *string = string_init (line);
-      char *result = NULL;
-      if (accept_string (string, &result))
-        {
-          printf ("STRING: '%s'\n", result);
-          printf ("Success!\n");
-          free (line);
-          free (string->buffer);
-          free (string);
-          return EXIT_SUCCESS;
-        }
-      else
-        {
-          printf ("Parsing %s failed\n", filename);
-          free (line);
-          free (string->buffer);
-          free (string);
-          return EXIT_FAILURE;
-        }
-    }
   if (type == INT)
     {
       FILE *fp;
