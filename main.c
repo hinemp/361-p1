@@ -55,13 +55,13 @@ main (int argc, char **argv)
       if (accept_string (string, &result))
         {
           printf ("STRING: '%s'\n", result);
-+          printf ("Success!\n");
-+          free (line);
-+          free (string->buffer);
-+          free (string);
-+          return EXIT_SUCCESS;
-+        }
-+      else
+          printf ("Success!\n");
+          free (line);
+          free (string->buffer);
+          free (string);
+          return EXIT_SUCCESS;
+        }
+      else
 +        {
 +          printf ("Parsing %s failed\n", filename);
 +          free (line);
