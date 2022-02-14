@@ -12,7 +12,6 @@
 #include "stringmodel.h"
 #include "valmodel.h"
 
-
 // Used to specify which of the four FSMs to use
 typedef enum
 {
@@ -95,69 +94,72 @@ main (int argc, char **argv)
           free (integer);
           return EXIT_FAILURE;
         }
-  }
-  if (type == INT) {
-    FILE *fp;
-    char *line = (char *) calloc (100, sizeof (char));
-    fp = fopen(filename, "r");
-    fgets (line, 100, (FILE*) fp);
-    fclose (fp);
-    fsm_t *integer = int_init (line);
-    int64_t value;
-    if (accept_integer (integer, &value)) 
-    {
-      printf ("INTEGER: %ld\n", value);
-      printf ("Success!\n");
-      free (line);
-      free (integer->buffer);
-      free (integer);
-      return EXIT_SUCCESS;
-    } else {
-      printf ("Parsing %s failed\n", filename);
-      free (line);
-      free (integer->buffer);
-      free (integer);
-      return EXIT_FAILURE;
     }
-  }
+  if (type == INT)
+    {
+      FILE *fp;
+      char *line = (char *) calloc (100, sizeof (char));
+      fp = fopen(filename, "r");
+      fgets (line, 100, (FILE*) fp);
+      fclose (fp);
+      fsm_t *integer = int_init (line);
+      int64_t value;
+      if (accept_integer (integer, &value)) 
+        {
+          printf ("INTEGER: %ld\n", value);
+          printf ("Success!\n");
+          free (line);
+          free (integer->buffer);
+          free (integer);
+          return EXIT_SUCCESS;
+        } 
+      else 
+        {
+          printf ("Parsing %s failed\n", filename);
+          free (line);
+          free (integer->buffer);
+          free (integer);
+          return EXIT_FAILURE;
+        }
+    }
   if (type == VAL)
-  {
-    FILE *fp;
-    char *line = (char *) calloc (100, sizeof (char));
-    fp = fopen(filename, "r");
-    fgets (line, 100, (FILE*) fp);
-    fclose (fp);
-    bool is_string = false;
-    char *str = NULL;
-    int64_t integer = 0;
-    fsm_t *value = value_init (line);
-    if (accept_value (value, &is_string, &str, &integer))
     {
-      if (is_string)
+      FILE *fp;
+      char *line = (char *) calloc (100, sizeof (char));
+      fp = fopen(filename, "r");
+      fgets (line, 100, (FILE*) fp);
+      fclose (fp);
+      bool is_string = false;
+      char *str = NULL;
+      int64_t integer = 0;
+      fsm_t *value = value_init (line);
+      if (accept_value (value, &is_string, &str, &integer))
+        {
+          if (is_string)
+            {
+              printf("VALUE [string]: '%s'\n", str);
+              printf("Success!\n");
+              free (line);
+              free (value->buffer);
+              free (value);
+            }
+          if (!is_string)
+            {
+              printf("VALUE [integer]: %ld\n", integer);
+              printf("Success!\n");
+              free (line);
+              free (value->buffer);
+              free (value);
+            }
+        } 
+      else 
       {
-        printf("VALUE [string]: '%s'\n", str);
-        printf("Success!\n");
+        printf ("Parsing %s failed\n", filename);
         free (line);
         free (value->buffer);
         free (value);
       }
-      if (!is_string) 
-      {
-        printf("VALUE [integer]: %ld\n", integer);
-        printf("Success!\n");
-        free (line);
-        free (value->buffer);
-        free (value);
-      }
-    } 
-    else 
-    {
-      printf ("Parsing %s failed\n", filename);
-      free (line);
-      free (value->buffer);
-      free (value);
     }
-  }
   if (type == OBJ) {
     FILE *fp;
     char *line = (char *) calloc (100, sizeof (char));
