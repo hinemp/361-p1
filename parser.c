@@ -134,31 +134,32 @@ accept_integer (fsm_t *fsm, int64_t *value)
               handle_event (fsm, NON_DIGIT);
               break;
             }
+          }
+        else if (fsm->state == SIGN)
+        {
+          switch (fsm->current[0])
+          {
+          case '1':
+          case '2':
+          case '3':
+          case '4':
+          case '5':
+          case '6':
+          case '7':
+          case '8':
+          case '9':
+            handle_event (fsm, NZ_DIGIT);
+            // fsm->current++;
+            break;
+          case '0':
+            handle_event (fsm, ZERO);
+            fsm->current++;
+            break;
+          default:
+            handle_event (fsm, NON_DIGIT);
+            break;
+          }
         }
-      else if (fsm->state == SIGN) {
-      switch (fsm->current[0])
-      {
-      case '1':
-      case '2':
-      case '3':
-      case '4':
-      case '5':
-      case '6':
-      case '7':
-      case '8':
-      case '9':
-        handle_event (fsm, NZ_DIGIT);
-        // fsm->current++;
-        break;
-      case '0':
-        handle_event (fsm, ZERO);
-        fsm->current++;
-        break;
-      default:
-        handle_event (fsm, NON_DIGIT);
-        break;
-      }
-    }
   
     else if (fsm->state == OCTAL) {
       switch (fsm->current[0])

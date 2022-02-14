@@ -1,14 +1,16 @@
 #include <stdbool.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+
+
+
+#include "intmodel.h"
+#include "parser.h"
 
 #include "statemodel.h"
 #include "valmodel.h"
 #include "stringmodel.h"
-#include "intmodel.h"
-#include "parser.h"
-
 
 static void ActivateString (fsm_t *);
 static void ActivateInteger (fsm_t *);
