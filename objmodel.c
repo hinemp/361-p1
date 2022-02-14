@@ -122,7 +122,7 @@ ActivateValue (fsm_t *fsm)
   bool is_string = false;
   char *str = NULL;
   int64_t integer = 0;
-  printf ("%c - i'm fsm current in activate value", fsm->current[0]);
+  printf ("%c - i'm fsm current in activate value\n", fsm->current[0]);
   fsm->is_val_ok = accept_value (valfsm, &is_string, &str, &integer);
   if (fsm->is_val_ok)
   {
