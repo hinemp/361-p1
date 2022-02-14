@@ -211,12 +211,12 @@ accept_value (fsm_t *fsm, bool *is_string, char **string, int64_t *value)
 {
   handle_event (fsm, START_VALUE);
   // Skip over whitespace
-  printf ("%c - i'm fsm current in accept value\n", fsm->current[0]);
   while (fsm->current[0] == ' ' || fsm->current[0] == '\n') 
   {
     handle_event (fsm, WHITESPACE);
     fsm->current++;
   }
+  printf ("%c - i'm fsm current in accept value\n", fsm->current[0]);
   // Leading character - Digits, hyphen, or quotation
   switch (fsm->current[0])
   {
