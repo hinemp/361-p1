@@ -163,8 +163,8 @@ main (int argc, char **argv)
   if (type == OBJ)
     {
       FILE *fp;
-      char *line = (char *) calloc (100, sizeof (char));
-      fp = fopen(filename, "r");
+      char *line = (char *)calloc (100, sizeof (char));
+      fp = fopen (filename, "r");
       fgets (line, 100, fp);
       // char ch = ' ';
       // int i = 0;
@@ -177,11 +177,11 @@ main (int argc, char **argv)
       fclose (fp);
       char *keys = NULL;
       fsm_t *obj = object_init (line);
-      if (accept_object(obj, &keys))
+      if (accept_object (obj, &keys))
         {
-          printf("Key-value pairs:\n");
-          printf("{\n%s}\n", obj->kvbuffer);
-          printf("Success!\n");
+          printf ("Key-value pairs:\n");
+          printf ("{\n%s}\n", obj->kvbuffer);
+          printf ("Success!\n");
         }
       free (line);
       free (obj->kvbuffer);
