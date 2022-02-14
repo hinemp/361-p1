@@ -302,10 +302,10 @@ accept_object (fsm_t *fsm, char **keys)
 {
   handle_event (fsm, OPEN_CB);
   fsm->current++;
-  printf ("\n%c = \n", fsm->current[0]);
   // SKIP
   while (fsm->current[0] == ' ' || fsm->current[0] == '\n') 
   {
+    printf ("\n%c = \n", fsm->current[0]);
     handle_event (fsm, WHITESPACE);
     fsm->current++;
   }
