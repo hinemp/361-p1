@@ -135,7 +135,7 @@ ActivateValue (fsm_t *fsm)
     }
   } else // Bad value
   {
-    printf ("Accept value failed \n");
+    
   }
   free (valfsm);
 }
