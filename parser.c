@@ -340,7 +340,6 @@ accept_object (fsm_t *fsm, char **keys)
           // SCANNING
           if (fsm->is_val_str)
           {
-            printf("val is str\n");
             fsm->current++;
             fsm->current++;
             keys = &fsm->val_str;
