@@ -128,6 +128,7 @@ ActivateValue (fsm_t *fsm)
     fsm->current = valfsm->current;
     if (is_string) // If val is a string
     {
+      printf ("%s\n", str);
       fsm->val_str = str;
     } 
     if (!is_string)  // If val is an int
