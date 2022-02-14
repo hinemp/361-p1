@@ -308,8 +308,8 @@ accept_object (fsm_t *fsm, char **keys)
     fsm->current++;
   }
   fsm->current++;
-  fsm->current++;
   printf ("\n%c\n", fsm->current[0]);
+  fsm->current++;
   // Should be the first quotation mark
   if (fsm->current[0] == '"')
   {
