@@ -134,20 +134,19 @@ parse_transition (fsm_t *fsm, event_t event, action_t *effect, action_t *entry)
   state_t next = _transition[fsm->state][event];
   if (next != NON_VAL)
     *entry = _entry[next];
-  
   return next;
 }
 
 static void
 ActivateString (fsm_t *fsm)
 {
-  fsm_t * str_fsm = string_init (fsm->current);
+  fsm_t *str_fsm = string_init (fsm->current);
   fsm->is_val_ok = accept_string (str_fsm, &fsm->buffer);
   if (!fsm->is_val_ok)
-  { 
-    fsm->buffer = NULL;
-    free (str_fsm->buffer);
-  }
+    {
+      fsm->buffer = NULL;
+      free (str_fsm->buffer);
+    }
   fsm->is_val_str = true;
   fsm->current = str_fsm->current;
   fsm->current++;
@@ -158,7 +157,7 @@ ActivateString (fsm_t *fsm)
 static void
 ActivateInteger (fsm_t *fsm)
 {
-  fsm_t * int_fsm = int_init (fsm->current);
+  fsm_t *int_fsm = int_init (fsm->current);
   fsm->is_val_ok = accept_integer (int_fsm, &fsm->build_int);
   fsm->is_val_str = false;
   fsm->current = int_fsm->current;
@@ -170,5 +169,5 @@ ActivateInteger (fsm_t *fsm)
 static void
 SyntaxError (fsm_t *fsm)
 {
-  printf("SYNTAX ERROR: '%c' is an invalid token\n", fsm->current[0]);
+  printf ("SYNTAX ERROR: '%c' is an invalid token\n", fsm->current[0]);
 }

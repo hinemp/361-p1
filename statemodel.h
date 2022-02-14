@@ -55,8 +55,6 @@ struct fsm
 
   char *kvbuffer;
 
-
-
   // TODO: Extend this with additional fields you need to hold information
   // during the execution of your FSM.
 };

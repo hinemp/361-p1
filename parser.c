@@ -104,7 +104,7 @@ accept_integer (fsm_t *fsm, int64_t *value)
           break;
         }
     }
-  while (fsm->state < INT_FINISH) 
+  while (fsm->state < INT_FINISH)
     {
       if (fsm->state == MAGNITUDE)
         {
@@ -160,10 +160,10 @@ accept_integer (fsm_t *fsm, int64_t *value)
               break;
             }
         }
-    else if (fsm->state == OCTAL)
-      {
-        switch (fsm->current[0])
+      else if (fsm->state == OCTAL)
         {
+        switch (fsm->current[0])
+          {
           case '0':
             handle_event (fsm, ZERO);
             fsm->current++;
@@ -190,7 +190,7 @@ accept_integer (fsm_t *fsm, int64_t *value)
           default:
             handle_event (fsm, NON_DIGIT);
             break;
-      }
+          }
     }
     if (fsm->state == INT_ERROR)
      {
