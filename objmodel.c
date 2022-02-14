@@ -240,7 +240,7 @@ ActivateValue (fsm_t *fsm)
   free (valfsm);
 }
 
-static void 
+static void
 AppendKeyValuePair (fsm_t *fsm) 
 {
   // key comes from fsm key_str
@@ -272,13 +272,15 @@ SyntaxError (fsm_t *fsm)
   char curr = fsm->current[0];
   char err;
   if (fsm->current[1] == '\n')
-  {
-    err = '-';
-  } else 
-  {
-    err = fsm->current[1];
-  }
-  printf ("SYNTAX ERROR: Could not process text beginning at '%c%c'\n", curr, err);
+    {
+      err = '-';
+    }
+  else
+    {
+      err = fsm->current[1];
+    }
+  printf ("SYNTAX ERROR: Could not process text beginning at '%c%c'\n", curr,
+          err);
 }
 // For syntax errors, if there is a newline character ('\n'),
 // replace it with a null byte ('\0'), then use this format
