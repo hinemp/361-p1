@@ -164,22 +164,20 @@ static action_t const _effect[NOBJ_STATES][NOBJ_EVENTS] = {
     NULL }, // OBJ_ERROR
 };
 
-static action_t const _entry[NOBJ_STATES] = {
-  NULL, NULL, ActivateString, NULL, ActivateValue, NULL, NULL, NULL
-};
+static action_t const _entry[NOBJ_STATES]
+    = { NULL, NULL, ActivateString, NULL, ActivateValue, NULL, NULL, NULL };
 
 /* Given FSM instance and event, perform the table lookups */
 static state_t
 parse_transition (fsm_t *fsm, event_t event, action_t *effect, action_t *entry)
 {
-  if (fsm->state >= NON_OBJ || event >= NIL_OBJ || _transition[fsm->state][event] == NON_OBJ) 
+  if (fsm->state >= NON_OBJ || event >= NIL_OBJ
+      || _transition[fsm->state][event] == NON_OBJ)
     return -1;
-  
   *effect = _effect[fsm->state][event];
   state_t next = _transition[fsm->state][event];
   if (next != NON_OBJ)
     *entry = _entry[next];
-  
   return next;
 }
 
@@ -188,32 +186,32 @@ parse_transition (fsm_t *fsm, event_t event, action_t *effect, action_t *entry)
    so that they are accessible only from within this file. No other portion of
    your code should access these functions or data structures directly; all
    access should be indirect through the fsm_t structure. */
-static void 
+static void
 SetIdent (fsm_t *fsm)
 {
   fsm->key_str = fsm->buffer;
   // This is done in ActivateString, idk how else to do it
 }
 
-static void 
+static void
 AdvancePointer (fsm_t *fsm)
 {
   fsm->current++;
 }
 
-static void 
+static void
 ActivateString (fsm_t *fsm)
 {
   fsm_t *str_machine = string_init (fsm->current);
   fsm->is_val_ok = accept_string (str_machine, &fsm->buffer);
   if (fsm->is_val_ok)
-  {
-    fsm->current = str_machine->current;
-  }
-  else 
-  {
-    free (str_machine->buffer);
-  }
+    {
+      fsm->current = str_machine->current;
+    }
+  else
+    {
+      free (str_machine->buffer);
+    }
   free (str_machine);
 }
 
