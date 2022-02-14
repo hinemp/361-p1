@@ -30,7 +30,7 @@ accept_string (fsm_t *fsm, char **result)
     }
   handle_event (fsm, OPEN_QUOTE);
   fsm->current++; // Puts the current pointer on first character of the string
-  while (fsm->state < STR_FINISH) 
+  while (fsm->state < STR_FINISH)
     {
       if (fsm->state == BUILDING)
         {
@@ -78,61 +78,64 @@ accept_string (fsm_t *fsm, char **result)
 bool
 accept_integer (fsm_t *fsm, int64_t *value)
 {
-  if (fsm->state == INT_INIT) {
-    switch (fsm->current[0]) {
-      case '0':
-        handle_event (fsm, ZERO);
-        break;
-      case '1':
-      case '2':
-      case '3':
-      case '4':
-      case '5':
-      case '6':
-      case '7':
-      case '8':
-      case '9':
-        handle_event (fsm, NZ_DIGIT);
-        break;
-      case '-':
-        handle_event (fsm, HYPHEN);
-        fsm->current++;
-        break;
-      default:
-        break;
-    }
+  if (fsm->state == INT_INIT) 
+    {
+      switch (fsm->current[0]) 
+        {
+          case '0':
+            handle_event (fsm, ZERO);
+            break;
+          case '1':
+          case '2':
+          case '3':
+          case '4':
+          case '5':
+          case '6':
+          case '7':
+          case '8':
+          case '9':
+            handle_event (fsm, NZ_DIGIT);
+            break;
+          case '-':
+            handle_event (fsm, HYPHEN);
+            fsm->current++;
+            break;
+          default:
+            break;
+        }
   }
-  while (fsm->state < INT_FINISH) {
-    if (fsm->state == MAGNITUDE) {
-      switch (fsm->current[0])
-      {
-      case ' ':
-      case '}':
-      case ',':
-      case '\0':
-      case '\n':
-        handle_event (fsm, TERM_INT);
-        break;
-      case '0':
-      case '1':
-      case '2':
-      case '3':
-      case '4':
-      case '5':
-      case '6':
-      case '7':
-      case '8':
-      case '9':
-        handle_event (fsm, DIGIT);
-        fsm->current++;
-        break;
-      default:
-        handle_event (fsm, NON_DIGIT);
-        break;
-      }
-    }
-
-    else if (fsm->state == SIGN) {
+  while (fsm->state < INT_FINISH) 
+    {
+      if (fsm->state == MAGNITUDE)
+        {
+          switch (fsm->current[0])
+            {
+              case ' ':
+              case '}':
+              case ',':
+              case '\0':
+              case '\n':
+                handle_event (fsm, TERM_INT);
+                break;
+              case '0':
+              case '1':
+              case '2':
+              case '3':
+              case '4':
+              case '5':
+              case '6':
+              case '7':
+              case '8':
+              case '9':
+                handle_event (fsm, DIGIT);
+                fsm->current++;
+                break;
+              default:
+                handle_event (fsm, NON_DIGIT);
+                break;
+            }
+        } 
+      else if (fsm->state == SIGN) {
       switch (fsm->current[0])
       {
       case '1':

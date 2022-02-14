@@ -40,24 +40,109 @@ int_init (char const *input)
    access should be indirect through the fsm_t structure. */
 
 static state_t const _transition[NINT_STATES][NINT_EVENTS] = {
-//  ZERO      HYPHEN    NZ_DIGIT    DIGIT      TERM_INIT   NON_DIGIT
-   {OCTAL,    SIGN,     MAGNITUDE,  NON_INT,   NON_INT,    NON_INT,},   // INT_INIT
-   {NON_INT,  NON_INT,  NON_INT,    MAGNITUDE, INT_FINISH, INT_ERROR,}, // MAGNITUDE
-   {OCTAL,    NON_INT,  MAGNITUDE,  NON_INT,   NON_INT,    INT_ERROR,}, // SIGN
-   {OCTAL,    NON_INT,  MAGNITUDE,  NON_INT,   INT_FINISH, INT_ERROR,}, // OCTAL
-   {NON_INT , NON_INT,  NON_INT,    NON_INT,   NON_INT,    NON_INT,},   // INT_FINISH
-   {NON_INT , NON_INT,  NON_INT,    NON_INT,   NON_INT,    NON_INT,},   // INT_ERROR
-  };
+  //  ZERO      HYPHEN    NZ_DIGIT    DIGIT      TERM_INIT   NON_DIGIT
+  {
+      OCTAL,
+      SIGN,
+      MAGNITUDE,
+      NON_INT,
+      NON_INT,
+      NON_INT,
+  }, // INT_INIT
+  {
+      NON_INT,
+      NON_INT,
+      NON_INT,
+      MAGNITUDE,
+      INT_FINISH,
+      INT_ERROR,
+  }, // MAGNITUDE
+  {
+      OCTAL,
+      NON_INT,
+      MAGNITUDE,
+      NON_INT,
+      NON_INT,
+      INT_ERROR,
+  }, // SIGN
+  {
+      OCTAL,
+      NON_INT,
+      MAGNITUDE,
+      NON_INT,
+      INT_FINISH,
+      INT_ERROR,
+  }, // OCTAL
+  {
+      NON_INT,
+      NON_INT,
+      NON_INT,
+      NON_INT,
+      NON_INT,
+      NON_INT,
+  }, // INT_FINISH
+  {
+      NON_INT,
+      NON_INT,
+      NON_INT,
+      NON_INT,
+      NON_INT,
+      NON_INT,
+  }, // INT_ERROR
+};
 
 static action_t const _effect[NINT_STATES][NINT_EVENTS] = {
-//  ZERO      HYPHEN        NZ_DIGIT            DIGIT       TERM_INT  NON_DIGIT
-   {NULL,     SetNegative,  SetMultiplier_10,   NULL,       NULL,     NULL,},   // INT_INIT
-   {NULL,     NULL,         NULL,               MultAndAdd, NULL,     SyntaxError,}, // MAGNITUDE
-   {NULL,     NULL,         SetMultiplier_10,   NULL,       NULL,     SyntaxError,}, // SIGN
-   {NULL,     NULL,         SetMultiplier_8,    NULL,       NULL,     SyntaxError,}, // OCTAL
-   {NULL,     NULL,         NULL,               NULL,       NULL,     NULL,},   // INT_FINISH
-   {NULL,     NULL,         NULL,               NULL,       NULL,     NULL,},   // INT_ERROR
-  };
+  //  ZERO      HYPHEN        NZ_DIGIT            DIGIT       TERM_INT
+  //  NON_DIGIT
+  {
+      NULL,
+      SetNegative,
+      SetMultiplier_10,
+      NULL,
+      NULL,
+      NULL,
+  }, // INT_INIT
+  {
+      NULL,
+      NULL,
+      NULL,
+      MultAndAdd,
+      NULL,
+      SyntaxError,
+  }, // MAGNITUDE
+  {
+      NULL,
+      NULL,
+      SetMultiplier_10,
+      NULL,
+      NULL,
+      SyntaxError,
+  }, // SIGN
+  {
+      NULL,
+      NULL,
+      SetMultiplier_8,
+      NULL,
+      NULL,
+      SyntaxError,
+  }, // OCTAL
+  {
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+  }, // INT_FINISH
+  {
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+      NULL,
+  }, // INT_ERROR
+};
 
 static action_t const _entry[NINT_STATES] = {
   // OPEN_QUOTE CLOSE_QUOTE NONCTRL BACKSLASH ESC_CHAR NO_ESC NULL
@@ -68,14 +153,13 @@ static action_t const _entry[NINT_STATES] = {
 static state_t
 parse_transition (fsm_t *fsm, event_t event, action_t *effect, action_t *entry)
 {
-  if (fsm->state >= NON_INT || event >= NIL_INT || _transition[fsm->state][event] == NON_INT) 
+  if (fsm->state >= NON_INT || event >= NIL_INT
+      || _transition[fsm->state][event] == NON_INT)
     return -1;
-  
   *effect = _effect[fsm->state][event];
   state_t next = _transition[fsm->state][event];
   if (next != NON_INT)
     *entry = _entry[next];
-  
   return next;
 }
 
@@ -102,7 +186,7 @@ MultAndAdd (fsm_t *fsm)
 {
   fsm->build_int *= fsm->multiplier;
   int to_add = fsm->current[0] - '0';
-  if (fsm->is_negative) 
+  if (fsm->is_negative)
     {
       fsm->build_int -= to_add;
     }
@@ -115,5 +199,5 @@ MultAndAdd (fsm_t *fsm)
 static void
 SyntaxError (fsm_t *fsm)
 {
-  printf("SYNTAX ERROR: '%c' is not a valid digit\n", fsm->current[0]);
+  printf ("SYNTAX ERROR: '%c' is not a valid digit\n", fsm->current[0]);
 }
