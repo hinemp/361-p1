@@ -30,40 +30,40 @@ accept_string (fsm_t *fsm, char **result)
     }
   handle_event (fsm, OPEN_QUOTE);
   fsm->current++; // Puts the current pointer on first character of the string
-  while (fsm->state < STR_FINISH) // As long as the fsm hasn't reached an end state
+  while (fsm->state < STR_FINISH) 
     {
       if (fsm->state == BUILDING)
         {
-          // Only options are ", /, or 
+          // Only options are ", /, or
           if (fsm->current[0] == '"')
             handle_event (fsm, CLOSE_QUOTE);
           else if (fsm->current[0] == 92) // 92 is ascii code for \  //
             handle_event (fsm, BACKSLASH);
-          else 
+          else
             handle_event (fsm, NON_CTRL);
         }
       else if (fsm->state == ESCAPE)
         {
           fsm->current++;
           switch (fsm->current[0])
-          {
-          case '"':
-          case 92:
-            handle_event (fsm, ESC_CHAR);
-            break;
-          default:
-            handle_event (fsm, NO_ESC);
-            break;
-          }
+            {
+            case '"':
+            case 92:
+              handle_event (fsm, ESC_CHAR);
+              break;
+            default:
+              handle_event (fsm, NO_ESC);
+              break;
+            }
         }
       if (fsm->state == STR_ERROR)
-      {
-        return false;
-      }
+        {
+          return false;
+        }
     }
-    *result = &fsm->buffer[0];
-    return fsm->state == STR_FINISH;
-  }
+  *result = &fsm->buffer[0];
+  return fsm->state == STR_FINISH;
+}
 
 /* Begins at fsm->current and tries to build a valid integer value. This
    function should accept both positive and negative numbers, and should
