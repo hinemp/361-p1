@@ -86,6 +86,7 @@ static void
 ActivateString (fsm_t *fsm)
 {
   fsm_t * str_fsm = string_init (fsm->current);
+  printf ("%c - i'm fsm current in activate string\n", fsm->current[0]);
   fsm->is_val_ok = accept_string (str_fsm, &fsm->buffer);
   if (!fsm->is_val_ok)
   {  

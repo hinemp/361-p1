@@ -242,7 +242,6 @@ accept_value (fsm_t *fsm, bool *is_string, char **string, int64_t *value)
   // Determine if BuildStr or BuildInt
   if (*is_string)
   {
-    printf ("%c - i'm fsm current in accept value\n", fsm->current[0]);
     handle_event (fsm, START_STR);
     *string = fsm->buffer;
     if (fsm->is_val_ok)
