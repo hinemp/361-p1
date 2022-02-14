@@ -95,6 +95,7 @@ ActivateString (fsm_t *fsm)
   fsm->is_val_str = true;
   fsm->current = str_fsm->current;
   printf ("%c", fsm->current[0]);
+  fsm->current++;
   free (str_fsm);
 }
 
