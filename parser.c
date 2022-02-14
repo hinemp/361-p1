@@ -36,7 +36,8 @@ accept_string (fsm_t *fsm, char **result)
       {
         // Only options are ", /, or 
         if (fsm->current[0] == '"')
-          handle_event (fsm, CLOSE_QUOTE);
+          {printf ("found a clsoe quote\n");
+          handle_event (fsm, CLOSE_QUOTE);}
         else if (fsm->current[0] == 92) // 92 is ascii code for \  //
           handle_event (fsm, BACKSLASH);
         else 
