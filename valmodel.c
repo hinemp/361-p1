@@ -89,12 +89,12 @@ ActivateString (fsm_t *fsm)
   fsm->is_val_ok = accept_string (str_fsm, &fsm->buffer);
   if (!fsm->is_val_ok)
   { 
-    printf ("val not ok\n"); 
     fsm->buffer = NULL;
     free (str_fsm->buffer);
   }
   fsm->is_val_str = true;
   fsm->current = str_fsm->current;
+  printf ("%c", fsm->current[0]);
   free (str_fsm);
 }
 
