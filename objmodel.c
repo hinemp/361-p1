@@ -9,7 +9,6 @@
 #include "stringmodel.h"
 #include "valmodel.h"
 
-
 static void SyntaxError (fsm_t *);
 static void SetIdent (fsm_t *);
 static void AdvancePointer (fsm_t *);
@@ -35,7 +34,7 @@ object_init (char const *input)
   // Int Fields
   fsm->build_int = 0;
   fsm->is_negative = false;
-  
+
   return fsm;
 }
 
@@ -223,8 +222,8 @@ ActivateValue (fsm_t *fsm)
   char *str = NULL;
   int64_t integer = 0;
   fsm->is_val_ok = accept_value (valfsm, &is_string, &str, &integer);
-   if (fsm->is_val_ok)
-     {
+  if (fsm->is_val_ok)
+    {
       fsm->current = valfsm->current;
       if (fsm->is_val_str) // If val is a string
         {
@@ -236,14 +235,14 @@ ActivateValue (fsm_t *fsm)
         }
     }
   else // Bad value
-     {
+    {
       printf ("Accept value failed \n");
-     }
-   free (valfsm);
- }
+    }
+  free (valfsm);
+}
 
 static void
-AppendKeyValuePair (fsm_t *fsm) 
+AppendKeyValuePair (fsm_t *fsm)
 {
   // key comes from fsm key_str
   fsm->kvbuffer = (char *)calloc (99, sizeof (char));
@@ -269,7 +268,7 @@ AppendKeyValuePair (fsm_t *fsm)
 // resize an existing dynamically
 //  allocated string to make space to concatenate.
 
-static void 
+static void
 SyntaxError (fsm_t *fsm)
 {
   fsm->current--;
