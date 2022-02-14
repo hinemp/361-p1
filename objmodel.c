@@ -41,37 +41,37 @@ object_init (char const *input)
 
 static state_t const _transition[NOBJ_STATES][NOBJ_EVENTS] = {
   // OPEN_CB  OBJ_WS  START_ID  END_ID  BAD_ID  COLON   NON_COLON   GOOD_VALUE
-+  // OBJ_BV  BAD_TOKEN COMMA CLOSE_CB
-+  {
-+      OBJ_SKIP,
-+      NON_OBJ,
-+      NON_OBJ,
-+      NON_OBJ,
-+      NON_OBJ,
-+      NON_OBJ,
-+      NON_OBJ,
-+      NON_OBJ,
-+      NON_OBJ,
-+      NON_OBJ,
-+      NON_OBJ,
-+  }, // OBJ_INIT
-+  {
-+      NON_OBJ,
-+      OBJ_SKIP,
-+      BUILD_ID,
-+      NON_OBJ,
-+      NON_OBJ,
-+      NON_OBJ,
-+      NON_OBJ,
-+      NON_OBJ,
-+      NON_OBJ,
-+      OBJ_ERROR,
-+      NON_OBJ,
-+      NON_OBJ,
-+  }, // OBJ_SKIP
-+  {
-+      NON_OBJ,
-+      NON_OBJ,
+  // OBJ_BV  BAD_TOKEN COMMA CLOSE_CB
+  {
+      OBJ_SKIP,
+      NON_OBJ,
+      NON_OBJ,
+      NON_OBJ,
+      NON_OBJ,
+      NON_OBJ,
+      NON_OBJ,
+      NON_OBJ,
+      NON_OBJ,
+      NON_OBJ,
+      NON_OBJ,
+  }, // OBJ_INIT
+  {
+      NON_OBJ,
+      OBJ_SKIP,
+      BUILD_ID,
+      NON_OBJ,
+      NON_OBJ,
+      NON_OBJ,
+      NON_OBJ,
+      NON_OBJ,
+      NON_OBJ,
+      OBJ_ERROR,
+      NON_OBJ,
+      NON_OBJ,
+  }, // OBJ_SKIP
+  {
+      NON_OBJ,
+      NON_OBJ,
 +      NON_OBJ,
 +      PEND_VALUE,
 +      OBJ_ERROR,
