@@ -122,7 +122,6 @@ ActivateValue (fsm_t *fsm)
   bool is_string = false;
   char *str = NULL;
   int64_t integer = 0;
-  printf ("%c - i'm fsm current in activate value\n", fsm->current[0]);
   fsm->is_val_ok = accept_value (valfsm, &is_string, &str, &integer);
   if (fsm->is_val_ok)
   {
@@ -153,7 +152,6 @@ AppendKeyValuePair (fsm_t *fsm)
     ret_val = snprintf (fsm->kvbuffer, 100, "KEYS[%s] = %s\n", fsm->key_str, fsm->val_str);
   } else 
   {
-    printf ("append thinks this is a int\n");
     ret_val = snprintf (fsm->kvbuffer, 100, "KEYS[%s] = %ld\n", fsm->key_str, fsm->val_int);
   }
   
