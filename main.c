@@ -43,31 +43,59 @@ main (int argc, char **argv)
     }
 
   if (type == STR)
-  if (type == INT)
-    {
+
+        {
       FILE *fp;
       char *line = (char *)calloc (100, sizeof (char));
       fp = fopen (filename, "r");
       fgets (line, 100, (FILE *)fp);
       fclose (fp);
-      fsm_t *integer = int_init (line);
-      int64_t value;
-      if (accept_integer (integer, &value))
+      fsm_t *string = string_init (line);
+      char *result = NULL;
+      if (accept_string (string, &result))
         {
-          printf ("INTEGER: %ld\n", value);
-          printf ("Success!\n");
-          free (line);
-          free (integer->buffer);
-          free (integer);
-          return EXIT_SUCCESS;
-        }
-      else
-        {
-          printf ("Parsing %s failed\n", filename);
-          free (line);
-          free (integer->buffer);
-          free (integer);
-          return EXIT_FAILURE;
+          printf ("STRING: '%s'\n", result);
++          printf ("Success!\n");
++          free (line);
++          free (string->buffer);
++          free (string);
++          return EXIT_SUCCESS;
++        }
++      else
++        {
++          printf ("Parsing %s failed\n", filename);
++          free (line);
++          free (string->buffer);
++          free (string);
++          return EXIT_FAILURE;
++        }
++    }
++  if (type == INT)
++    {
++      FILE *fp;
++      char *line = (char *)calloc (100, sizeof (char));
++      fp = fopen (filename, "r");
++      fgets (line, 100, (FILE *)fp);
++      fclose (fp);
++      fsm_t *integer = int_init (line);
++      int64_t value;
++      if (accept_integer (integer, &value))
++        {
++          printf ("INTEGER: %ld\n", value);
++          printf ("Success!\n");
++          free (line);
++          free (integer->buffer);
++          free (integer);
++          return EXIT_SUCCESS;
++        }
++      else
++        {
++          printf ("Parsing %s failed\n", filename);
++          free (line);
++          free (integer->buffer);
++          free (integer);
++          return EXIT_FAILURE;
++        }
         }
   }
   if (type == INT) {
