@@ -110,29 +110,29 @@ accept_integer (fsm_t *fsm, int64_t *value)
         {
           switch (fsm->current[0])
             {
-              case ' ':
-              case '}':
-              case ',':
-              case '\0':
-              case '\n':
-                handle_event (fsm, TERM_INT);
-                break;
-              case '0':
-              case '1':
-              case '2':
-              case '3':
-              case '4':
-              case '5':
-              case '6':
-              case '7':
-              case '8':
-              case '9':
-                handle_event (fsm, DIGIT);
-                fsm->current++;
-                break;
-              default:
-                handle_event (fsm, NON_DIGIT);
-                break;
+            case ' ':
+            case '}':
+            case ',':
+            case '\0':
+            case '\n':
+              handle_event (fsm, TERM_INT);
+              break;
+            case '0':
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+              handle_event (fsm, DIGIT);
+              fsm->current++;
+              break;
+            default:
+              handle_event (fsm, NON_DIGIT);
+              break;
             }
         } 
       else if (fsm->state == SIGN) {
