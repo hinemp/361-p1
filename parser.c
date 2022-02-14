@@ -357,17 +357,19 @@ accept_object (fsm_t *fsm, char **keys)
                   return false;
                 }
             }
-          else 
+          else
             {
               handle_event (fsm, NON_COLON);
               return false;
             }
-        } else
+        } 
+      else
         {
           handle_event (fsm, BAD_ID);
           return false;
         }
-    } else
+    } 
+  else
     {
       handle_event (fsm, BAD_TOKEN);
       return false;
